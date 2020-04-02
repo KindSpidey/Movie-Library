@@ -239,16 +239,29 @@ def get_films_by_actor(name1):
         WHERE act_id = {idact!r}'''
     id_films = cursor.execute(query).fetchall()
     list = []
-    for elem in id_films:
+    for elem in id_films[0]:
         list.append(elem)
-    query = f'''SELECT title, box_office, rating, year
-        FROM film
-        WHERE id in {list!r}'''
-    cursor.execute(query)
-    a = cursor.fetchall()
+    result = []
+    for elem in list:
+        s = get_film_by_id(elem)
+        result+=s
     conn.commit()
     conn.close()
-    return a
+    return result
+def get_film_by_id(ids):
+    conn = sqlite3.connect('Movies.db')
+    cursor = conn.cursor()
+    query = f'''
+        	    SELECT title, box_office, rating, year
+        	    FROM film
+        	    WHERE id = {ids!r}
+
+        	'''
+    cursor.execute(query)
+    all_rows = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return all_rows
 def get_film_by_title(name):
     conn = sqlite3.connect('Movies.db')
     cursor = conn.cursor()

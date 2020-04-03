@@ -39,14 +39,7 @@
         <item name="Movies" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
-        <item name="actfilm: table" type="3d80ac25:SqliteImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Movies" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
-        <item name="actor: table" type="3d80ac25:SqliteImplModel$Table" />
+        <item name="news: table" type="3d80ac25:SqliteImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -58,6 +51,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Z4WwQSzKpFGvZzroE5uBMWzEG4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -67,7 +63,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/SQL.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.OOP_project">
@@ -160,6 +156,7 @@
       <workItem from="1585297600100" duration="1469000" />
       <workItem from="1585804539587" duration="15584000" />
       <workItem from="1585827967513" duration="886000" />
+      <workItem from="1585911702205" duration="4923000" />
     </task>
     <servers />
   </component>
@@ -187,38 +184,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584102981982" />
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1585828818711">
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1585917737217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585828818711" />
-    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1585828818711">
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585917737217" />
+    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1585917737217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1585828818711" />
-    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1585828818711">
+    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1585917737217" />
+    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1585917737207">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1585828818711" />
-    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1585828818711">
+    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1585917737207" />
+    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1585917737217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1585828818711" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1585828818712">
+    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1585917737217" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1585917737217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585828818712" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1585828818711">
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585917737217" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1585917737217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1585828818711" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1585828818711">
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1585917737217" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1585917737217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1585828818711" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1585828818711">
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1585917737217" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1585917737217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1585828818711" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1585917737217" />
     <state x="204" y="6" width="978" height="708" key="SettingsEditor" timestamp="1584510000432">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -240,20 +237,9 @@
     </state>
     <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1585827994758" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SQL.py</url>
-          <line>431</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Movie_Library$sasa.coverage" NAME="sasa Coverage Results" MODIFIED="1585816062702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Movie_Library$OOP_project.coverage" NAME="OOP_project Coverage Results" MODIFIED="1585828818417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Movie_Library$OOP_project.coverage" NAME="OOP_project Coverage Results" MODIFIED="1585917398829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$API.coverage" NAME="API Coverage Results" MODIFIED="1585812846353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

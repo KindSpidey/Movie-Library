@@ -10,7 +10,7 @@ def create_table():
                 act_id  INT REFERENCES actor (id),
                 news_id INT REFERENCES news (id) 
     )'''
-    queryyActorFilm = '''
+    queryActorFilm = '''
         CREATE TABLE IF NOT EXISTS actfilm(
             act_id  INT REFERENCES actor (id),
             film_id INT REFERENCES film (id) 
@@ -36,14 +36,14 @@ def create_table():
         '''
     queryFilm = '''
             CREATE TABLE IF NOT EXISTS film(
-            id              INTEGER CONSTRAINT film_pk PRIMARY KEY,
-            title           TEXT,
-            box_office      INT,
-            rating          INT,
-            year            INT,
-            id_director     INT     REFERENCES director (id),
-            id_screenwriter INT     REFERENCES screenwriter (name) 
-            )
+            id                INTEGER CONSTRAINT film_pk PRIMARY KEY AUTOINCREMENT,
+            title             TEXT,
+            box_office        INT,
+            rating            INT,
+            year              INT,
+            director_name     TEXT        REFERENCES director (name),
+            screenwriter_name TEXT        REFERENCES screenwriter (name) 
+)
         '''
     queryAwards = '''
             CREATE TABLE IF NOT EXISTS awards(
@@ -82,7 +82,7 @@ def create_table():
     cursor.execute(queryNews)
     cursor.execute(queryScreenwriter)
     cursor.execute(queryAwards)
-    cursor.execute(queryyActorFilm)
+    cursor.execute(queryActorFilm)
 
     conn.commit()
     conn.close()
@@ -142,15 +142,14 @@ def add_screenwriter(name, phone, email):
 
     conn.commit()
     conn.close()
-def add_film(title, box_office, rating, year, id_director, id_screenwriter):
+def add_film(title, box_office, rating, year, director_name, screenwriter_name):
     conn = sqlite3.connect('Movies.db')
     cursor = conn.cursor()
     query = '''
-        	    INSERT INTO film(title, box_office,rating,year,id_director, id_screenwriter)
+        	    INSERT INTO film(title, box_office,rating, year, director_name, screenwriter_name)
         	    	        VALUES (?,?,?,?,?,?)
         	'''
-    cursor.execute(query, (title, box_office, rating, year, id_director,id_screenwriter))
-
+    cursor.execute(query, (title, box_office, rating, year, director_name, screenwriter_name))
     conn.commit()
     conn.close()
 
@@ -318,13 +317,13 @@ def get_films_by_box_office(box1):
     conn.commit()
     conn.close()
     return all_rows
-def get_films_by_scrennwriter(scr_id):
+def get_films_by_scrennwriter(screenwriter_name1):
     conn = sqlite3.connect('Movies.db')
     cursor = conn.cursor()
     query = f'''
-    	    SELECT title, box_office, rating, year
+    	    SELECT title, box_office, rating, year, director_name, screenwriter_name
     	    FROM film
-    	    WHERE id_screenwriter = {scr_id!r}
+    	    WHERE screenwriter_name = {screenwriter_name1!r}
 
     	'''
     cursor.execute(query)
@@ -332,14 +331,13 @@ def get_films_by_scrennwriter(scr_id):
     conn.commit()
     conn.close()
     return all_rows
-def get_films_by_director(director_id):
+def get_films_by_director(director_name1):
     conn = sqlite3.connect('Movies.db')
     cursor = conn.cursor()
     query = f'''
-    	    SELECT title, box_office, rating, year
+    	    SELECT title, box_office, rating, year, director_name, screenwriter_name
     	    FROM film
-    	    WHERE id_director = {director_id!r}
-
+    	    WHERE director_name = {director_name1!r}
     	'''
     cursor.execute(query)
     all_rows = cursor.fetchall()
@@ -384,15 +382,15 @@ def remove_screenwriter_by_name(name1):
     conn.commit()
     conn.close()
 
-def update_film(name, box_office, rating, id_director, id_screenwriter):
+def update_film(name, box_office, rating, director_name, screenwriter_name):
     conn = sqlite3.connect('Movies.db')
     cursor = conn.cursor()
     query = f'''
-    UPDATE director
-    SET title = ?, box_office = ?, rating = ? ,id_director = ?, id_screenwriter = ?
+    UPDATE film
+    SET title = ?, box_office = ?, rating = ? ,director_name = ?, screenwriter_name = ?
     WHERE title = '{name}'
     '''
-    cursor.execute(query, (name, box_office, rating, id_director, id_screenwriter))
+    cursor.execute(query, (name, box_office, rating, director_name, screenwriter_name))
     conn.commit()
     conn.close()
 def update_actor(name1, phone, email):
@@ -429,4 +427,6 @@ def update_director(name1, phone, email):
     conn.commit()
     conn.close()
 
-print(get_films_by_actor('Tobey Maguire'))
+
+print(get_films_by_scrennwriter('Alvin Sargent'))
+

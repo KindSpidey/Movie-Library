@@ -128,26 +128,25 @@
       <Position>5</Position>
       <DataType>INT|0s</DataType>
     </column>
-    <column id="40" parent="10" name="id_director">
+    <column id="40" parent="10" name="director_name">
       <Position>6</Position>
-      <DataType>INT|0s</DataType>
+      <DataType>TEXT|0s</DataType>
     </column>
-    <column id="41" parent="10" name="id_screenwriter">
+    <column id="41" parent="10" name="screenwriter_name">
       <Position>7</Position>
-      <DataType>INT|0s</DataType>
+      <DataType>TEXT|0s</DataType>
     </column>
     <key id="42" parent="10" name="film_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="43" parent="10">
-      <ColNames>id_director</ColNames>
+      <ColNames>director_name</ColNames>
       <RefTableName>director</RefTableName>
-      <RefKeyName>director_pk</RefKeyName>
-      <RefColNames>id</RefColNames>
+      <RefColNames>name</RefColNames>
     </foreign-key>
     <foreign-key id="44" parent="10">
-      <ColNames>id_screenwriter</ColNames>
+      <ColNames>screenwriter_name</ColNames>
       <RefTableName>screenwriter</RefTableName>
       <RefColNames>name</RefColNames>
     </foreign-key>

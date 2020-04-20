@@ -111,6 +111,13 @@ class WorkingBD():
         filmID = cursor.fetchall()
         result = actID[0]+filmID[0]
         actID, filmID = result[0], result[1]
+        cursor.execute(f'''SELECT film_id FROM actfilm WHERE act_id ={actID!r}''')
+        a = cursor.fetchall()
+        list =[]
+        for elem in a:
+            list.append(elem[0])
+        if list.__contains__(filmID):
+            return
         query ='''
         INSERT INTO actfilm(act_id, film_id)
                         VALUES (?,?)'''
@@ -129,6 +136,10 @@ class WorkingBD():
         cursor.execute(query, (name,))
         conn.commit()
         conn.close()
+    def add_actor_in_consist_film(actor, *films):
+        WorkingBD.add_actor_during_adding_film(actor)
+        for elem in films:
+            WorkingBD.connect_film_and_actor(elem,actor)
     def add_person_during_adding_film(name,who):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -271,6 +282,8 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        a = WorkingBD.get_films_by_director(name1)
+        all_rows.append(a)
         conn.commit()
         conn.close()
         return all_rows
@@ -286,6 +299,8 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        a = WorkingBD.get_films_by_composer(name1)
+        all_rows.append(a)
         conn.commit()
         conn.close()
         return all_rows
@@ -300,6 +315,8 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        a = WorkingBD.get_films_by_scrennwriter(name1)
+        all_rows.append(a)
         conn.commit()
         conn.close()
         return all_rows
@@ -331,15 +348,19 @@ class WorkingBD():
             WHERE act_id = {idact!r}'''
         id_films = cursor.execute(query).fetchall()
         list = []
-        for elem in id_films[0]:
-            list.append(elem)
+        for elem in id_films:
+            list.append(elem[0])
         result = []
         for elem in list:
             s = WorkingBD.get_film_by_id(elem)
             result+=s
+        list =[]
+        for elem in result:
+            a = elem[0]
+            list.append(WorkingBD.get_film_by_title(a))
         conn.commit()
         conn.close()
-        return result
+        return list
     def get_film_by_id(ids):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -616,15 +637,17 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
-    def update_film(name, box_office, rating,budget, director_name, screenwriter_name):
+    def update_film(name, box_office, rating,budget, director_name, screenwriter_name, composer_name, *actors):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
         UPDATE film
-        SET title = ?, box_office = ?, rating = ? ,budget = ?,director_name = ?, screenwriter_name = ?
+        SET title = ?, box_office = ?, rating = ? ,budget = ?,director_name = ?, screenwriter_name = ?, composer_name = ?
         WHERE title = '{name}'
         '''
-        cursor.execute(query, (name, box_office, rating, budget, director_name, screenwriter_name))
+        cursor.execute(query, (name, box_office, rating, budget, director_name, screenwriter_name, composer_name))
+        for actor in actors:
+            WorkingBD.connect_film_and_actor(name,actor)
         conn.commit()
         conn.close()
     def update_actor(name1, phone, email):
@@ -667,4 +690,5 @@ WorkingBD.add_film('The Amazing Spider-Man 2',800000000,40,2014,200000000,'Marc 
 WorkingBD.add_film('Captain America: The Winter Soldier',800000000,70,2014,200000000,'Russo Brothers','Russo Brothers','Michael Jackino','Chris Evans', 'Sam Jackson', 'Scarlett Johanson', 'Robert Redfford', 'Sebastian Stan')
 WorkingBD.add_film('The Amazing Spider-Man',800000000,60,2012,200000000,'Marc Webb','Alvin Sargent','James Horner','Andrew Garfield', 'Emma Stone', 'Rhys Ifans')
 WorkingBD.add_film('Spider-Man',800000000,80,2002,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco')
+WorkingBD.add_actor_in_consist_film('Emma Stone', 'The Amazing Spider-Man','The Amazing Spider-Man 2')
 

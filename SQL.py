@@ -202,6 +202,8 @@ class WorkingBD():
     def add_film(title, box_office, rating, year, budget,  director_name, screenwriter_name, composer_name, *actors_names):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
+        if WorkingBD.get_film_by_title(title).__len__()!=0:
+            return
         query = '''
                     INSERT INTO film(title, box_office,rating, year,budget, director_name, screenwriter_name,composer_name)
                                 VALUES (?,?,?,?,?,?,?,?)
@@ -301,7 +303,21 @@ class WorkingBD():
         conn.commit()
         conn.close()
         return all_rows
-
+    def get_actors_by_film(name1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        cursor.execute(f'''SELECT id FROM film WHERE title ={name1!r}''')
+        idf = cursor.fetchone()[0]
+        cursor.execute(f'''SELECT act_id FROM actfilm WHERE film_id={idf!r}''')
+        actf = cursor.fetchall()
+        list =[]
+        result =[]
+        for elem in actf:
+            list.append(elem[0])
+        for elem in list:
+            cursor.execute(f'''SELECT name FROM actor WHERE id ={elem!r}''')
+            result+=cursor.fetchone()
+        return result
     def get_films_by_actor(name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -349,125 +365,224 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        cursor.execute('''''')
         conn.commit()
         conn.close()
+        if all_rows.__len__()!=0:
+            all_rows.append(WorkingBD.get_actors_by_film(name))
         return all_rows
     def get_films_by_year(year1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
-                SELECT title, box_office, rating, year, budget, director_name, screenwriter_name, composer_name
+                SELECT title
                 FROM film
                 WHERE year = {year1!r}
     
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        list = []
+        result =[]
+        for elem in all_rows:
+            list.append(elem[0])
+        for elem in list:
+            a = WorkingBD.get_film_by_title(elem)
+            result.append(a)
         conn.commit()
         conn.close()
-        return all_rows
-    def get_films_by_rating(rating1):
-        conn = sqlite3.connect('Movies.db')
-        cursor = conn.cursor()
-        query = f'''
-                SELECT title, box_office, rating, year,budget, director_name, screenwriter_name, composer_name
-                FROM film
-                WHERE rating>={rating1!r}
-    
-            '''
-        cursor.execute(query)
-        all_rows = cursor.fetchall()
-        conn.commit()
-        conn.close()
-        return all_rows
-    def get_films_by_box_office(box1):
-        conn = sqlite3.connect('Movies.db')
-        cursor = conn.cursor()
-        query = f'''
-                SELECT title, box_office, rating, year,budget, director_name, screenwriter_name, composer_name
-                FROM film
-                WHERE box_office>={box1!r}
-    
-            '''
-        cursor.execute(query)
-        all_rows = cursor.fetchall()
-        conn.commit()
-        conn.close()
-        return all_rows
 
-    def get_films_by_budget(budg):
+        return result
+    def get_films_by_rating(rating1,what):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
-        query = f'''
-                SELECT title, box_office, rating, year,budget, director_name, screenwriter_name, composer_name
-                FROM film
-                WHERE box_office>={budg!r}
+        if what=='less':
+            query = f'''
+                           SELECT title
+                           FROM film
+                           WHERE rating <= {rating1!r}
+    
+                       '''
+        if what == 'more':
+            query = f'''
+                           SELECT title
+                           FROM film
+                           WHERE rating >= {rating1!r}
 
-            '''
+                       '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        list = []
+        result = []
+        for elem in all_rows:
+            list.append(elem[0])
+        for elem in list:
+            a = WorkingBD.get_film_by_title(elem)
+            result.append(a)
         conn.commit()
         conn.close()
-        return all_rows
+
+        return result
+    def get_films_by_box_office(box1,what):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if what == 'less':
+            query = f'''
+                           SELECT title
+                           FROM film
+                           WHERE box_office <= {box1!r}
+
+                       '''
+        if what == 'more':
+            query = f'''
+                           SELECT title
+                           FROM film
+                           WHERE box_office >= {box1!r}
+
+                       '''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        list = []
+        result = []
+        for elem in all_rows:
+            list.append(elem[0])
+        for elem in list:
+            a = WorkingBD.get_film_by_title(elem)
+            result.append(a)
+        conn.commit()
+        conn.close()
+
+        return result
+
+    def get_films_by_budget(budg,what):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if what == 'less':
+            query = f'''
+                    SELECT title
+                    FROM film
+                    WHERE box_office<={budg!r}
+    
+                '''
+        if what == 'more':
+            query = f'''
+                            SELECT title
+                            FROM film
+                            WHERE box_office>={budg!r}
+    
+                        '''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        list = []
+        result = []
+        for elem in all_rows:
+            list.append(elem[0])
+        for elem in list:
+            a = WorkingBD.get_film_by_title(elem)
+            result.append(a)
+        conn.commit()
+        conn.close()
+
+        return result
+
     def get_films_by_scrennwriter(screenwriter_name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
-                SELECT title, box_office, rating, year,budget, director_name, screenwriter_name, composer_name
+                SELECT title
                 FROM film
                 WHERE screenwriter_name = {screenwriter_name1!r}
     
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        list = []
+        result = []
+        for elem in all_rows:
+            list.append(elem[0])
+        for elem in list:
+            a = WorkingBD.get_film_by_title(elem)
+            result.append(a)
         conn.commit()
         conn.close()
-        return all_rows
+
+        return result
+
+
     def get_films_by_director(director_name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
-                SELECT title, box_office, rating, year,budget, director_name, screenwriter_name, composer_name
+                SELECT title
                 FROM film
                 WHERE director_name = {director_name1!r}
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        list = []
+        result = []
+        for elem in all_rows:
+            list.append(elem[0])
+        for elem in list:
+            a = WorkingBD.get_film_by_title(elem)
+            result.append(a)
         conn.commit()
         conn.close()
-        return all_rows
+
+        return result
+
+
     def get_films_by_composer(composer_name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
-                SELECT title, box_office, rating, year,budget, director_name, screenwriter_name, composer_name
+                SELECT title
                 FROM film
                 WHERE composer_name = {composer_name1!r}
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        list = []
+        result = []
+        for elem in all_rows:
+            list.append(elem[0])
+        for elem in list:
+            a = WorkingBD.get_film_by_title(elem)
+            result.append(a)
         conn.commit()
         conn.close()
-        return all_rows
+        return result
 
     def remove_film_by_title(*name):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         for elem in name:
             query = f'''
-                        DELETE FROM film WHERE title = "{elem}"
+                        DELETE FROM film WHERE title = "{elem!r}"
                     '''
             cursor.execute(query)
+        for elem in name:
+            cursor.execute(f'''SELECT id FROM film WHERE title = "{elem!r}"''')
+        conn.commit()
+        conn.close()
+    def remove_connection_by_actor(name1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        cursor.execute(f'''SELECT id FROM actor WHERE name ="{name1}"''')
+        act_id = cursor.fetchall()[0][0]
+        cursor.execute(f'''DELETE FROM actfilm WHERE act_id ="{act_id!r}"''')
         conn.commit()
         conn.close()
     def remove_actor_by_name(*name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         for elem in name1:
+            WorkingBD.remove_connection_by_actor(elem)
             query = f'''
                         DELETE FROM actor WHERE name = "{elem}"
                     '''
             cursor.execute(query)
+
         conn.commit()
         conn.close()
     def remove_director_by_name(*name1):
@@ -534,6 +649,7 @@ class WorkingBD():
         cursor.execute(query, (name1, phone, email))
         conn.commit()
         conn.close()
+
     def update_director(name1, phone, email):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -546,7 +662,9 @@ class WorkingBD():
         conn.commit()
         conn.close()
 WorkingBD.create_table()
-WorkingBD.remove_film_by_title('Spider-Man')
-WorkingBD.remove_actor_by_name('Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe','James Franco', 'J.K. Simmons', 'Joe Manganiello')
-WorkingBD.add_film('Spider-Man',821708551,90,2002,139000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe','James Franco', 'J.K. Simmons', 'Joe Manganiello')
+WorkingBD.add_actor('Andrew Garfield','89157213979','garfield','male','1986')
+WorkingBD.add_film('The Amazing Spider-Man 2',800000000,40,2014,200000000,'Marc Webb','Idiot','Hans Zimmer','Andrew Garfield', 'Emma Stone', 'Jamie Foxx', 'Dane Dehaan', 'Sally Field')
+WorkingBD.add_film('Captain America: The Winter Soldier',800000000,70,2014,200000000,'Russo Brothers','Russo Brothers','Michael Jackino','Chris Evans', 'Sam Jackson', 'Scarlett Johanson', 'Robert Redfford', 'Sebastian Stan')
+WorkingBD.add_film('The Amazing Spider-Man',800000000,60,2012,200000000,'Marc Webb','Alvin Sargent','James Horner','Andrew Garfield', 'Emma Stone', 'Rhys Ifans')
+WorkingBD.add_film('Spider-Man',800000000,80,2002,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco')
 

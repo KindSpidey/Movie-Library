@@ -147,7 +147,10 @@ class WorkingBD():
             sums = 0
             for elem in list:
                 sums+=elem
-            aver_salery = sums/length
+            if length!=0:
+                aver_salery = sums/length
+            else:
+                aver_salery = 0
             query = f'''UPDATE actor SET average_salary=? WHERE id={id!r}'''
             cursor.execute(query, (aver_salery,))
         if who=='director':
@@ -160,7 +163,10 @@ class WorkingBD():
             sums = 0
             for elem in list:
                 sums+=elem
-            aver_salery = sums/length
+            if length != 0:
+                aver_salery = sums / length
+            else:
+                aver_salery = 0
             query = f'''UPDATE director SET average_salary=? WHERE id={id!r}'''
             cursor.execute(query, (aver_salery,))
         if who=='screenwriter':
@@ -173,7 +179,10 @@ class WorkingBD():
             sums = 0
             for elem in list:
                 sums+=elem
-            aver_salery = sums/length
+            if length != 0:
+                aver_salery = sums / length
+            else:
+                aver_salery = 0
             query = f'''UPDATE screenwriter SET average_salary=? WHERE id={id!r}'''
             cursor.execute(query, (aver_salery,))
         if who=='composer':
@@ -186,7 +195,10 @@ class WorkingBD():
             sums = 0
             for elem in list:
                 sums+=elem
-            aver_salery = sums/length
+            if length != 0:
+                aver_salery = sums / length
+            else:
+                aver_salery = 0
             query = f'''UPDATE composer SET average_salary=? WHERE id={id!r}'''
             cursor.execute(query, (aver_salery,))
         conn.commit()
@@ -206,12 +218,22 @@ class WorkingBD():
             list = []
             for elem in aid:
                 list.append(elem[0])
+            cursor.execute(f'''SELECT name FROM actor WHERE id={actID!r}''')
             if(list.__contains__(filmID)):
+                return
+            cursor.execute(f'''SELECT film_id FROM actfilm WHERE act_id={actID!r}''')
+            lFilms = cursor.fetchall()
+            lf = []
+            for elem in lFilms:
+                lf.append(elem[0])
+            if not (lf.__contains__(filmID)):
                 return
             query = '''
                     INSERT INTO actsal(act_id, film_id,salary)
                                     VALUES (?,?,?)'''
-            WorkingBD.update_salary('actor',WorkingBD.get_actorID_by_name(name))
+            cursor.execute(query, (actID, filmID, salary))
+            conn.commit()
+            WorkingBD.update_salary('actor',actID)
         if who=='director':
             cursor.execute(f'''SELECT id FROM director WHERE name = {name!r}''')
             actID = cursor.fetchall()
@@ -219,9 +241,24 @@ class WorkingBD():
             filmID = cursor.fetchall()
             result = actID[0] + filmID[0]
             actID, filmID = result[0], result[1]
+            cursor.execute(f'''SELECT film_id FROM dirsal WHERE dir_id ={actID!r} ''')
+            aid = cursor.fetchall()
+            list = []
+            for elem in aid:
+                list.append(elem[0])
+            if (list.__contains__(filmID)):
+                return
+            cursor.execute(f'''SELECT director_name FROM film WHERE title ={film!r}''')
+            names = cursor.fetchall()[0][0]
+            if names!=name:
+                return
             query = '''
-                    INSERT INTO dirsal(act_id, film_id,salary)
+                    INSERT INTO dirsal(dir_id, film_id,salary)
                                     VALUES (?,?,?)'''
+            cursor.execute(query, (actID, filmID, salary))
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('director',actID)
         if who=='screenwriter':
             cursor.execute(f'''SELECT id FROM screenwriter WHERE name = {name!r}''')
             actID = cursor.fetchall()
@@ -229,22 +266,48 @@ class WorkingBD():
             filmID = cursor.fetchall()
             result = actID[0] + filmID[0]
             actID, filmID = result[0], result[1]
+            cursor.execute(f'''SELECT film_id FROM scrsal WHERE scr_id ={actID!r} ''')
+            aid = cursor.fetchall()
+            list = []
+            for elem in aid:
+                list.append(elem[0])
+            if (list.__contains__(filmID)):
+                return
+            cursor.execute(f'''SELECT screenwriter_name FROM film WHERE title ={film!r}''')
+            names = cursor.fetchall()[0]
+            if names != name:
+                return
             query = '''
-                    INSERT INTO scrsal(act_id, film_id,salary)
+                    INSERT INTO scrsal(scr_id, film_id,salary)
                                     VALUES (?,?,?)'''
+            cursor.execute(query, (actID, filmID, salary))
+            conn.commit()
+            WorkingBD.update_salary('screenwriter', actID)
         if who=='composer':
-            cursor.execute(f'''SELECT id FROM composerr WHERE name = {name!r}''')
+            cursor.execute(f'''SELECT id FROM composer WHERE name = {name!r}''')
             actID = cursor.fetchall()
             cursor.execute(f'''SELECT id FROM film WHERE title ={film!r} ''')
             filmID = cursor.fetchall()
             result = actID[0] + filmID[0]
             actID, filmID = result[0], result[1]
+            cursor.execute(f'''SELECT film_id FROM compsal WHERE comp_id ={actID!r} ''')
+            aid = cursor.fetchall()
+            list = []
+            for elem in aid:
+                list.append(elem[0])
+            if (list.__contains__(filmID)):
+                return
+            cursor.execute(f'''SELECT composer_name FROM film WHERE title ={film!r}''')
+            names = cursor.fetchall()[0][0]
+            if names != name:
+                return
             query = '''
-                    INSERT INTO compsal(act_id, film_id,salary)
+                    INSERT INTO compsal(comp_id, film_id,salary)
                                     VALUES (?,?,?)'''
-        cursor.execute(query, (actID, filmID,salary))
-        conn.commit()
-        conn.close()
+            cursor.execute(query, (actID, filmID, salary))
+            conn.commit()
+            WorkingBD.update_salary('composer', actID)
+
     def connect_film_and_actor(film_title, actor_name):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -535,10 +598,17 @@ class WorkingBD():
         conn.commit()
         conn.close()
         return all_rows
-    def get_actorID_by_name(name):
+    def get_personID_by_name(name, who):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
-        cursor.execute(f'''SELECT id FROM actor WHERE name = {name!r}''')
+        if who=='actor':
+            cursor.execute(f'''SELECT id FROM actor WHERE name = {name!r}''')
+        if who=='director':
+            cursor.execute(f'''SELECT id FROM director WHERE name = {name!r}''')
+        if who=='screenwriter':
+            cursor.execute(f'''SELECT id FROM screenwriter WHERE name = {name!r}''')
+        if who=='composer':
+            cursor.execute(f'''SELECT id FROM composer WHERE name = {name!r}''')
         return cursor.fetchall()[0][0]
     def get_film_by_title(name):
         conn = sqlite3.connect('Movies.db')
@@ -717,7 +787,89 @@ class WorkingBD():
 
         return result
 
-
+    def get_salary_by_person(who,name):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if who=='actor':
+            cursor.execute(f'''SELECT id FROM actor WHERE name ={name!r}''')
+            id = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT salary FROM actsal WHERE act_id={id!r}''')
+            sal = cursor.fetchall()
+            cursor.execute(f'''SELECT film_id FROM actsal WHERE act_id = {id!r}''')
+            a = cursor.fetchall()
+            sallist = []
+            for elem in sal:
+                sallist.append(elem[0])
+            list = []
+            for elem in a:
+                list.append(elem[0])
+            result = []
+            for elem in list:
+                a = WorkingBD.get_film_by_id(elem)
+                result.append(a)
+            for i in range(len(sallist)):
+                result[i].append(sallist[i])
+            return result
+        if who=='director':
+            cursor.execute(f'''SELECT id FROM director WHERE name ={name!r}''')
+            id = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT salary FROM dirsal WHERE dir_id={id!r}''')
+            sal = cursor.fetchall()
+            cursor.execute(f'''SELECT film_id FROM dirsal WHERE dir_id = {id!r}''')
+            a = cursor.fetchall()
+            sallist = []
+            for elem in sal:
+                sallist.append(elem[0])
+            list = []
+            for elem in a:
+                list.append(elem[0])
+            result = []
+            for elem in list:
+                a = WorkingBD.get_film_by_id(elem)
+                result.append(a)
+            for i in range(len(sallist)):
+                result[i].append(sallist[i])
+            return result
+        if who=='screenwriter':
+            cursor.execute(f'''SELECT id FROM screenwriter WHERE name ={name!r}''')
+            id = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT salary FROM scrtsal WHERE scr_id={id!r}''')
+            sal = cursor.fetchall()
+            cursor.execute(f'''SELECT film_id FROM scrsal WHERE scr_id = {id!r}''')
+            a = cursor.fetchall()
+            sallist = []
+            for elem in sal:
+                sallist.append(elem[0])
+            list = []
+            for elem in a:
+                list.append(elem[0])
+            result = []
+            for elem in list:
+                a = WorkingBD.get_film_by_id(elem)
+                result.append(a)
+            for i in range(len(sallist)):
+                result[i].append(sallist[i])
+            return result
+        if who=='composer':
+            cursor.execute(f'''SELECT id FROM composer WHERE name ={name!r}''')
+            id = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT salary FROM compsal WHERE comp_id={id!r}''')
+            sal = cursor.fetchall()
+            cursor.execute(f'''SELECT film_id FROM compsal WHERE comp_id = {id!r}''')
+            a = cursor.fetchall()
+            sallist = []
+            for elem in sal:
+                sallist.append(elem[0])
+            list = []
+            for elem in a:
+                list.append(elem[0])
+            result = []
+            for elem in list:
+                a = WorkingBD.get_film_by_id(elem)
+                result.append(a)
+            for i in range(len(sallist)):
+                result[i].append(sallist[i])
+            return result
     def get_films_by_composer(composer_name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -809,7 +961,84 @@ class WorkingBD():
             cursor.execute(query)
         conn.commit()
         conn.close()
-
+    def remove_salary_by_person(film,who, name):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if who == 'composer':
+            cursor.execute(f'''SELECT id FROM composer WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute( f'''DELETE FROM compsal WHERE comp_id={actID!r} AND film_id={filmID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('composer', actID)
+        if who == 'director':
+            cursor.execute(f'''SELECT id FROM director WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute( f'''DELETE FROM dirsal WHERE dir_id={actID!r} AND film_id={filmID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('director', actID)
+        if who == 'actor':
+            cursor.execute(f'''SELECT id FROM actor WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute( f'''DELETE FROM actsal WHERE act_id={actID!r} AND film_id={filmID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('actor', actID)
+        if who == 'screenwriter':
+            cursor.execute(f'''SELECT id FROM screenwriter WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute( f'''DELETE FROM scrsal WHERE scr_id={actID!r} AND film_id={filmID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('screenwriter', actID)
+    def update_salary_when_created(film,who,name,salary):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if who=='composer':
+            cursor.execute(f'''SELECT id FROM composer WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute(f'''UPDATE compsal SET salary = {salary!r} WHERE film_id={filmID!r} AND comp_id ={actID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('composer', actID)
+        if who=='director':
+            cursor.execute(f'''SELECT id FROM director WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute(f'''UPDATE dirpsal SET salary = {salary!r} WHERE film_id={filmID!r} AND dir_id ={actID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('director', actID)
+        if who=='actor':
+            cursor.execute(f'''SELECT id FROM actor WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute(f'''UPDATE actsal SET salary = {salary!r} WHERE film_id={filmID!r} AND comp_id ={actID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('actor', actID)
+        if who=='screenwriter':
+            cursor.execute(f'''SELECT id FROM screenwriter WHERE name={name!r}''')
+            actID = cursor.fetchall()[0][0]
+            cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
+            filmID = cursor.fetchall()[0][0]
+            cursor.execute(f'''UPDATE scrpsal SET salary = {salary!r} WHERE film_id={filmID!r} AND comp_id ={actID!r}''')
+            conn.commit()
+            conn.close()
+            WorkingBD.update_salary('screenwriter', actID)
     def update_film(name, box_office, rating,budget, director_name, screenwriter_name, composer_name, *actors):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -865,5 +1094,8 @@ WorkingBD.add_film('Captain America: The Winter Soldier',800000000,70,2014,20000
 WorkingBD.add_film('The Amazing Spider-Man',800000000,60,2012,200000000,'Marc Webb','Alvin Sargent','James Horner','Andrew Garfield', 'Emma Stone', 'Rhys Ifans')
 WorkingBD.add_film('Spider-Man',800000000,80,2002,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco')
 WorkingBD.add_film('Spider-Man 3',800000000,90,2004,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco', 'Alfred Molina')
-WorkingBD.connect_salary_and_person('The Amazing Spider-Man','actor','Andrew Garfield',135000)
-
+WorkingBD.connect_salary_and_person('The Amazing Spider-Man','actor','Tobey Maguire',135000)
+WorkingBD.connect_salary_and_person('The Amazing Spider-Man 2','director','Marc Webb',5220)
+WorkingBD.update_salary_when_created('The Amazing Spider-Man 2','composer','Hans Zimmer',20)
+#WorkingBD.remove_salary_by_person('The Amazing Spider-Man 2', 'director','Marc Webb')
+print(WorkingBD.get_salary_by_person('director','Marc Webb'))

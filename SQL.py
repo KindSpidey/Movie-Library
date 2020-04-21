@@ -1017,7 +1017,7 @@ class WorkingBD():
             actID = cursor.fetchall()[0][0]
             cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
             filmID = cursor.fetchall()[0][0]
-            cursor.execute(f'''UPDATE dirpsal SET salary = {salary!r} WHERE film_id={filmID!r} AND dir_id ={actID!r}''')
+            cursor.execute(f'''UPDATE dirsal SET salary = {salary!r} WHERE film_id={filmID!r} AND dir_id ={actID!r}''')
             conn.commit()
             conn.close()
             WorkingBD.update_salary('director', actID)
@@ -1035,7 +1035,7 @@ class WorkingBD():
             actID = cursor.fetchall()[0][0]
             cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
             filmID = cursor.fetchall()[0][0]
-            cursor.execute(f'''UPDATE scrpsal SET salary = {salary!r} WHERE film_id={filmID!r} AND comp_id ={actID!r}''')
+            cursor.execute(f'''UPDATE scrsal SET salary = {salary!r} WHERE film_id={filmID!r} AND comp_id ={actID!r}''')
             conn.commit()
             conn.close()
             WorkingBD.update_salary('screenwriter', actID)
@@ -1095,7 +1095,7 @@ WorkingBD.add_film('The Amazing Spider-Man',800000000,60,2012,200000000,'Marc We
 WorkingBD.add_film('Spider-Man',800000000,80,2002,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco')
 WorkingBD.add_film('Spider-Man 3',800000000,90,2004,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco', 'Alfred Molina')
 WorkingBD.connect_salary_and_person('The Amazing Spider-Man','actor','Tobey Maguire',135000)
-WorkingBD.connect_salary_and_person('The Amazing Spider-Man 2','director','Marc Webb',5220)
-WorkingBD.update_salary_when_created('The Amazing Spider-Man 2','composer','Hans Zimmer',20)
+WorkingBD.connect_salary_and_person('The Amazing Spider-Man 2','actor','Emma Stone',5221220)
+WorkingBD.update_salary_when_created('The Amazing Spider-Man 2','director','Marc Webb',20)
 #WorkingBD.remove_salary_by_person('The Amazing Spider-Man 2', 'director','Marc Webb')
-print(WorkingBD.get_salary_by_person('director','Marc Webb'))
+print(WorkingBD.get_salary_by_person('actor','Emma Stone'))

@@ -56,10 +56,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/GUI/Studio.ui" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.OOP_project">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\d_pug\Documents\GitHub\Movie-Library" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.GUI">
     <configuration name="API" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Movie_Library" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -74,6 +79,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/API.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Movie_Library" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GUI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -128,6 +155,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.GUI" />
         <item itemvalue="Python.sasa" />
         <item itemvalue="Python.API" />
       </list>
@@ -155,7 +183,10 @@
       <workItem from="1587303692990" duration="6758000" />
       <workItem from="1587358862320" duration="16171000" />
       <workItem from="1587392389633" duration="8940000" />
-      <workItem from="1587445433854" duration="10329000" />
+      <workItem from="1587445433854" duration="10353000" />
+      <workItem from="1587538093081" duration="992000" />
+      <workItem from="1587545478539" duration="1506000" />
+      <workItem from="1587621430161" duration="5736000" />
     </task>
     <servers />
   </component>
@@ -183,46 +214,54 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="457" y="167" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1587278861004" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1584102981982">
+    <state x="468" y="65" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1587641789749">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584102981982" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1587458523470">
+    <state x="468" y="65" key="#com.intellij.ide.macro.MacrosDialog/0.0.1366.728@0.0.1366.728" timestamp="1587641789749" />
+    <state x="461" y="190" key="#com.intellij.tools.ToolEditorDialog" timestamp="1587641790705">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587458523470" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1587458523470">
+    <state x="461" y="190" key="#com.intellij.tools.ToolEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1587641790705" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1587626085224">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587458523470" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1587458523470">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587626085224" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1587643558873">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587458523470" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1587458523470">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587643558873" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1587643558872">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587458523470" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1587458136189">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587643558872" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1587643558871">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587458136189" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1587458136189">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587643558871" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1587643558872">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587458136189" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1587458136189">
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587643558872" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1587458567060">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587458136189" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1587458136189">
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1587458567060">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587458136189" />
-    <state x="204" y="6" width="978" height="708" key="SettingsEditor" timestamp="1584510000432">
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1587458567060">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="204" y="6" width="978" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584510000432" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1587458567060">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
+    <state x="204" y="6" width="978" height="708" key="SettingsEditor" timestamp="1587642729865">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="204" y="6" width="978" height="708" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1587642729865" />
     <state x="579" y="254" width="326" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1585137301135">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -246,6 +285,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Movie_Library$sasa.coverage" NAME="sasa Coverage Results" MODIFIED="1585816062702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Movie_Library$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1587641794757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$OOP_project.coverage" NAME="OOP_project Coverage Results" MODIFIED="1587458523454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$API.coverage" NAME="API Coverage Results" MODIFIED="1585812846353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

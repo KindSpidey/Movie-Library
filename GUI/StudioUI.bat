@@ -1,0 +1,1 @@
+pyuic5.exe Studio.ui -o Studio.py

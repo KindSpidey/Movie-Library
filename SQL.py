@@ -118,6 +118,25 @@ class WorkingBD():
             salary INT
         );
         '''
+        queryFilmInPlan ='''CREATE TABLE IF NOT EXISTS planningMovie (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    title           STRING,
+    description     STRING,
+    theme           STRING,
+    idea            STRING,
+    planning_budget INTEGER
+);
+'''
+        queryFilmInProgress ='''CREATE TABLE IF NOT EXISTS filmInProgress (
+    id           INTEGER NOT NULL
+                         PRIMARY KEY AUTOINCREMENT,
+    title        STRING  NOT NULL,
+    budget       INTEGER NOT NULL,
+    director     STRING  NOT NULL,
+    screenwriter STRING  NOT NULL,
+    composer     STRING  NOT NULL
+);
+'''
         cursor.execute(queryActor)
         cursor.execute(queryDirector)
         cursor.execute(queryFilm)
@@ -131,9 +150,11 @@ class WorkingBD():
         cursor.execute(queryDirSal)
         cursor.execute(queryActSal)
         cursor.execute(queryCompSal)
-
+        cursor.execute(queryFilmInProgress)
+        cursor.execute(queryFilmInPlan)
         conn.commit()
         conn.close()
+
     def update_salary(who,id):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()

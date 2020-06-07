@@ -29,6 +29,51 @@
     </size>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="6">
+     <widget class="QPushButton" name="Find">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Найти</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="ObjectName">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>32771</number>
+      </property>
+      <property name="placeholderText">
+       <string>Поиск</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="logo">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>images/logo3.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="4">
      <widget class="QComboBox" name="comboBox">
       <property name="currentText">
@@ -64,10 +109,13 @@
       </item>
      </widget>
     </item>
-    <item row="5" column="0" colspan="7">
-     <widget class="QTabWidget" name="tabWidget">
+    <item row="4" column="0" colspan="7">
+     <widget class="QTabWidget" name="OldTab">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="filmTab">
        <attribute name="title">
@@ -138,6 +186,11 @@
           <column>
            <property name="text">
             <string>Имя</string>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+            </font>
            </property>
           </column>
           <column>
@@ -253,12 +306,12 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="CompTab">
+      <widget class="QWidget" name="compTab">
        <attribute name="title">
         <string>Композиторы</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QTableWidget" name="tableWidget_4">
           <column>
            <property name="text">
@@ -291,65 +344,12 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="2">
-     <widget class="QLineEdit" name="ObjectName">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="maxLength">
-       <number>32771</number>
-      </property>
-      <property name="placeholderText">
-       <string>Поиск</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QCommandLinkButton" name="commandLinkButton">
-      <property name="maximumSize">
-       <size>
-        <width>200</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Расширенный поиск</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="6">
-     <widget class="QPushButton" name="Find">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Найти</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="logo">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>images/logo3.png</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
    </layout>
+   <zorder>OldTab</zorder>
+   <zorder>comboBox</zorder>
+   <zorder>ObjectName</zorder>
+   <zorder>Find</zorder>
+   <zorder>logo</zorder>
   </widget>
  </widget>
  <resources/>

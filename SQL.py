@@ -2,7 +2,7 @@ import sqlite3
 import subprocess as sp
 
 class WorkingBD():
-    def create_table():
+    def create_table(self):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         queryyActorNews = '''
@@ -118,7 +118,7 @@ class WorkingBD():
             salary INT
         );
         '''
-        queryFilmInPlan ='''CREATE TABLE IF NOT EXISTS planningMovie (
+        queryFilmInPlan ='''CREATE TABLE IF NOT EXISTS filminplan (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     title           STRING,
     description     STRING,
@@ -127,7 +127,7 @@ class WorkingBD():
     planning_budget INTEGER
 );
 '''
-        queryFilmInProgress ='''CREATE TABLE IF NOT EXISTS filmInProgress (
+        queryFilmInProgress ='''CREATE TABLE IF NOT EXISTS filminprogress (
     id           INTEGER NOT NULL
                          PRIMARY KEY AUTOINCREMENT,
     title        STRING  NOT NULL,
@@ -137,6 +137,11 @@ class WorkingBD():
     composer     STRING  NOT NULL
 );
 '''
+        queryActFilmInProgress = '''CREATE TABLE IF NOT EXISTS actfilminprogress (
+    act_id              INT,
+    film_in_progress_id INT
+);'''
+        cursor.execute(queryActFilmInProgress)
         cursor.execute(queryActor)
         cursor.execute(queryDirector)
         cursor.execute(queryFilm)
@@ -353,6 +358,31 @@ class WorkingBD():
         cursor.execute(query, (actID,filmID))
         conn.commit()
         conn.close()
+
+    def connect_film_and_actor_in_progress(film_title, actor_name):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if(WorkingBD.get_actor_by_name(actor_name).__len__()==0):
+            WorkingBD.add_actor_during_adding_film(actor_name)
+        cursor.execute(f'''SELECT id FROM actor WHERE name = {actor_name!r}''')
+        actID = cursor.fetchall()
+        cursor.execute(f'''SELECT id FROM filminprogress WHERE title ={film_title!r} ''')
+        filmID = cursor.fetchall()
+        result = actID[0]+filmID[0]
+        actID, filmID = result[0], result[1]
+        cursor.execute(f'''SELECT film_id FROM actfilminprogress WHERE act_id ={actID!r}''')
+        a = cursor.fetchall()
+        list =[]
+        for elem in a:
+            list.append(elem[0])
+        if list.__contains__(filmID):
+            return
+        query ='''
+        INSERT INTO actfilminprogress(act_id, film_id)
+                        VALUES (?,?)'''
+        cursor.execute(query, (actID,filmID))
+        conn.commit()
+        conn.close()
     def add_actor_during_adding_film(name):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -453,6 +483,33 @@ class WorkingBD():
         conn.commit()
         for elem in actors_names:
             WorkingBD.connect_film_and_actor(title,elem)
+        WorkingBD.add_person_during_adding_film(director_name, 'director')
+        WorkingBD.add_person_during_adding_film(screenwriter_name, 'screenwriter')
+        WorkingBD.add_person_during_adding_film(composer_name, 'composer')
+        conn.close()
+    def add_filminplan(title, description, theme, idea, budget):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = '''
+                INSERT INTO filminplan(title, description, theme, idea, planning_budget)
+                            VALUES (?,?,?,?)
+            '''
+        cursor.execute(query, (title, description, theme, idea, budget))
+        conn.commit()
+        conn.close()
+    def add_filmInProgress(title, budget, director_name, screenwriter_name, composer_name, *actors_names):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if WorkingBD.get_film_by_title(title).__len__() != 0:
+            return
+        query = '''
+                        INSERT INTO filmInProgress(title, budget, director_name, screenwriter_name,composer_name)
+                                    VALUES (?,?,?,?,?)
+                    '''
+        cursor.execute(query, (title, budget, director_name, screenwriter_name, composer_name))
+        conn.commit()
+        for elem in actors_names:
+            WorkingBD.connect_film_and_actor(title, elem)
         WorkingBD.add_person_during_adding_film(director_name, 'director')
         WorkingBD.add_person_during_adding_film(screenwriter_name, 'screenwriter')
         WorkingBD.add_person_during_adding_film(composer_name, 'composer')
@@ -579,6 +636,21 @@ class WorkingBD():
             cursor.execute(f'''SELECT name FROM actor WHERE id ={elem!r}''')
             result+=cursor.fetchone()
         return result
+    def get_actors_by_filminprogress(name1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        cursor.execute(f'''SELECT id FROM filminprogress WHERE title ={name1!r}''')
+        idf = cursor.fetchone()[0]
+        cursor.execute(f'''SELECT act_id FROM actfilminprogress WHERE film_id={idf!r}''')
+        actf = cursor.fetchall()
+        list =[]
+        result =[]
+        for elem in actf:
+            list.append(elem[0])
+        for elem in list:
+            cursor.execute(f'''SELECT name FROM actor WHERE id ={elem!r}''')
+            result+=cursor.fetchone()
+        return result
     def get_films_by_actor(name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -648,6 +720,25 @@ class WorkingBD():
         if all_rows.__len__()!=0:
             all_rows.append(WorkingBD.get_actors_by_film(name))
         return all_rows
+    def get_film_in_plan(name):
+        
+    def get_film_in_progress_by_title(name):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''
+                SELECT title, budget, director_name, screenwriter_name, composer_name
+                FROM filminprogress
+                WHERE title = {name!r} 
+
+            '''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        cursor.execute('''''')
+        conn.commit()
+        conn.close()
+        if all_rows.__len__() != 0:
+            all_rows.append(WorkingBD.get_actors_by_filminprogress(name))
+        return all_rows
     def get_films_by_year(year1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -668,8 +759,8 @@ class WorkingBD():
             result.append(a)
         conn.commit()
         conn.close()
-
         return result
+
     def get_films_by_rating(rating1,what):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -957,7 +1048,7 @@ class WorkingBD():
         cursor = conn.cursor()
         for elem in name1:
             query = f'''
-                        DELETE FROM director WHERE title = "{elem}"
+                        DELETE FROM director WHERE name = "{elem}"
                     '''
             cursor.execute(query)
         conn.commit()
@@ -967,7 +1058,7 @@ class WorkingBD():
         cursor = conn.cursor()
         for elem in name1:
             query = f'''
-                        DELETE FROM screenwriter WHERE title = "{elem}"
+                        DELETE FROM screenwriter WHERE name = "{elem}"
                     '''
             cursor.execute(query)
         conn.commit()
@@ -977,7 +1068,27 @@ class WorkingBD():
         cursor = conn.cursor()
         for elem in name1:
             query = f'''
-                        DELETE FROM composer WHERE title = "{elem}"
+                        DELETE FROM composer WHERE name = "{elem}"
+                    '''
+            cursor.execute(query)
+        conn.commit()
+        conn.close()
+    def remove_filminplan(*title1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        for elem in title1:
+            query = f'''
+                        DELETE FROM filminplan WHERE title = "{elem}"
+                    '''
+            cursor.execute(query)
+        conn.commit()
+        conn.close()
+    def remove_filninprogress(*title1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        for elem in title1:
+            query = f'''
+                        DELETE FROM filminprogress WHERE title = "{elem}"
                     '''
             cursor.execute(query)
         conn.commit()
@@ -1095,7 +1206,29 @@ class WorkingBD():
         cursor.execute(query, (name1, phone, email))
         conn.commit()
         conn.close()
-
+    def update_filminplan(title, description, theme, idea, budget):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''UPDATE director
+        SET title = ?,description = ?, theme = ?, idea = ?, planning_budget = ?
+        WHERE name = '{name1}'
+        '''
+        cursor.execute(query, (title, description, theme, idea, budget))
+        conn.commit()
+        conn.close()
+    def update_filminprogress(title, budget, director_name, screenwriter_name, composer_name, *actors_names):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''
+        UPDATE film
+        SET title = ? ,budget = ?,director_name = ?, screenwriter_name = ?, composer_name = ?
+        WHERE title = '{title}'
+        '''
+        cursor.execute(query, (title, budget, director_name, screenwriter_name, composer_name, *actors_names))
+        for actor in actors_names:
+            WorkingBD.connect_film_and_actor_in_progress(title,actor)
+        conn.commit()
+        conn.close()
     def update_director(name1, phone, email):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -1107,6 +1240,7 @@ class WorkingBD():
         cursor.execute(query, (name1, phone, email))
         conn.commit()
         conn.close()
+
 #WorkingBD.create_table()
 WorkingBD.add_actor('Andrew Garfield','89157213979','garfield','male','1986')
 #WorkingBD.remove_film_by_title('The Amazing Spider-Man 2')

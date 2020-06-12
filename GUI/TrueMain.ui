@@ -73,7 +73,7 @@
     </widget>
    </item>
    <item row="3" column="0" colspan="4">
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="mainTable">
      <property name="font">
       <font>
        <family>Proxima Nova</family>
@@ -94,7 +94,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -133,7 +133,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="1" column="0">
-        <widget class="QTableWidget" name="tableWidget">
+        <widget class="QTableWidget" name="filmTab">
          <property name="font">
           <font>
            <family>Proxima Nova</family>
@@ -196,7 +196,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QWidget" name="widget" native="true">
+        <widget class="QWidget" name="filmButtonsWidget" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -222,7 +222,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QToolButton" name="toolButton">
+           <widget class="QToolButton" name="filmCreate">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -264,7 +264,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_2">
+           <widget class="QToolButton" name="filmEdit">
             <property name="font">
              <font>
               <family>Open Sans</family>
@@ -275,6 +275,20 @@
             </property>
             <property name="text">
              <string>Редактировать</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="filmDelete">
+            <property name="font">
+             <font>
+              <family>Open Sans</family>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Удалить</string>
             </property>
            </widget>
           </item>
@@ -339,7 +353,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QWidget" name="widget_2" native="true">
+        <widget class="QWidget" name="progressButtonsWidget" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -347,8 +361,25 @@
           </sizepolicy>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="1">
+           <widget class="QToolButton" name="progressEdit">
+            <property name="font">
+             <font>
+              <family>Open Sans</family>
+              <pointsize>9</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+              <stylestrategy>PreferAntialias</stylestrategy>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="text">
+             <string>Редактировать</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
-           <widget class="QToolButton" name="toolButton_3">
+           <widget class="QToolButton" name="progressCreate">
             <property name="font">
              <font>
               <family>Open Sans</family>
@@ -364,20 +395,18 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QToolButton" name="toolButton_4">
+          <item row="0" column="2">
+           <widget class="QPushButton" name="progressDelete">
             <property name="font">
              <font>
               <family>Open Sans</family>
               <pointsize>9</pointsize>
               <weight>50</weight>
               <bold>false</bold>
-              <stylestrategy>PreferAntialias</stylestrategy>
-              <kerning>true</kerning>
              </font>
             </property>
             <property name="text">
-             <string>Редактировать</string>
+             <string>Удалить</string>
             </property>
            </widget>
           </item>
@@ -464,7 +493,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QWidget" name="widget_3" native="true">
+        <widget class="QWidget" name="planButtons" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -473,7 +502,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_11">
           <item row="0" column="0">
-           <widget class="QToolButton" name="toolButton_5">
+           <widget class="QToolButton" name="planCreate">
             <property name="font">
              <font>
               <family>Open Sans</family>
@@ -490,7 +519,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QToolButton" name="toolButton_6">
+           <widget class="QToolButton" name="planEdit">
             <property name="font">
              <font>
               <family>Open Sans</family>
@@ -506,6 +535,21 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="planDelete">
+            <property name="font">
+             <font>
+              <family>Open Sans</family>
+              <pointsize>9</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Удалить</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -517,7 +561,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0">
-        <widget class="QTabWidget" name="tabWidget_2">
+        <widget class="QTabWidget" name="peopleTabInTab">
          <property name="font">
           <font>
            <family>Proxima Nova</family>
@@ -545,7 +589,7 @@
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="documentMode">
           <bool>false</bool>
@@ -556,13 +600,13 @@
          <property name="tabBarAutoHide">
           <bool>false</bool>
          </property>
-         <widget class="QWidget" name="tab_5">
+         <widget class="QWidget" name="actor">
           <attribute name="title">
            <string>Актёр</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_7">
            <item row="1" column="0">
-            <widget class="QTableWidget" name="tableWidget_5">
+            <widget class="QTableWidget" name="actorTable">
              <property name="font">
               <font>
                <family>Proxima Nova</family>
@@ -610,7 +654,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QWidget" name="widget_4" native="true">
+            <widget class="QWidget" name="actorButtonsWidget" native="true">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -619,7 +663,7 @@
              </property>
              <layout class="QGridLayout" name="gridLayout_12">
               <item row="0" column="0">
-               <widget class="QToolButton" name="toolButton_7">
+               <widget class="QToolButton" name="actorCreate">
                 <property name="font">
                  <font>
                   <family>Open Sans</family>
@@ -634,7 +678,7 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QToolButton" name="toolButton_8">
+               <widget class="QToolButton" name="actorEdit">
                 <property name="font">
                  <font>
                   <family>Open Sans</family>
@@ -648,18 +692,33 @@
                 </property>
                </widget>
               </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="actorDelete">
+                <property name="font">
+                 <font>
+                  <family>Open Sans</family>
+                  <pointsize>9</pointsize>
+                  <weight>50</weight>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Удалить</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tab_6">
+         <widget class="QWidget" name="director">
           <attribute name="title">
            <string>Режиссер</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_8">
            <item row="1" column="0">
-            <widget class="QTableWidget" name="tableWidget_4">
+            <widget class="QTableWidget" name="directorTable">
              <property name="font">
               <font>
                <family>Proxima Nova</family>
@@ -702,7 +761,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QWidget" name="widget_5" native="true">
+            <widget class="QWidget" name="directorButtonsWidget" native="true">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -718,17 +777,24 @@
               </font>
              </property>
              <layout class="QGridLayout" name="gridLayout_13">
+              <item row="0" column="1">
+               <widget class="QToolButton" name="directorEdit">
+                <property name="text">
+                 <string>Редактировать</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
-               <widget class="QToolButton" name="toolButton_9">
+               <widget class="QToolButton" name="directorCreate">
                 <property name="text">
                  <string>Создать</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="QToolButton" name="toolButton_10">
+              <item row="0" column="2">
+               <widget class="QPushButton" name="directorDelete">
                 <property name="text">
-                 <string>Редактировать</string>
+                 <string>Удалить</string>
                 </property>
                </widget>
               </item>
@@ -737,13 +803,13 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tab_3">
+         <widget class="QWidget" name="screenwriter">
           <attribute name="title">
            <string>Сценарист</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_9">
            <item row="1" column="0">
-            <widget class="QTableWidget" name="tableWidget_6">
+            <widget class="QTableWidget" name="scrnTable">
              <property name="font">
               <font>
                <family>Proxima Nova</family>
@@ -786,7 +852,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QWidget" name="widget_6" native="true">
+            <widget class="QWidget" name="scrwrtButtonsWidget" native="true">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -803,16 +869,23 @@
              </property>
              <layout class="QGridLayout" name="gridLayout_14">
               <item row="0" column="0">
-               <widget class="QToolButton" name="toolButton_11">
+               <widget class="QToolButton" name="scrnCreate">
                 <property name="text">
                  <string>Создать</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QToolButton" name="toolButton_12">
+               <widget class="QToolButton" name="scrnEdit">
                 <property name="text">
                  <string>Редактировать</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="scrnDelete">
+                <property name="text">
+                 <string>Удалить</string>
                 </property>
                </widget>
               </item>
@@ -821,13 +894,13 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tab_4">
+         <widget class="QWidget" name="composer">
           <attribute name="title">
            <string>Композитор</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_10">
            <item row="1" column="0">
-            <widget class="QTableWidget" name="tableWidget_7">
+            <widget class="QTableWidget" name="compTable">
              <property name="font">
               <font>
                <family>Proxima Nova</family>
@@ -870,7 +943,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QWidget" name="widget_7" native="true">
+            <widget class="QWidget" name="compButtonsWidg" native="true">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -887,14 +960,14 @@
              </property>
              <layout class="QGridLayout" name="gridLayout_15">
               <item row="0" column="0">
-               <widget class="QToolButton" name="toolButton_13">
+               <widget class="QToolButton" name="compCreate">
                 <property name="text">
                  <string>Создать</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QToolButton" name="toolButton_14">
+               <widget class="QToolButton" name="compEdit">
                 <property name="font">
                  <font>
                   <family>Open Sans</family>
@@ -908,6 +981,13 @@
                 </property>
                 <property name="text">
                  <string>Редактировать</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="compDelete">
+                <property name="text">
+                 <string>Удалить</string>
                 </property>
                </widget>
               </item>

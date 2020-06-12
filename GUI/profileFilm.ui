@@ -40,7 +40,7 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QLabel" name="label_12">
+    <widget class="QLabel" name="headTitle">
      <property name="font">
       <font>
        <family>Proxima Nova</family>
@@ -69,29 +69,10 @@
       </sizepolicy>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="7" column="2">
-       <widget class="QLabel" name="label_11">
-        <property name="font">
-         <font>
-          <family>Open Sans</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Год выхода</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_8">
-        <property name="font">
-         <font>
-          <family>Open Sans</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Бюджет</string>
+      <item row="2" column="1">
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
        </widget>
       </item>
@@ -102,8 +83,14 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="0">
-       <widget class="QLabel" name="label_7">
+      <item row="0" column="0">
+       <widget class="QLabel" name="director">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="font">
          <font>
           <family>Open Sans</family>
@@ -111,27 +98,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Актёры</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="label_6">
-        <property name="font">
-         <font>
-          <family>Open Sans</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Композитор</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="Line" name="line_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+         <string>Режиссёр</string>
         </property>
        </widget>
       </item>
@@ -160,23 +127,10 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="font">
-         <font>
-          <family>Open Sans</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Сценарист</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
+      <item row="9" column="0">
+       <widget class="QLabel" name="actors">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -188,12 +142,12 @@
          </font>
         </property>
         <property name="text">
-         <string>Режиссёр</string>
+         <string>Актёры</string>
         </property>
        </widget>
       </item>
       <item row="5" column="2">
-       <widget class="QLabel" name="label_10">
+       <widget class="QLabel" name="score">
         <property name="font">
          <font>
           <family>Open Sans</family>
@@ -225,57 +179,41 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <family>Open Sans</family>
-          <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="inputMethodHints">
-         <set>Qt::ImhNone</set>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
-        </property>
-        <property name="text">
-         <string>Название фильма</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-        <property name="scaledContents">
-         <bool>false</bool>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="Line" name="line">
+      <item row="6" column="1">
+       <widget class="Line" name="line_3">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
       </item>
+      <item row="7" column="2">
+       <widget class="QLabel" name="year">
+        <property name="font">
+         <font>
+          <family>Open Sans</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Год выхода</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_8">
+        <property name="font">
+         <font>
+          <family>Open Sans</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Бюджет</string>
+        </property>
+       </widget>
+      </item>
       <item row="10" column="0">
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="actorsTable">
         <column>
          <property name="text">
           <string>Имя</string>
@@ -291,6 +229,44 @@
           <string>Зарплата</string>
          </property>
         </column>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="screenwriter">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Open Sans</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сценарист</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="composer">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Open Sans</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Композитор</string>
+        </property>
        </widget>
       </item>
      </layout>

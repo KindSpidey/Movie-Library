@@ -40,7 +40,7 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QLabel" name="label_12">
+    <widget class="QLabel" name="head">
      <property name="font">
       <font>
        <family>Proxima Nova</family>
@@ -97,7 +97,7 @@
        </widget>
       </item>
       <item row="9" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="addSalaryButton">
         <property name="font">
          <font>
           <family>Open Sans</family>
@@ -121,7 +121,7 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QLineEdit" name="lineEdit_4">
+       <widget class="QLineEdit" name="nameEdit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -149,7 +149,7 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QLineEdit" name="lineEdit_5"/>
+       <widget class="QLineEdit" name="birthYearEdit"/>
       </item>
       <item row="8" column="0">
        <widget class="QTextEdit" name="textEdit">
@@ -171,7 +171,7 @@
        </widget>
       </item>
       <item row="8" column="2">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="saveButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -252,7 +252,7 @@
        </widget>
       </item>
       <item row="4" column="2">
-       <widget class="QLineEdit" name="lineEdit_6">
+       <widget class="QLineEdit" name="sexEdit">
         <property name="font">
          <font>
           <family>Open Sans</family>
@@ -265,7 +265,7 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLineEdit" name="lineEdit_3">
+       <widget class="QLineEdit" name="emailEdit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -342,7 +342,7 @@
        </widget>
       </item>
       <item row="6" column="0">
-       <widget class="QLineEdit" name="lineEdit_2">
+       <widget class="QLineEdit" name="phoneEdit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>

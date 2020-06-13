@@ -1,4 +1,11 @@
 from PyQt5.QtWidgets import QWidget
-import CreateFilm, PyQt5
+import CreateFilm
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+import sys
 
-class CreateFilm,Working(CreateFilm,, QWidget):
+class CreateFilmWorking(CreateFilm.Ui_Form, QWidget):
+    def __init__(self):
+        super(CreateFilmWorking, self).__init__()
+        self.setWindowModality(Qt.WindowModal)
+        self.setupUi(self)

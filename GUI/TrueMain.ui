@@ -153,6 +153,9 @@
          <property name="sizeAdjustPolicy">
           <enum>QAbstractScrollArea::AdjustIgnored</enum>
          </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <column>
           <property name="text">
            <string>Название</string>
@@ -320,6 +323,9 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <column>
           <property name="text">
            <string>Название</string>
@@ -416,6 +422,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="PlanTab">
+      <property name="contextMenuPolicy">
+       <enum>Qt::ActionsContextMenu</enum>
+      </property>
       <attribute name="title">
        <string>Планируемые фильмы</string>
       </attribute>
@@ -443,13 +452,19 @@
           <enum>QFrame::Raised</enum>
          </property>
          <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
          </property>
          <property name="gridStyle">
           <enum>Qt::SolidLine</enum>
          </property>
          <property name="sortingEnabled">
-          <bool>false</bool>
+          <bool>true</bool>
+         </property>
+         <property name="cornerButtonEnabled">
+          <bool>true</bool>
          </property>
          <column>
           <property name="text">
@@ -621,6 +636,9 @@
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
+             <property name="sortingEnabled">
+              <bool>true</bool>
+             </property>
              <column>
               <property name="text">
                <string>Имя</string>
@@ -733,6 +751,9 @@
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
+             <property name="sortingEnabled">
+              <bool>true</bool>
+             </property>
              <column>
               <property name="text">
                <string>Имя</string>
@@ -824,6 +845,9 @@
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
+             <property name="sortingEnabled">
+              <bool>true</bool>
+             </property>
              <column>
               <property name="text">
                <string>Имя</string>
@@ -914,6 +938,9 @@
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
+             </property>
+             <property name="sortingEnabled">
+              <bool>true</bool>
              </property>
              <column>
               <property name="text">

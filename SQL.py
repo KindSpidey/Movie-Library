@@ -100,6 +100,14 @@ class WorkingBD():
         salary INT
         );
         '''
+        queryLogPass = '''CREATE TABLE IF NOT EXISTS loginpassword (
+    id       INTEGER PRIMARY KEY AUTOINCREMENT
+                     NOT NULL,
+    login    STRING  UNIQUE
+                     NOT NULL,
+    password STRING  NOT NULL
+);
+'''
         queryDirSal = '''CREATE TABLE IF NOT EXISTS dirsal (
             dir_id  INTEGER,
             film_id INT,
@@ -157,6 +165,7 @@ class WorkingBD():
         cursor.execute(queryCompSal)
         cursor.execute(queryFilmInProgress)
         cursor.execute(queryFilmInPlan)
+        cursor.execute(queryLogPass)
         conn.commit()
         conn.close()
 
@@ -714,14 +723,46 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
-        cursor.execute('''''')
+        cursor.execute(query)
         conn.commit()
         conn.close()
         if all_rows.__len__()!=0:
             all_rows.append(WorkingBD.get_actors_by_film(name))
         return all_rows
+    def add_user(login, password):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''INSERT INTO loginpassword(login, password) VALUES (?,?)'''
+        cursor.execute(query,(login,password))
+        conn.commit()
+        conn.close()
+    def get_password(login):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''
+                        SELECT password
+                        FROM loginpassword
+                        WHERE login = {login!r} 
+
+                    '''
+        cursor.execute(query)
+        conn.commit()
+        conn.close()
     def get_film_in_plan(name):
-        
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''
+                SELECT title, theme, idead, planning_budget, description
+                FROM filminplan
+                WHERE title = {name!r} 
+
+            '''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        cursor.execute(query)
+        conn.commit()
+        conn.close()
+        return all_rows
     def get_film_in_progress_by_title(name):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -733,7 +774,7 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
-        cursor.execute('''''')
+        cursor.execute(query)
         conn.commit()
         conn.close()
         if all_rows.__len__() != 0:
@@ -1211,7 +1252,7 @@ class WorkingBD():
         cursor = conn.cursor()
         query = f'''UPDATE director
         SET title = ?,description = ?, theme = ?, idea = ?, planning_budget = ?
-        WHERE name = '{name1}'
+        WHERE title = '{title}'
         '''
         cursor.execute(query, (title, description, theme, idea, budget))
         conn.commit()
@@ -1242,15 +1283,16 @@ class WorkingBD():
         conn.close()
 
 #WorkingBD.create_table()
-WorkingBD.add_actor('Andrew Garfield','89157213979','garfield','male','1986')
+#WorkingBD.add_actor('Andrew Garfield','89157213979','garfield','male','1986')
 #WorkingBD.remove_film_by_title('The Amazing Spider-Man 2')
-WorkingBD.add_film('The Amazing Spider-Man 2',800000000,40,2014,200000000,'Marc Webb','Idiot','Hans Zimmer','Andrew Garfield', 'Emma Stone', 'Jamie Foxx', 'Dane Dehaan', 'Sally Field')
-WorkingBD.add_film('Captain America: The Winter Soldier',800000000,70,2014,200000000,'Russo Brothers','Russo Brothers','Michael Jackino','Chris Evans', 'Sam Jackson', 'Scarlett Johanson', 'Robert Redfford', 'Sebastian Stan')
-WorkingBD.add_film('The Amazing Spider-Man',800000000,60,2012,200000000,'Marc Webb','Alvin Sargent','James Horner','Andrew Garfield', 'Emma Stone', 'Rhys Ifans')
-WorkingBD.add_film('Spider-Man',800000000,80,2002,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco')
-WorkingBD.add_film('Spider-Man 3',800000000,90,2004,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco', 'Alfred Molina')
-WorkingBD.connect_salary_and_person('The Amazing Spider-Man','actor','Tobey Maguire',135000)
-WorkingBD.connect_salary_and_person('The Amazing Spider-Man 2','actor','Emma Stone',5221220)
-WorkingBD.update_salary_when_created('The Amazing Spider-Man 2','director','Marc Webb',20)
+#WorkingBD.add_film('The Amazing Spider-Man 2',800000000,40,2014,200000000,'Marc Webb','Idiot','Hans Zimmer','Andrew Garfield', 'Emma Stone', 'Jamie Foxx', 'Dane Dehaan', 'Sally Field')
+#WorkingBD.add_film('Captain America: The Winter Soldier',800000000,70,2014,200000000,'Russo Brothers','Russo Brothers','Michael Jackino','Chris Evans', 'Sam Jackson', 'Scarlett Johanson', 'Robert Redfford', 'Sebastian Stan')
+#WorkingBD.add_film('The Amazing Spider-Man',800000000,60,2012,200000000,'Marc Webb','Alvin Sargent','James Horner','Andrew Garfield', 'Emma Stone', 'Rhys Ifans')
+#WorkingBD.add_film('Spider-Man',800000000,80,2002,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco')
+#WorkingBD.add_film('Spider-Man 3',800000000,90,2004,200000000,'Sam Raimi','David Koepp','Danny Elfman','Tobey Maguire', 'Kirsten Dunst', 'Willem Dafoe', 'James Franco', 'Alfred Molina')
+#WorkingBD.connect_salary_and_person('The Amazing Spider-Man','actor','Tobey Maguire',135000)
+#WorkingBD.connect_salary_and_person('The Amazing Spider-Man 2','actor','Emma Stone',5221220)
+#WorkingBD.update_salary_when_created('The Amazing Spider-Man 2','director','Marc Webb',20)
 #WorkingBD.remove_salary_by_person('The Amazing Spider-Man 2', 'director','Marc Webb')
-print(WorkingBD.get_salary_by_person('actor','Emma Stone'))
+#WorkingBD.add_user('Daniil Pugavko', 'd123123123')
+#print(WorkingBD.get_salary_by_person('actor','Emma Stone'))

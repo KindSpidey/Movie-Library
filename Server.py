@@ -5,9 +5,28 @@ from PyQt5.QtWidgets import QApplication, QDialog
 from PyQt5.QtNetwork import QHostAddress, QTcpServer
 
 class Server():
-    def __init__(self):
+    def __init__(self,address="", port=53210):
         super().__init__()
         self.tcpServer = None
+        self.socket = socket.socket()
+        self.socket.bind((address, port))
+        self.socket.listen(100)
+        self.__isWorking = False
+        self.clients = {}
+    def start(self):
+        threading.Thread(target=self.listen_clients)
+        print('SERVER WORKS')
+        return self
+
+    def listen_clients(self):
+        self.conn, self.adr = self.socket.accept()
+        while True:
+            self.socket.listen(1000)
+            data = self.conn.recv(1024)
+            if not data:
+                break
+            self.conn.send(data.upper())
+
     def sessionOpened(self):
         self.tcpServer = QTcpServer(self)
         PORT = 53210
@@ -18,36 +37,17 @@ class Server():
             return
         self.tcpServer.newConnection.connect(self.dealCommunication)
 
-    def __init__(self, address="", port=53210):
-        self.socket = socket.socket()
-        self.socket.bind((address, port))
+    def stop(self):
         self.__isWorking = False
-        self.clients = {}
-
-
-    serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
-    serv_sock.bind(('', 53210))
-    serv_sock.listen(1000)
-
-    sqlworker = WorkingBD()
-
-    while True:
-        print('Server ONLINE')
-        client_sock, client_addr = serv_sock.accept()
-        print('Connected by', client_addr)
-
-        while True:
-            # Пока клиент не отключился, читаем передаваемые им данные и отправляем их обратно
-            data = client_sock.recv(1024)
-            if not data:
-                print('# Клиент отключился')
-                break
-            if data == b'Hello, world':
-                client_sock.sendall(b'I got')
-        client_sock.close()
+        self.socket.close()
+        for client in self.clients.values():
+            client.pendedToDisconnect = True
+            client.disconnect()
+        print("Server has stopped")
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    #app = QApplication(sys.argv)
     server = Server()
-    server.sessionOpened()
-    sys.exit(server.exec_())
+    server.start()
+    #server.sessionOpened()
+    #sys.exit(server.exec_())

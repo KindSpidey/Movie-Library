@@ -1,6 +1,6 @@
 import sys, socket
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
-from Server import Server
+from backend_server import Server
 import TrueMainWRK
 
 class LoginForm(QWidget):

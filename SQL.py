@@ -141,9 +141,11 @@ class WorkingBD():
                          PRIMARY KEY AUTOINCREMENT,
     title        STRING  NOT NULL,
     budget       INTEGER NOT NULL,
-    director     STRING  NOT NULL,
-    screenwriter STRING  NOT NULL,
-    composer     STRING  NOT NULL
+    director_name     STRING  NOT NULL,
+    screenwriter_name STRING  NOT NULL,
+    composer_name     STRING  NOT NULL
+);
+
 );
 '''
         queryActFilmInProgress = '''CREATE TABLE IF NOT EXISTS actfilminprogress (
@@ -381,7 +383,7 @@ class WorkingBD():
         filmID = cursor.fetchall()
         result = actID[0] + filmID[0]
         actID, filmID = result[0], result[1]
-        cursor.execute(f'''SELECT film_id FROM actfilminprogress WHERE act_id ={actID!r}''')
+        cursor.execute(f'''SELECT film_in_progress_id FROM actfilminprogress WHERE act_id ={actID!r}''')
         a = cursor.fetchall()
         list = []
         for elem in a:
@@ -389,7 +391,7 @@ class WorkingBD():
         if list.__contains__(filmID):
             return
         query = '''
-        INSERT INTO actfilminprogress(act_id, film_id)
+        INSERT INTO actfilminprogress(act_id, film_in_progress_id)
                         VALUES (?,?)'''
         cursor.execute(query, (actID, filmID))
         conn.commit()
@@ -511,7 +513,7 @@ class WorkingBD():
         cursor = conn.cursor()
         query = '''
                 INSERT INTO filminplan(title, description, theme, idea, planning_budget)
-                            VALUES (?,?,?,?)
+                            VALUES (?,?,?,?,?)
             '''
         cursor.execute(query, (title, description, theme, idea, budget))
         conn.commit()
@@ -529,7 +531,7 @@ class WorkingBD():
         cursor.execute(query, (title, budget, director_name, screenwriter_name, composer_name))
         conn.commit()
         for elem in actors_names:
-            WorkingBD.connect_film_and_actor(title, elem)
+            WorkingBD.connect_film_and_actor_in_progress(title, elem)
         WorkingBD.add_person_during_adding_film(director_name, 'director')
         WorkingBD.add_person_during_adding_film(screenwriter_name, 'screenwriter')
         WorkingBD.add_person_during_adding_film(composer_name, 'composer')
@@ -1299,9 +1301,35 @@ class WorkingBD():
         all_rows = cursor.fetchall()
         all_rows = [list(i) for i in all_rows]
         list_actors = []
-        lists = []
         for elem in all_rows:
             list_actors.append(WorkingBD.get_actors_by_film(elem[1]))
+        for i in range(0, len(all_rows)):
+            all_rows[i].append(list_actors[i])
+        conn.close()
+        return all_rows
+
+    @staticmethod
+    def get_all_films_in_plan(self):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = '''SELECT * FROM filminplan'''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        all_rows = [list(i) for i in all_rows]
+        conn.close()
+        return all_rows
+
+    @staticmethod
+    def get_all_films_in_progress(self):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = '''SELECT * FROM filminprogress'''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        all_rows = [list(i) for i in all_rows]
+        list_actors = []
+        for elem in all_rows:
+            list_actors.append(WorkingBD.get_actors_by_filminprogress(elem[1]))
         for i in range(0, len(all_rows)):
             all_rows[i].append(list_actors[i])
         conn.close()
@@ -1359,3 +1387,6 @@ class WorkingBD():
 # WorkingBD.remove_salary_by_person('The Amazing Spider-Man 2', 'director','Marc Webb')
 # WorkingBD.add_user('Daniil Pugavko', 'd123123123')
 # print(WorkingBD.get_salary_by_person('actor','Emma Stone'))
+#WorkingBD.add_director('as','32','3232')
+WorkingBD.add_filmInProgress('ds',32,'dsdsds','sddsds','dsdssd','dasdsadsada')
+#WorkingBD.add_filminplan('Atlas Shrugged', 'How talent people fight agaisnt shit','Capitalism, happiness, objectivism','Strike of Atlases', 1000000)

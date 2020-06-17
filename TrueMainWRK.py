@@ -68,7 +68,6 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.pushButton.clicked.connect(self.ProfFilm.show)
     def fill_film_table(self):
         actors_str =''
-        self.filmTab.setItem(0,0,QTableWidgetItem('72'))
         films = WorkingBD.get_all_films(WorkingBD())
         self.filmTab.setRowCount(len(films))
         for raw in range(0, len(films)):
@@ -87,7 +86,12 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                     actors_str = ''
 
     def fill_film_in_plan_table(self):
-
+        films = WorkingBD.get_all_films_in_plan(WorkingBD())
+        self.PlanTab.setRowCount(len(films))
+        for raw in range(0, len(films)):
+            for columns in range(0,self.filmTab.columnCount()):
+                a = str(films[raw][columns+1])
+                self.filmTab.setItem(raw, columns, QTableWidgetItem(a))
 
 
 

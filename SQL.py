@@ -1359,22 +1359,3 @@ class WorkingBD():
 # WorkingBD.remove_salary_by_person('The Amazing Spider-Man 2', 'director','Marc Webb')
 # WorkingBD.add_user('Daniil Pugavko', 'd123123123')
 # print(WorkingBD.get_salary_by_person('actor','Emma Stone'))
-    def shit(self):
-        films = WorkingBD.get_all_films(WorkingBD())
-        lists =[[]]
-        actors_str =''
-        for j in range(0, len(films)):
-            for i in range(0,9):
-                for elem in films:
-                    if i!=9:
-                        lists[j][i] = elem[i+1]
-                    else:
-                        actors = elem[9]
-                        for u in actors:
-                            actors_str += u + ', '
-                        lists[9][j]=actors_str
-                        actors_str = ''
-        print(lists)
-
-
-#WorkingBD.shit(WorkingBD())

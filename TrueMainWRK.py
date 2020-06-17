@@ -79,10 +79,16 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                 else:
                     actors = films[raw][9]
                     for u in actors:
-                        actors_str += u + ', '
+                        if u!=actors[len(actors)-1]:
+                            actors_str += u + ', '
+                        else:
+                            actors_str+=u
                     self.filmTab.setItem(raw, columns, QTableWidgetItem(actors_str))
                     actors_str = ''
-        print('DONE')
+
+    def fill_film_in_plan_table(self):
+
+
 
 
 

@@ -100,7 +100,7 @@ class Ui_Form(object):
         self.header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         self.header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
         self.header.setSectionResizeMode(7, QtWidgets.QHeaderView.ResizeToContents)
-        self.header.setSectionResizeMode(8, QtWidgets.QHeaderView.Stretch)
+        self.header.setSectionResizeMode(8, QtWidgets.QHeaderView.ResizeToContents)
         self.filmTab.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.filmTab.setHorizontalHeaderItem(1, item)

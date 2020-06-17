@@ -1,4 +1,4 @@
-import socket
+import socket, threading
 
 
 class ClientServer:
@@ -6,6 +6,14 @@ class ClientServer:
         self.client_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_sock.connect(('127.0.0.1', 53210))
         self.data = bytes
+        self.serv_thread = threading.Thread(target=self.listen_server)
+        self.serv_thread.start()
+    def listen_server(self):
+        while True:
+            print('LISTENING')
+            while True:
+                self.data = self.client_sock.recv(1024)
+                print(self.data)
 
     def receive_data(self):
         self.data = self.client_sock.recv(1024)
@@ -17,8 +25,5 @@ class ClientServer:
     def stop(self):
         self.client_sock.close()
 
-
-abc = ClientServer()
-abc.send_data(b'FUCK YOU MCcRUSSIAN')
-
-print(abc.receive_data())
+a = ClientServer()
+a.send_data(b'URA')

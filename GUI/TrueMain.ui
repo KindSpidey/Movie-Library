@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>794</width>
-    <height>477</height>
+    <height>484</height>
    </rect>
   </property>
   <property name="font">
@@ -27,7 +27,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>images/logo3.png</pixmap>
+      <pixmap>../logo3.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -151,7 +151,10 @@
           <enum>QFrame::Raised</enum>
          </property>
          <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustIgnored</enum>
+          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
          </property>
          <property name="sortingEnabled">
           <bool>true</bool>
@@ -163,12 +166,12 @@
          </column>
          <column>
           <property name="text">
-           <string>Бюджет</string>
+           <string>Сборы</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Сборы</string>
+           <string>Бюджет</string>
           </property>
          </column>
          <column>
@@ -189,6 +192,11 @@
          <column>
           <property name="text">
            <string>Сценарист</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Композитор</string>
           </property>
          </column>
          <column>
@@ -323,6 +331,9 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
          <property name="sortingEnabled">
           <bool>true</bool>
          </property>
@@ -456,6 +467,9 @@
          </property>
          <property name="selectionMode">
           <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
          </property>
          <property name="gridStyle">
           <enum>Qt::SolidLine</enum>
@@ -636,6 +650,9 @@
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
              <property name="sortingEnabled">
               <bool>true</bool>
              </property>
@@ -751,6 +768,9 @@
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
              <property name="sortingEnabled">
               <bool>true</bool>
              </property>
@@ -845,6 +865,9 @@
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
              <property name="sortingEnabled">
               <bool>true</bool>
              </property>
@@ -938,6 +961,9 @@
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
              </property>
              <property name="sortingEnabled">
               <bool>true</bool>
@@ -1051,6 +1077,19 @@
      </property>
      <property name="scaledContents">
       <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Перейти</string>
      </property>
     </widget>
    </item>

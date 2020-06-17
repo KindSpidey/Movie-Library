@@ -1,12 +1,12 @@
 import sys, socket
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
 from backend_server import Server
-import TrueMainWRK
+import TrueMainWRK#, client_server
 
 class LoginForm(QWidget):
 	def __init__(self):
 		super().__init__()
-		self.abd = TrueMainWRK.TrueMainWorking()
+		self.MainWindow = TrueMainWRK.TrueMainWorking()
 		self.setWindowTitle('Login Form')
 		self.resize(500, 120)
 
@@ -39,8 +39,12 @@ class LoginForm(QWidget):
 		#sock.send(self.lineEdit_password.text())
 		#data = sock.recv(1024)
 		#print(data)
-		if self.lineEdit_password.text() == '1':
-			self.abd.show()
+		s = self.lineEdit_password.text()
+		#clServ = client_server.ClientServer()
+		#clServ.send_data(s)
+		#a = clServ.receive_data().decode('utf-8')
+		if self.lineEdit_password.text() == '':
+			self.MainWindow.show()
 			self.hide()
 		else:
 			msg.setText('Incorrect Password')

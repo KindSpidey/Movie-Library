@@ -190,7 +190,7 @@ class Ui_Form(object):
         self.headTitle.setText(_translate("Form", "Фильм"))
         self.director.setText(_translate("Form", "Режиссёр"))
         self.pushButton.setText(_translate("Form", "Редактировать"))
-        self.actors.setText(_translate("Form", "Актёры"))
+        self.actors.setText(_translate("Form", "Люди"))
         self.score.setText(_translate("Form", "Рейтинг"))
         self.label_9.setText(_translate("Form", "Сборы"))
         self.year.setText(_translate("Form", "Год выхода"))

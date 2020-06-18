@@ -20,31 +20,31 @@ class WorkingBD():
         queryActor = '''
             CREATE TABLE IF NOT EXISTS actor(
                     id    INTEGER CONSTRAINT actor_pk PRIMARY KEY AUTOINCREMENT,
-    name  TEXT,
-    phone TEXT,
-    email TEXT,
-    sex   TEXT,
-    age   INT,
-    average_salary INT,
-    birth_year     INT
+    name           TEXT,
+    email          TEXT,
+    phone          TEXT,
+    sex            TEXT,
+    birth_year     INT,
+    age            INT,
+    average_salary INT
             )
         '''
         queryDirector = '''
                 CREATE TABLE IF NOT EXISTS director(
                     id    INTEGER CONSTRAINT director_pk PRIMARY KEY AUTOINCREMENT,
-        name  TEXT    ,
-        phone TEXT   ,
-        email TEXT,    
-        average_salary INT,
+    name           TEXT,
+    email          TEXT,
+    phone          TEXT,
+    average_salary INT
                 )
             '''
         queryComposer = '''
                     CREATE TABLE IF NOT EXISTS composer(
     id    INTEGER CONSTRAINT composer_pk PRIMARY KEY AUTOINCREMENT,
-    name  TEXT,
-    phone TEXT,
-    average_salary INT,
-    email TEXT
+    name           TEXT,
+    email          TEXT,
+    phone          TEXT,
+    average_salary INT
                     )
                 '''
         queryFilm = '''
@@ -79,12 +79,11 @@ class WorkingBD():
                 )
             '''
         queryScreenwriter = '''CREATE TABLE IF NOT EXISTS screenwriter(
-                        id    INTEGER CONSTRAINT screenwriter_pk PRIMARY KEY AUTOINCREMENT,
-        name  TEXT    ,
-        phone TEXT    ,
-        average_salary INT,
-        num_of_salaries INT,
-        email TEXT   )'''
+    id             INTEGER CONSTRAINT screenwriter_pk PRIMARY KEY AUTOINCREMENT,
+    name           TEXT,
+    email          TEXT,
+    phone          TEXT,
+    average_salary INT  )'''
         queryWinners = '''
                 CREATE TABLE IF NOT EXISTS winners(
                     id INTEGER PRIMARY KEY, 
@@ -522,7 +521,7 @@ class WorkingBD():
     def add_filmInProgress(title, budget, director_name, screenwriter_name, composer_name, *actors_names):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
-        if WorkingBD.get_film_by_title(title).__len__() != 0:
+        if WorkingBD.get_film_in_progress_by_title(title).__len__() != 0:
             return
         query = '''
                         INSERT INTO filmInProgress(title, budget, director_name, screenwriter_name,composer_name)
@@ -574,7 +573,19 @@ class WorkingBD():
         conn.commit()
         conn.close()
         return all_rows
+    def get_film_title_by_id(id):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''
+                        SELECT title
+                        FROM film
+                        WHERE id = {id!r} 
 
+                    '''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        conn.close()
+        return all_rows
     def get_actor_by_name(name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -668,7 +679,7 @@ class WorkingBD():
         cursor = conn.cursor()
         cursor.execute(f'''SELECT id FROM filminprogress WHERE title ={name1!r}''')
         idf = cursor.fetchone()[0]
-        cursor.execute(f'''SELECT act_id FROM actfilminprogress WHERE film_id={idf!r}''')
+        cursor.execute(f'''SELECT act_id FROM actfilminprogress WHERE film_in_progress_id={idf!r}''')
         actf = cursor.fetchall()
         list = []
         result = []
@@ -678,7 +689,28 @@ class WorkingBD():
             cursor.execute(f'''SELECT name FROM actor WHERE id ={elem!r}''')
             result += cursor.fetchone()
         return result
-
+    def get_films_title_by_actor(name1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''SELECT id
+                FROM actor
+                WHERE name = {name1!r}
+            '''
+        idact = cursor.execute(query).fetchall()[0][0]
+        query = f'''SELECT film_id
+                    FROM actfilm
+                    WHERE act_id = {idact!r}'''
+        id_films = cursor.execute(query).fetchall()
+        list = []
+        for elem in id_films:
+            list.append(elem[0])
+        result = []
+        for elem in list:
+            s = WorkingBD.get_film_title_by_id(elem)[0]
+            result += s
+        conn.commit()
+        conn.close()
+        return result
     def get_films_by_actor(name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -1162,7 +1194,7 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
-    def remove_filninprogress(*title1):
+    def remove_filminprogress(*title1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         for elem in title1:
@@ -1335,6 +1367,57 @@ class WorkingBD():
         conn.close()
         return all_rows
 
+    @staticmethod
+    def get_all_actors(self):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = '''SELECT * FROM actor'''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        all_rows = [list(i) for i in all_rows]
+        for elem in all_rows:
+            elem.remove(elem[5])
+        list_actors = []
+        for elem in all_rows:
+            list_actors.append(WorkingBD.get_films_title_by_actor(elem[1]))
+        for i in range(0, len(all_rows)):
+            all_rows[i].append(list_actors[i])
+        conn.close()
+        return all_rows
+
+    @staticmethod
+    def get_all_person(self, who):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''SELECT * FROM {who!r}'''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        all_rows = [list(i) for i in all_rows]
+        list_actors = []
+        for elem in all_rows:
+            list_actors.append(WorkingBD.get_films_title_by_person(who,elem[1]))
+        for i in range(0, len(all_rows)):
+            all_rows[i].append(list_actors[i])
+        conn.close()
+        return all_rows
+
+    @staticmethod
+    def get_films_title_by_person(who, name):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        if who=='director':
+            query = f'''SELECT title FROM film where director_name={name!r} UNION SELECT title FROM filminprogress where director_name={name!r}'''
+        if who=='screenwriter':
+            query = f'''SELECT title FROM film where screenwriter_name={name!r} UNION SELECT title from filminprogress where screenwriter_name={name!r}'''
+        if who=='composer':
+            query = f'''SELECT title FROM film where composer_name={name!r} UNION SELECT title from filminprogress where composer_name={name!r}'''
+        cursor.execute(query)
+        all_rows = cursor.fetchall()
+        list = []
+        for elem in all_rows:
+            list.append(elem[0])
+        return list
+
     def update_filminplan(title, description, theme, idea, budget):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -1373,6 +1456,7 @@ class WorkingBD():
         conn.close()
 
 
+worker = WorkingBD()
 # WorkingBD.create_table()
 # WorkingBD.add_actor('Andrew Garfield','89157213979','garfield','male','1986')
 # WorkingBD.remove_film_by_title('The Amazing Spider-Man 2')
@@ -1388,5 +1472,6 @@ class WorkingBD():
 # WorkingBD.add_user('Daniil Pugavko', 'd123123123')
 # print(WorkingBD.get_salary_by_person('actor','Emma Stone'))
 #WorkingBD.add_director('as','32','3232')
-WorkingBD.add_filmInProgress('ds',32,'dsdsds','sddsds','dsdssd','dasdsadsada')
+#WorkingBD.add_filmInProgress('ds',32,'dsdsds','sddsds','dsdssd','dasdsadsada')
 #WorkingBD.add_filminplan('Atlas Shrugged', 'How talent people fight agaisnt shit','Capitalism, happiness, objectivism','Strike of Atlases', 1000000)
+print(worker.get_all_person(worker, 'composer'))

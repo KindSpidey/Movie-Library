@@ -673,6 +673,11 @@
              </column>
              <column>
               <property name="text">
+               <string>Пол</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
                <string>Возраст</string>
               </property>
              </column>

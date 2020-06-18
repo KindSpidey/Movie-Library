@@ -20,7 +20,6 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         super(TrueMainWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.fill_film_table()
         self.createFilm = CreateFilmWorking()
         self.filmCreate.clicked.connect(self.createFilm.show)
         self.createFilmInPlan = CreateFilmInPlanWorking()
@@ -33,7 +32,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.scrnCreate.clicked.connect(self.createPerson.show)
         self.directorCreate.clicked.connect(self.createPerson.show)
         self.compCreate.clicked.connect(self.createPerson.show)
-        self.Find.clicked.connect(self.finds)
+        self.Find.clicked.connect(self.search)
         self.ProfFilm = profileFilmWRK.profileFilmWorking()
         self.ProfActor = profileActorWRK.profileActorWorking()
         self.ProfPerson = profilePersonWRK.profilePersonWorking()
@@ -41,14 +40,25 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.ProfFilmInPlan = profileFilmInPlanWRK.profileFilmInPlanWorking()
         self.pushButton.setDisabled(True)
         self.pushButton.clicked.connect(self.transtition)
+        self.setup_tables()
 
-
-    def finds(self):
+    def setup_tables(self):
+        self.fill_film_table()
+        self.fill_film_in_plan_table()
+        self.fill_film_in_progress()
+        self.fill_actors()
+        self.fill_directors()
+        self.fill_composers()
+        self.fill_screenwriters()
+    def search(self):
         search = self.ObjectName.text()
+        WorkingBD.get_film_by_title(WorkingBD(), search)
+        WorkingBD.get_film_in_progress_by_title(WorkingBD(), search)
+        WorkingBD.get_actor_by_name(WorkingBD(), search)
+        WorkingBD.get_director_by_name(WorkingBD(), search)
+        WorkingBD.get_screenwriter_by_name(WorkingBD(), search)
+        WorkingBD.get_composer_by_name(WorkingBD(),search)
         list =[]
-        #делаем запрос на поиск в БД такого-то человека или фильма
-        #if search!= None:
-            #смотрим, перед нами фильм, актер или кто-то еще. Затем открываем соответстующее окно
         list.append('Spider-Man')
         list.append('film')
         self.found.setText(list[0])#тут ставим найденое, если нашлось и ничего не найдено, если не нашлось
@@ -87,11 +97,101 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
 
     def fill_film_in_plan_table(self):
         films = WorkingBD.get_all_films_in_plan(WorkingBD())
-        self.PlanTab.setRowCount(len(films))
+        self.tableWidget_3.setRowCount(len(films))
         for raw in range(0, len(films)):
-            for columns in range(0,self.filmTab.columnCount()):
+            for columns in range(0,self.tableWidget_3.columnCount()):
                 a = str(films[raw][columns+1])
-                self.filmTab.setItem(raw, columns, QTableWidgetItem(a))
+                self.tableWidget_3.setItem(raw, columns, QTableWidgetItem(a))
+    def fill_film_in_progress(self):
+        actors_str = ''
+        films = WorkingBD.get_all_films_in_progress(WorkingBD())
+        self.tableWidget_2.setRowCount(len(films))
+        for raw in range(0, len(films)):
+            for columns in range(0, self.tableWidget_2.columnCount()):
+                if columns != 8:
+                    a = str(films[raw][columns + 1])
+                    self.tableWidget_2.setItem(raw, columns, QTableWidgetItem(a))
+                else:
+                    actors = films[raw][9]
+                    for u in actors:
+                        if u != actors[len(actors) - 1]:
+                            actors_str += u + ', '
+                        else:
+                            actors_str += u
+                    self.tableWidget_2.setItem(raw, columns, QTableWidgetItem(actors_str))
+                    actors_str = ''
+    def fill_actors(self):
+        actors_str = ''
+        films = WorkingBD.get_all_actors(WorkingBD())
+        self.actorTable.setRowCount(len(films))
+        for raw in range(0, len(films)):
+            for columns in range(0, self.actorTable.columnCount()):
+                if columns != 6:
+                    a = str(films[raw][columns + 1])
+                    self.actorTable.setItem(raw, columns, QTableWidgetItem(a))
+                else:
+                    actors = films[raw][7]
+                    for u in actors:
+                        if u != actors[len(actors) - 1]:
+                            actors_str += u + ', '
+                        else:
+                            actors_str += u
+                    self.actorTable.setItem(raw, columns, QTableWidgetItem(actors_str))
+                    actors_str = ''
+    def fill_directors(self):
+        actors_str = ''
+        films = WorkingBD.get_all_person(WorkingBD(),'director')
+        self.directorTable.setRowCount(len(films))
+        for raw in range(0, len(films)):
+            for columns in range(0, self.directorTable.columnCount()):
+                if columns != 4:
+                    a = str(films[raw][columns + 1])
+                    self.directorTable.setItem(raw, columns, QTableWidgetItem(a))
+                else:
+                    actors = films[raw][5]
+                    for u in actors:
+                        if u != actors[len(actors) - 1]:
+                            actors_str += u + ', '
+                        else:
+                            actors_str += u
+                    self.directorTable.setItem(raw, columns, QTableWidgetItem(actors_str))
+                    actors_str = ''
+    def fill_composers(self):
+        actors_str = ''
+        films = WorkingBD.get_all_person(WorkingBD(),'composer')
+        self.compTable.setRowCount(len(films))
+        for raw in range(0, len(films)):
+            for columns in range(0, self.compTable.columnCount()):
+                if columns != 4:
+                    a = str(films[raw][columns + 1])
+                    self.compTable.setItem(raw, columns, QTableWidgetItem(a))
+                else:
+                    actors = films[raw][5]
+                    for u in actors:
+                        if u != actors[len(actors) - 1]:
+                            actors_str += u + ', '
+                        else:
+                            actors_str += u
+                    self.compTable.setItem(raw, columns, QTableWidgetItem(actors_str))
+                    actors_str = ''
+    def fill_screenwriters(self):
+        actors_str = ''
+        films = WorkingBD.get_all_person(WorkingBD(),'screenwriter')
+        self.scrnTable.setRowCount(len(films))
+        for raw in range(0, len(films)):
+            for columns in range(0, self.scrnTable.columnCount()):
+                if columns != 4:
+                    a = str(films[raw][columns + 1])
+                    self.scrnTable.setItem(raw, columns, QTableWidgetItem(a))
+                else:
+                    actors = films[raw][5]
+                    for u in actors:
+                        if u != actors[len(actors) - 1]:
+                            actors_str += u + ', '
+                        else:
+                            actors_str += u
+                    self.scrnTable.setItem(raw, columns, QTableWidgetItem(actors_str))
+                    actors_str = ''
 
 
 

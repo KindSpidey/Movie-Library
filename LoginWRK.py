@@ -2,6 +2,7 @@ import sys, socket
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
 from backend_server import Server
 import TrueMainWRK#, client_server
+from SQL import WorkingBD
 
 class LoginForm(QWidget):
 	def __init__(self):
@@ -39,13 +40,14 @@ class LoginForm(QWidget):
 		#sock.send(self.lineEdit_password.text())
 		#data = sock.recv(1024)
 		#print(data)
+		password = WorkingBD.get_password(self.lineEdit_username.text())
 		s = self.lineEdit_password.text()
 		#clServ = client_server.ClientServer()
 		#clServ.send_data(s)
 		#a = clServ.receive_data().decode('utf-8')
-		if self.lineEdit_password.text() == '':
+		if self.lineEdit_password.text() == password:
 			self.MainWindow.show()
 			self.hide()
 		else:
-			msg.setText('Incorrect Password')
+			msg.setText('Неправильный логин или пароль')
 			msg.exec_()

@@ -409,7 +409,7 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
-    def add_actor_in_consist_film(actor, *films):
+    def add_actor_in_consist_film(actor, films):
         WorkingBD.add_actor_during_adding_film(actor)
         for elem in films:
             WorkingBD.connect_film_and_actor(elem, actor)
@@ -487,8 +487,20 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
+    def add_composer(name, phone, email):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = '''
+                INSERT INTO composer(name, phone, email)
+                            VALUES (?,?,?)
+            '''
+        cursor.execute(query, (name, phone, email))
+
+        conn.commit()
+        conn.close()
+
     def add_film(title, box_office, rating, year, budget, director_name, screenwriter_name, composer_name,
-                 *actors_names):
+                 actors_names):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         if WorkingBD.get_film_by_title(title).__len__() != 0:
@@ -500,8 +512,9 @@ class WorkingBD():
         cursor.execute(query,
                        (title, box_office, rating, year, budget, director_name, screenwriter_name, composer_name))
         conn.commit()
-        for elem in actors_names:
-            WorkingBD.connect_film_and_actor(title, elem)
+        if actors_names!=None:
+            for elem in actors_names:
+                WorkingBD.connect_film_and_actor(title, elem)
         WorkingBD.add_person_during_adding_film(director_name, 'director')
         WorkingBD.add_person_during_adding_film(screenwriter_name, 'screenwriter')
         WorkingBD.add_person_during_adding_film(composer_name, 'composer')
@@ -518,7 +531,7 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
-    def add_filmInProgress(title, budget, director_name, screenwriter_name, composer_name, *actors_names):
+    def add_filmInProgress(title, budget, director_name, screenwriter_name, composer_name, actors_names):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         if WorkingBD.get_film_in_progress_by_title(title).__len__() != 0:
@@ -802,7 +815,11 @@ class WorkingBD():
 
                     '''
         cursor.execute(query)
-        a = cursor.fetchall()[0][0]
+        a = cursor.fetchall()
+        if len(a)==0:
+            return a
+        else:
+            a = a[0][0]
         conn.commit()
         conn.close()
         return a
@@ -1286,7 +1303,7 @@ class WorkingBD():
             conn.close()
             WorkingBD.update_salary('screenwriter', actID)
 
-    def update_film(name, box_office, rating, budget, director_name, screenwriter_name, composer_name, *actors):
+    def update_film(name, box_office, rating, budget, director_name, screenwriter_name, composer_name, actors):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
@@ -1429,7 +1446,7 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
-    def update_filminprogress(title, budget, director_name, screenwriter_name, composer_name, *actors_names):
+    def update_filminprogress(title, budget, director_name, screenwriter_name, composer_name, actors_names):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
@@ -1437,7 +1454,7 @@ class WorkingBD():
         SET title = ? ,budget = ?,director_name = ?, screenwriter_name = ?, composer_name = ?
         WHERE title = '{title}'
         '''
-        cursor.execute(query, (title, budget, director_name, screenwriter_name, composer_name, *actors_names))
+        cursor.execute(query, (title, budget, director_name, screenwriter_name, composer_name))
         for actor in actors_names:
             WorkingBD.connect_film_and_actor_in_progress(title, actor)
         conn.commit()
@@ -1474,4 +1491,3 @@ worker = WorkingBD()
 #WorkingBD.add_director('as','32','3232')
 #WorkingBD.add_filmInProgress('ds',32,'dsdsds','sddsds','dsdssd','dasdsadsada')
 #WorkingBD.add_filminplan('Atlas Shrugged', 'How talent people fight agaisnt shit','Capitalism, happiness, objectivism','Strike of Atlases', 1000000)
-print(worker.get_all_person(worker, 'composer'))

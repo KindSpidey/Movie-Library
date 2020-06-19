@@ -799,5 +799,5 @@ class Ui_Form(object):
         self.compDelete.setText(_translate("Form", "Удалить"))
         self.peopleTabInTab.setTabText(self.peopleTabInTab.indexOf(self.composer), _translate("Form", "Композитор"))
         self.mainTable.setTabText(self.mainTable.indexOf(self.PeopleTab), _translate("Form", "Люди"))
-        self.found.setText(_translate("Form", "НАЙДЕНО"))
+        self.found.setText(_translate("Form", "Найдено"))
         self.pushButton.setText(_translate("Form", "Перейти"))

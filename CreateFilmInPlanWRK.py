@@ -6,9 +6,10 @@ import CreateFilmInProgressWRK
 
 
 class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):
-    def __init__(self):
+    def __init__(self, parent):
+        self.parent = parent
         super(CreateFilmInPlanWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.MakeFilmProgress = CreateFilmInProgressWRK.CreateFilmInProgressWorking()
+        self.MakeFilmProgress = CreateFilmInProgressWRK.CreateFilmInProgressWorking(parent)
         self.makeInProgressFilmButton.clicked.connect(self.MakeFilmProgress.show)

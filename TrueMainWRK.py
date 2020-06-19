@@ -17,21 +17,25 @@ from CreateFilmWRK import CreateFilmWorking
 class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def __init__(self):
         self.who =''
+        self.create_who =''
+        self.scrn_bool = False
+        self.dir_bool = False
+        self.comp_bool = False
         super(TrueMainWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.createFilm = CreateFilmWorking()
+        self.createFilm = CreateFilmWorking(self, None)
         self.filmCreate.clicked.connect(self.createFilm.show)
-        self.createFilmInPlan = CreateFilmInPlanWorking()
+        self.createFilmInPlan = CreateFilmInPlanWorking(self)
         self.planCreate.clicked.connect(self.createFilmInPlan.show)
-        self.createFilmInProgress = CreateFilmInProgressWorking()
+        self.createFilmInProgress = CreateFilmInProgressWorking(self)
         self.progressCreate.clicked.connect(self.createFilmInProgress.show)
         self.createActor = CreateActorWRK.CreateActorWorking()
         self.actorCreate.clicked.connect(self.createActor.show)
-        self.createPerson = CreatePersonWRK.CreatePersonWorking()
-        self.scrnCreate.clicked.connect(self.createPerson.show)
-        self.directorCreate.clicked.connect(self.createPerson.show)
-        self.compCreate.clicked.connect(self.createPerson.show)
+        self.createPerson = CreatePersonWRK.CreatePersonWorking(self)
+        self.scrnCreate.clicked.connect(self.create_screenwriter)
+        self.directorCreate.clicked.connect(self.create_director)
+        self.compCreate.clicked.connect(self.create_composer)
         self.Find.clicked.connect(self.search)
         self.ProfFilm = profileFilmWRK.profileFilmWorking()
         self.ProfActor = profileActorWRK.profileActorWorking()
@@ -41,6 +45,25 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.pushButton.setDisabled(True)
         self.pushButton.clicked.connect(self.transtition)
         self.setup_tables()
+
+    def create_director(self):
+        self.create_who='director'
+        self.scrn_bool = False
+        self.dir_bool = True
+        self.comp_bool = False
+        self.createPerson.show()
+
+    def create_screenwriter(self):
+        self.scrn_bool = True
+        self.dir_bool = False
+        self.comp_bool = False
+        self.createPerson.show()
+
+    def create_composer(self):
+        self.scrn_bool = False
+        self.dir_bool = False
+        self.comp_bool = True
+        self.createPerson.show()
 
     def setup_tables(self):
         self.fill_film_table()
@@ -52,16 +75,48 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.fill_screenwriters()
     def search(self):
         search = self.ObjectName.text()
-        WorkingBD.get_film_by_title(WorkingBD(), search)
-        WorkingBD.get_film_in_progress_by_title(WorkingBD(), search)
-        WorkingBD.get_actor_by_name(WorkingBD(), search)
-        WorkingBD.get_director_by_name(WorkingBD(), search)
-        WorkingBD.get_screenwriter_by_name(WorkingBD(), search)
-        WorkingBD.get_composer_by_name(WorkingBD(),search)
         list =[]
-        list.append('Spider-Man')
-        list.append('film')
-        self.found.setText(list[0])#тут ставим найденое, если нашлось и ничего не найдено, если не нашлось
+        result =''
+        try:
+            film = WorkingBD.get_film_by_title(search)[0][0]
+            list.append(film)
+            list.append('film')
+        except:
+            pass
+        try:
+            filminprogress = WorkingBD.get_film_in_progress_by_title(search)[0][0]
+            list.append(filminprogress)
+            list.append('filminporgress')
+        except:
+            pass
+        try:
+            actor = WorkingBD.get_actor_by_name(search)[0][0]
+            list.append(actor)
+            list.append('actor')
+        except:
+            pass
+        try:
+            director = WorkingBD.get_director_by_name(search)[0][0]
+            list.append(director)
+            list.append('person')
+        except:
+            pass
+        try:
+            screenwriter = WorkingBD.get_screenwriter_by_name(search)[0][0]
+            list.append(screenwriter)
+            list.append('person')
+        except:
+            pass
+        try:
+            composer = WorkingBD.get_composer_by_name(search)[0][0]
+            list.append(composer)
+            list.append('person')
+        except:
+            pass
+        if len(list)==0:
+            self.found.setText('Не найдено')
+            return
+        self.found.setText(list[0])
         self.who = list[1]
         self.pushButton.setEnabled(True)
 
@@ -77,6 +132,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         if self.who == 'film':
             self.pushButton.clicked.connect(self.ProfFilm.show)
     def fill_film_table(self):
+        self.filmTab.clear()
         actors_str =''
         films = WorkingBD.get_all_films(WorkingBD())
         self.filmTab.setRowCount(len(films))
@@ -96,6 +152,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                     actors_str = ''
 
     def fill_film_in_plan_table(self):
+        self.tableWidget_3.clear()
         films = WorkingBD.get_all_films_in_plan(WorkingBD())
         self.tableWidget_3.setRowCount(len(films))
         for raw in range(0, len(films)):
@@ -103,6 +160,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                 a = str(films[raw][columns+1])
                 self.tableWidget_3.setItem(raw, columns, QTableWidgetItem(a))
     def fill_film_in_progress(self):
+        self.tableWidget_2.clear()
         actors_str = ''
         films = WorkingBD.get_all_films_in_progress(WorkingBD())
         self.tableWidget_2.setRowCount(len(films))
@@ -121,6 +179,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                     self.tableWidget_2.setItem(raw, columns, QTableWidgetItem(actors_str))
                     actors_str = ''
     def fill_actors(self):
+        self.actorTable.clear()
         actors_str = ''
         films = WorkingBD.get_all_actors(WorkingBD())
         self.actorTable.setRowCount(len(films))
@@ -139,6 +198,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                     self.actorTable.setItem(raw, columns, QTableWidgetItem(actors_str))
                     actors_str = ''
     def fill_directors(self):
+        self.directorTable.clear()
         actors_str = ''
         films = WorkingBD.get_all_person(WorkingBD(),'director')
         self.directorTable.setRowCount(len(films))
@@ -157,6 +217,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                     self.directorTable.setItem(raw, columns, QTableWidgetItem(actors_str))
                     actors_str = ''
     def fill_composers(self):
+        self.compTable.clear()
         actors_str = ''
         films = WorkingBD.get_all_person(WorkingBD(),'composer')
         self.compTable.setRowCount(len(films))
@@ -175,6 +236,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                     self.compTable.setItem(raw, columns, QTableWidgetItem(actors_str))
                     actors_str = ''
     def fill_screenwriters(self):
+        self.scrnTable.clear()
         actors_str = ''
         films = WorkingBD.get_all_person(WorkingBD(),'screenwriter')
         self.scrnTable.setRowCount(len(films))

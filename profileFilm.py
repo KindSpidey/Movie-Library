@@ -138,6 +138,7 @@ class Ui_Form(object):
         self.actorsTable.setObjectName("actorsTable")
         self.actorsTable.setColumnCount(3)
         self.actorsTable.setRowCount(0)
+        self.actorsTable.setSortingEnabled(True)
         item = QtWidgets.QTableWidgetItem()
         self.actorsTable.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()

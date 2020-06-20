@@ -47,7 +47,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def cell_was_clicked(self):
         self.chosen_film_in_tab = self.filmTab.selectedItems().__getitem__(0).text()
         self.ProfFilm.set_all()
+        self.ProfFilm.fill_salary_table()
         self.ProfFilm.show()
+
 
 
 

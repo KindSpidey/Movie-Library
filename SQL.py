@@ -1141,33 +1141,77 @@ class WorkingBD():
         cursor = conn.cursor()
         cursor.execute(f'''SELECT name FROM actor WHERE id ={id!r}''')
         all_rows = cursor.fetchall()[0][0]
-        #all_rows = [list(i) for i in all_rows]
+        return all_rows
+    def get_director_by_id(id):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        cursor.execute(f'''SELECT name FROM director WHERE id ={id!r}''')
+        all_rows = cursor.fetchall()[0][0]
+        return all_rows
+    def get_screenwriter_by_id(id):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        cursor.execute(f'''SELECT name FROM screenwriter WHERE id ={id!r}''')
+        all_rows = cursor.fetchall()[0][0]
+        return all_rows
+    def get_composer_by_id(id):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        cursor.execute(f'''SELECT name FROM composer WHERE id ={id!r}''')
+        all_rows = cursor.fetchall()[0][0]
         return all_rows
     def get_salary_by_film(title):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
+        result = []
         query = f'''SELECT id FROM film WHERE title = {title!r}'''
         id = cursor.execute(query).fetchone()[0]
-        query = f'''SELECT salary FROM actsal WHERE film_id = {id!r}'''
-        actors_salary = cursor.execute(query).fetchall()
-        actors_salary = [list(elem) for elem in actors_salary]
-        query = f'''SELECT act_id FROM actsal WHERE film_id = {id!r}'''
-        actors_id = cursor.execute(query).fetchall()
-        actors_id = [list(i) for i in actors_id]
-        actors_names = []
-        result = []
-        lists = []
-        second_list = []
-        
-        for elem in actors_id:
-            actors_names.append(WorkingBD.get_actors_by_id(elem[0]))
-        for i in range (0, len(actors_names)):
-            abc = [actors_names[i], 'Актёр', actors_salary[i][0]]
+        try:
+            query = f'''SELECT salary FROM dirsal WHERE film_id = {id!r}'''
+            director_salary = cursor.execute(query).fetchall()[0][0]
+            query = f'''SELECT dir_id FROM dirsal WHERE film_id = {id!r}'''
+            dir_id = cursor.execute(query).fetchall()[0][0]
+            dir_name = WorkingBD.get_director_by_id(dir_id)
+            abc = [dir_name, 'Режиссер', director_salary]
             result.append(abc)
-        print(actors_salary)
-        print(actors_id)
-        print(actors_names)
-        print(result)
+        except:
+            pass
+        try:
+            query = f'''SELECT salary FROM scrsal WHERE film_id = {id!r}'''
+            scr_salary = cursor.execute(query).fetchall()[0][0]
+            query = f'''SELECT scr_id FROM scrsal WHERE film_id = {id!r}'''
+            scr_id = cursor.execute(query).fetchall()[0][0]
+            scr_name = WorkingBD.get_screenwriter_by_id(scr_id)
+            abc = [scr_name, 'Сценарист', scr_salary]
+            result.append(abc)
+        except:
+            pass
+        try:
+            query = f'''SELECT salary FROM compsal WHERE film_id = {id!r}'''
+            composer_salary = cursor.execute(query).fetchall()[0][0]
+            query = f'''SELECT comp_id FROM compsal WHERE film_id = {id!r}'''
+            comp_id = cursor.execute(query).fetchall()[0][0]
+            comp_name = WorkingBD.get_composer_by_id(comp_id)
+            abc = [comp_name, 'Композитор', composer_salary]
+            result.append(abc)
+        except:
+            pass
+        try:
+            query = f'''SELECT salary FROM actsal WHERE film_id = {id!r}'''
+            actors_salary = cursor.execute(query).fetchall()
+            actors_salary = [list(elem) for elem in actors_salary]
+            query = f'''SELECT act_id FROM actsal WHERE film_id = {id!r}'''
+            actors_id = cursor.execute(query).fetchall()
+            actors_id = [list(i) for i in actors_id]
+            actors_names = []
+            for elem in actors_id:
+                actors_names.append(WorkingBD.get_actors_by_id(elem[0]))
+            for i in range (0, len(actors_names)):
+                abc = [actors_names[i], 'Актёр', actors_salary[i][0]]
+                result.append(abc)
+        except:
+            pass
+        return result
     def get_films_by_composer(composer_name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -1564,5 +1608,3 @@ worker = WorkingBD()
 #WorkingBD.remove_director_by_name('')
 #WorkingBD.remove_screenwriter_by_name('')
 #WorkingBD.remove_composer_by_name('')
-a = WorkingBD.get_salary_by_film('The Amazing Spider-Man 2')
-print(a)

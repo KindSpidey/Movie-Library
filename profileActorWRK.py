@@ -4,7 +4,8 @@ import profileActor, PyQt5
 
 
 class profileActorWorking(profileActor.Ui_Form, QWidget):
-    def __init__(self):
+    def __init__(self, parent):
+        self.parent = parent
         super(profileActorWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)

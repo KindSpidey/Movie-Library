@@ -27,12 +27,38 @@
      </property>
     </widget>
    </item>
+   <item row="3" column="1">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>Фильм</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Зарплата</string>
+      </property>
+     </column>
+    </widget>
+   </item>
    <item row="0" column="1">
     <widget class="QLabel" name="personName">
      <property name="font">
       <font>
        <family>Proxima Nova</family>
-       <pointsize>12</pointsize>
+       <pointsize>18</pointsize>
       </font>
      </property>
      <property name="text">
@@ -46,27 +72,32 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QTableWidget" name="tableWidget">
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="font">
       <font>
        <family>Open Sans</family>
        <pointsize>12</pointsize>
       </font>
      </property>
-     <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     <property name="text">
+      <string>Внести изменения</string>
      </property>
-     <column>
-      <property name="text">
-       <string>Фильм</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Зарплата</string>
-      </property>
-     </column>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
   </layout>

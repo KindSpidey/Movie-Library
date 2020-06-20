@@ -11,7 +11,13 @@ class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
         self.saveButton.clicked.connect(self.submit)
-
+    def setHead(self):
+        if self.parent.create_who =='director':
+            self.head.setText('Добавление режиссера')
+        if self.parent.create_who == 'composer':
+            self.head.setText('Добавление композитораё')
+        if self.parent.create_who == 'screenwriter':
+            self.head.setText('Добавление сценариста')
     def submit(self):
         #вызывать несколько методов. Добавлять инфу о человеке. Из поля фильмов добавлять фильм, все остальное заполнить ему nullами
         list = []

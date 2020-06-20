@@ -1,2 +1,1 @@
-pyuic5 salaryPersonConnect.ui -o salaryPersonConnect.py
-pyuic5 TrueMain.ui -o TrueMain.py
+pyuic5 CreateFilmInProgress.ui -o CreateFilmInProgress.py

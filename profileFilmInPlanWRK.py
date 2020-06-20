@@ -3,7 +3,8 @@ import profileFilmInPlan, PyQt5
 from PyQt5.QtCore import Qt, pyqtSignal
 
 class profileFilmInPlanWorking(profileFilmInPlan.Ui_Form, QWidget):
-    def __init__(self):
+    def __init__(self, parent):
+        self.parent = parent
         super(profileFilmInPlanWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)

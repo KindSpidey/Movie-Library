@@ -23,7 +23,7 @@ class Ui_Form(object):
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.logo = QtWidgets.QLabel(Form)
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap("logo3.png"))
+        self.logo.setPixmap(QtGui.QPixmap("GUI/images/logo3.png"))
         self.logo.setScaledContents(False)
         self.logo.setObjectName("logo")
         self.gridLayout_4.addWidget(self.logo, 0, 0, 1, 1)

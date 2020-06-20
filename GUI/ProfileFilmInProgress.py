@@ -24,7 +24,7 @@ class Ui_Form(object):
         self.formLayout.setObjectName("formLayout")
         self.logo = QtWidgets.QLabel(Form)
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap("GUI/images/logo3.png"))
+        self.logo.setPixmap(QtGui.QPixmap("images/logo3.png"))
         self.logo.setScaledContents(False)
         self.logo.setObjectName("logo")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.logo)

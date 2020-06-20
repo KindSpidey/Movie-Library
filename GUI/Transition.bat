@@ -1,1 +1,1 @@
-pyuic5 CreateFilmInProgress.ui -o CreateFilmInProgress.py
+pyuic5 ProfileFilmInProgress.ui -o ProfileFilmInProgress.py

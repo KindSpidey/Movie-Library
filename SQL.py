@@ -863,13 +863,14 @@ class WorkingBD():
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
-                SELECT title, theme, idead, planning_budget, description
+                SELECT title, theme, idea, planning_budget, description
                 FROM filminplan
                 WHERE title = {name!r} 
 
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        all_rows = [list(elem) for elem in all_rows]
         cursor.execute(query)
         conn.commit()
         conn.close()
@@ -1608,3 +1609,4 @@ worker = WorkingBD()
 #WorkingBD.remove_director_by_name('')
 #WorkingBD.remove_screenwriter_by_name('')
 #WorkingBD.remove_composer_by_name('')
+print(WorkingBD.get_film_in_plan('Atlas Shrugged'))

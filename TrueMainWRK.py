@@ -16,6 +16,9 @@ from CreateFilmWRK import CreateFilmWorking
 
 class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def __init__(self):
+        self.chosen_film_in_plan = ''
+        self.chosen_film_in_progress_in_tab = ''
+        self.chosen_film_in_plan_in_tab = ''
         self.chosen_film_in_tab = ''
         self.who =''
         self.create_who =''
@@ -42,16 +45,24 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.ProfFilmInPlan = profileFilmInPlanWRK.profileFilmInPlanWorking(self)
         self.pushButton.setDisabled(True)
         self.setup_tables()
-        self.filmTab.itemDoubleClicked.connect(self.cell_was_clicked)
+        self.filmTab.itemDoubleClicked.connect(self.film_cell_was_clicked)
+        self.film_in_progressTab.itemDoubleClicked.connect(self.film_in_progress_cell_was_clicked)
+        self.film_in_planTab.itemDoubleClicked.connect(self.film_in_plan_cell_was_clicked)
+    def film_in_plan_cell_was_clicked(self):
+        self.chosen_film_in_plan = self.film_in_planTab.selectedItems().__getitem__(0).text()
+        self.ProfFilmInPlan.set_all()
+        self.ProfFilmInPlan.show()
 
-    def cell_was_clicked(self):
+    def film_cell_was_clicked(self):
         self.chosen_film_in_tab = self.filmTab.selectedItems().__getitem__(0).text()
         self.ProfFilm.set_all()
         self.ProfFilm.fill_salary_table()
         self.ProfFilm.show()
-
-
-
+    def film_in_progress_cell_was_clicked(self):
+        self.chosen_film_in_progress_in_tab = self.film_in_progressTab.selectedItems().__getitem__(0).text()
+        self.ProfFilmInProgress.set_all()
+        self.ProfFilmInProgress.fill_actors_table()
+        self.ProfFilmInProgress.show()
 
     def create_director(self):
         self.create_who='director'
@@ -154,34 +165,33 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                             actors_str+=u
                     self.filmTab.setItem(raw, columns, QTableWidgetItem(actors_str))
                     actors_str = ''
-
-    def fill_film_in_plan_table(self):
-        self.tableWidget_3.setRowCount(0)
-        films = WorkingBD.get_all_films_in_plan(WorkingBD())
-        self.tableWidget_3.setRowCount(len(films))
-        for raw in range(0, len(films)):
-            for columns in range(0,self.tableWidget_3.columnCount()):
-                a = str(films[raw][columns+1])
-                self.tableWidget_3.setItem(raw, columns, QTableWidgetItem(a))
     def fill_film_in_progress(self):
-        self.tableWidget_2.setRowCount(0)
+        self.film_in_progressTab.setRowCount(0)
         actors_str = ''
         films = WorkingBD.get_all_films_in_progress(WorkingBD())
-        self.tableWidget_2.setRowCount(len(films))
+        self.film_in_progressTab.setRowCount(len(films))
         for raw in range(0, len(films)):
-            for columns in range(0, self.tableWidget_2.columnCount()):
-                if columns != 8:
+            for columns in range(0, self.film_in_progressTab.columnCount()):
+                if columns != 5:
                     a = str(films[raw][columns + 1])
-                    self.tableWidget_2.setItem(raw, columns, QTableWidgetItem(a))
+                    self.film_in_progressTab.setItem(raw, columns, QTableWidgetItem(a))
                 else:
-                    actors = films[raw][9]
+                    actors = films[raw][6]
                     for u in actors:
                         if u != actors[len(actors) - 1]:
                             actors_str += u + ', '
                         else:
                             actors_str += u
-                    self.tableWidget_2.setItem(raw, columns, QTableWidgetItem(actors_str))
+                    self.film_in_progressTab.setItem(raw, columns, QTableWidgetItem(actors_str))
                     actors_str = ''
+    def fill_film_in_plan_table(self):
+        self.film_in_planTab.setRowCount(0)
+        films = WorkingBD.get_all_films_in_plan(WorkingBD())
+        self.film_in_planTab.setRowCount(len(films))
+        for raw in range(0, len(films)):
+            for columns in range(0, self.film_in_planTab.columnCount()):
+                a = str(films[raw][columns+1])
+                self.film_in_planTab.setItem(raw, columns, QTableWidgetItem(a))
     def fill_actors(self):
         self.actorTable.setRowCount(0)
         actors_str = ''

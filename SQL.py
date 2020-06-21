@@ -678,18 +678,17 @@ class WorkingBD():
         a = WorkingBD.get_salary_by_person('composer', name1)
         all_rows.append(a)
         a = WorkingBD.get_films_title_by_person('composer', name1)
-        inside = 0
         other_films = []
         if len(all_rows[1])==0:
             for elem in a:
                 other_films.append(elem)
             all_rows.append(other_films)
         for i in range(0, len(a)):
-            inside = 0
+            not_inside = 0
             for elem in all_rows[1]:
                 if not elem.__contains__(a[i]):
-                    inside += 1
-                if inside == len(all_rows):
+                    not_inside += 1
+                if not_inside == len(all_rows[1]):
                     other_films.append(a[i])
         if len(other_films) != 0 and len(all_rows[1])!=0:
             all_rows.append(other_films)

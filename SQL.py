@@ -628,20 +628,19 @@ class WorkingBD():
         a = WorkingBD.get_salary_by_person('actor', name1)
         all_rows.append(a)
         a = WorkingBD.get_films_title_by_actor(name1)
-        inside = 0
         other_films = []
         if len(all_rows[1]) == 0:
             for elem in a:
                 other_films.append(elem)
             all_rows.append(other_films)
         for i in range(0, len(a)):
-            inside = 0
+            not_inside = 0
             for elem in all_rows[1]:
                 if not elem.__contains__(a[i]):
-                    inside += 1
-                if inside == len(all_rows):
+                    not_inside += 1
+                if not_inside == len(all_rows[1]):
                     other_films.append(a[i])
-        if len(other_films) != 0 and len(all_rows[1]) != 0:
+        if len(other_films) != 0 or len(all_rows[1]) != 0:
             all_rows.append(other_films)
         conn.commit()
         conn.close()
@@ -678,20 +677,19 @@ class WorkingBD():
         a = WorkingBD.get_salary_by_person('director', name1)
         all_rows.append(a)
         a = WorkingBD.get_films_title_by_person('director', name1)
-        inside = 0
         other_films = []
-        if len(all_rows[1])==0:
+        if len(all_rows[1]) == 0:
             for elem in a:
                 other_films.append(elem)
             all_rows.append(other_films)
         for i in range(0, len(a)):
-            inside = 0
+            not_inside = 0
             for elem in all_rows[1]:
                 if not elem.__contains__(a[i]):
-                    inside += 1
-                if inside == len(all_rows):
+                    not_inside += 1
+                if not_inside == len(all_rows[1]):
                     other_films.append(a[i])
-        if len(other_films) != 0 and len(all_rows[1])!=0:
+        if len(other_films) != 0 or len(all_rows[1]) != 0:
             all_rows.append(other_films)
         conn.commit()
         conn.close()
@@ -726,7 +724,7 @@ class WorkingBD():
                     not_inside += 1
                 if not_inside == len(all_rows[1]):
                     other_films.append(a[i])
-        if len(other_films) != 0 and len(all_rows[1])!=0:
+        if len(other_films) != 0 or len(all_rows[1])!=0:
             all_rows.append(other_films)
         conn.commit()
         conn.close()
@@ -749,20 +747,19 @@ class WorkingBD():
         a = WorkingBD.get_salary_by_person('screenwriter', name1)
         all_rows.append(a)
         a = WorkingBD.get_films_title_by_person('screenwriter', name1)
-        inside = 0
         other_films = []
-        if len(all_rows[1])==0:
+        if len(all_rows[1]) == 0:
             for elem in a:
                 other_films.append(elem)
             all_rows.append(other_films)
         for i in range(0, len(a)):
-            inside = 0
+            not_inside = 0
             for elem in all_rows[1]:
                 if not elem.__contains__(a[i]):
-                    inside += 1
-                if inside == len(all_rows):
+                    not_inside += 1
+                if not_inside == len(all_rows[1]):
                     other_films.append(a[i])
-        if len(other_films) != 0 and len(all_rows[1])!=0:
+        if len(other_films) != 0 or len(all_rows[1]) != 0:
             all_rows.append(other_films)
         conn.commit()
         conn.close()
@@ -1333,6 +1330,7 @@ class WorkingBD():
                         DELETE FROM film WHERE title = "{elem}"
                     '''
             cursor.execute(query)
+
         conn.commit()
         conn.close()
 
@@ -1675,7 +1673,6 @@ class WorkingBD():
         conn.close()
 
 
-worker = WorkingBD()
 # WorkingBD.create_table()
 # WorkingBD.add_actor('Andrew Garfield','89157213979','garfield','male','1986')
 # WorkingBD.remove_film_by_title('The Amazing Spider-Man 2')
@@ -1698,8 +1695,8 @@ worker = WorkingBD()
 #WorkingBD.remove_director_by_name('')
 #WorkingBD.remove_screenwriter_by_name('')
 #WorkingBD.remove_composer_by_name('')
-#print(WorkingBD.get_director_by_name('Marc Webb'))
+print(WorkingBD.get_director_by_name('Marc Webb'))
 #WorkingBD.add_film('500 Days of Summer',12131313,80,2009,10000000,'Marc Webb','I dont know', 'Good guys', 'Joseph Gordon Levitt')
 #print(WorkingBD.get_composer_by_name('Hans Zimmer'))
-print(WorkingBD.get_salary_by_person('actor','Andrew Garfield'))
-print(WorkingBD.get_actor_by_name_for_profile('Andrew Garfield'))
+#WorkingBD.remove_film_by_title('500 Days of Summer')
+print(WorkingBD.get_films_title_by_actor('Andrew Garfield'))

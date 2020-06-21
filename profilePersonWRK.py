@@ -22,9 +22,12 @@ class profilePersonWorking(profilePerson.Ui_Form, QWidget):
                 for columns in range(0, self.moviesTable.columnCount()):
                     a = str(self.dataPerson[1][raw][columns])
                     self.moviesTable.setItem(raw, columns, QTableWidgetItem(a))
-        for raw in range(len(self.dataPerson[1]), len(self.dataPerson[1])+len(self.dataPerson[2])):
-            for elem in self.dataPerson[2]:
-                self.moviesTable.setItem(raw, 0, QTableWidgetItem(elem))
+            for raw in range(len(self.dataPerson[1]), len(self.dataPerson[1])+len(self.dataPerson[2])):
+                self.moviesTable.setItem(raw, 0, QTableWidgetItem(self.dataPerson[2][raw - 2]))
+        else:
+            for raw in range(len(self.dataPerson[1]), len(self.dataPerson[1])+len(self.dataPerson[2])):
+                self.moviesTable.setItem(raw, 0, QTableWidgetItem(self.dataPerson[2][raw]))
+
     def set_all(self):
         if self.parent.who_is_person == 'director':
             self.dataPerson = WorkingBD.get_director_by_name(self.parent.chosen_director)

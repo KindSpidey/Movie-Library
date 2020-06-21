@@ -17,6 +17,7 @@ from CreateFilmWRK import CreateFilmWorking
 class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def __init__(self):
         self.who_is_person =''
+        self.chosen_actor = ''
         self.chosen_director =''
         self.chosen_composer =''
         self.chosen_screenwriter =''
@@ -55,7 +56,14 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.directorTable.itemDoubleClicked.connect(self.director_cell_was_clicked)
         self.compTable.itemDoubleClicked.connect(self.composer_cell_was_clicked)
         self.scrnTable.itemDoubleClicked.connect(self.screenwriter_cell_was_clicked)
+        self.actorTable.itemDoubleClicked.connect(self.actor_cell_was_clicked)
 
+    def actor_cell_was_clicked(self):
+        #self.who_is_person = 'actor'
+        self.chosen_actor = self.actorTable.selectedItems().__getitem__(0).text()
+        self.ProfActor.set_all()
+        self.ProfActor.fill_salary_table()
+        self.ProfActor.show()
     def composer_cell_was_clicked(self):
         self.who_is_person ='composer'
         self.chosen_composer = self.compTable.selectedItems().__getitem__(0).text()

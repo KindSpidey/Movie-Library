@@ -1,1 +1,2 @@
-pyuic5 ProfileFilmInProgress.ui -o ProfileFilmInProgress.py
+pyuic5 salaryPersonConnect.ui -o salaryPersonConnect.py
+pyuic5 salaryFilmConnect.ui -o salaryFilmConnect.py

@@ -14,7 +14,7 @@ class profileFilmInProgressWorking(profileFilmInProgress.Ui_Form, QWidget):
         self.setupUi(self)
 
     def set_all(self):
-        self.data = WorkingBD.get_film_in_progress_by_title(self.parent.chosen_film_in_progress_in_tab)
+        self.data = WorkingBD.get_film_in_progress_by_title(self.parent.chosen_film_in_progress)
         self.data = [list(elem) for elem in self.data]
         self.actors = self.data[1]
         self.data = self.data[0]

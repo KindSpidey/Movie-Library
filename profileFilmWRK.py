@@ -15,7 +15,7 @@ class profileFilmWorking(profileFilm.Ui_Form, QWidget):
         self.data = []
 
     def set_all(self):
-        self.data = WorkingBD.get_film_by_title(self.parent.chosen_film_in_tab)
+        self.data = WorkingBD.get_film_by_title(self.parent.chosen_film)
         self.data = [list(elem) for elem in self.data]
         self.headTitle.setText(self.data[0][0])
         self.director.setText('Режиссер: '+ self.data[0][5])

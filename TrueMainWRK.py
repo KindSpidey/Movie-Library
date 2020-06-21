@@ -16,10 +16,14 @@ from CreateFilmWRK import CreateFilmWorking
 
 class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def __init__(self):
+        self.who_is_person =''
+        self.chosen_director =''
+        self.chosen_composer =''
+        self.chosen_screenwriter =''
+        self.chosen_actor =''
         self.chosen_film_in_plan = ''
-        self.chosen_film_in_progress_in_tab = ''
-        self.chosen_film_in_plan_in_tab = ''
-        self.chosen_film_in_tab = ''
+        self.chosen_film_in_progress = ''
+        self.chosen_film = ''
         self.who =''
         self.create_who =''
         super(TrueMainWorking, self).__init__()
@@ -48,18 +52,42 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.filmTab.itemDoubleClicked.connect(self.film_cell_was_clicked)
         self.film_in_progressTab.itemDoubleClicked.connect(self.film_in_progress_cell_was_clicked)
         self.film_in_planTab.itemDoubleClicked.connect(self.film_in_plan_cell_was_clicked)
+        self.directorTable.itemDoubleClicked.connect(self.director_cell_was_clicked)
+        self.compTable.itemDoubleClicked.connect(self.composer_cell_was_clicked)
+        self.scrnTable.itemDoubleClicked.connect(self.screenwriter_cell_was_clicked)
+
+    def composer_cell_was_clicked(self):
+        self.who_is_person ='composer'
+        self.chosen_composer = self.compTable.selectedItems().__getitem__(0).text()
+        self.ProfPerson.set_all()
+        self.ProfPerson.fill_salary_table()
+        self.ProfPerson.show()
+
+    def screenwriter_cell_was_clicked(self):
+        self.who_is_person ='screenwriter'
+        self.chosen_screenwriter = self.scrnTable.selectedItems().__getitem__(0).text()
+        self.ProfPerson.set_all()
+        self.ProfPerson.fill_salary_table()
+        self.ProfPerson.show()
+
+    def director_cell_was_clicked(self):
+        self.who_is_person ='director'
+        self.chosen_director = self.directorTable.selectedItems().__getitem__(0).text()
+        self.ProfPerson.set_all()
+        self.ProfPerson.fill_salary_table()
+        self.ProfPerson.show()
     def film_in_plan_cell_was_clicked(self):
         self.chosen_film_in_plan = self.film_in_planTab.selectedItems().__getitem__(0).text()
         self.ProfFilmInPlan.set_all()
         self.ProfFilmInPlan.show()
 
     def film_cell_was_clicked(self):
-        self.chosen_film_in_tab = self.filmTab.selectedItems().__getitem__(0).text()
+        self.chosen_film = self.filmTab.selectedItems().__getitem__(0).text()
         self.ProfFilm.set_all()
         self.ProfFilm.fill_salary_table()
         self.ProfFilm.show()
     def film_in_progress_cell_was_clicked(self):
-        self.chosen_film_in_progress_in_tab = self.film_in_progressTab.selectedItems().__getitem__(0).text()
+        self.chosen_film_in_progress = self.film_in_progressTab.selectedItems().__getitem__(0).text()
         self.ProfFilmInProgress.set_all()
         self.ProfFilmInProgress.fill_actors_table()
         self.ProfFilmInProgress.show()
@@ -93,38 +121,51 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         result =''
         try:
             film = WorkingBD.get_film_by_title(search)[0][0]
+            self.chosen_film = film
             list.append(film)
             list.append('film')
         except:
             pass
         try:
             filminprogress = WorkingBD.get_film_in_progress_by_title(search)[0][0]
+            self.chosen_film_in_progress = filminprogress
             list.append(filminprogress)
-            list.append('filminporgress')
+            list.append('filminprogress')
+        except:
+            pass
+        try:
+            filminplan = WorkingBD.get_film_in_plan(search)[0][0]
+            self.chosen_film_in_plan = filminplan
+            list.append(filminplan)
+            list.append('filminplan')
         except:
             pass
         try:
             actor = WorkingBD.get_actor_by_name(search)[0][0]
+            self.chosen_actor = actor
             list.append(actor)
             list.append('actor')
         except:
             pass
         try:
             director = WorkingBD.get_director_by_name(search)[0][0]
+            self.chosen_director = director
             list.append(director)
-            list.append('person')
+            list.append('director')
         except:
             pass
         try:
             screenwriter = WorkingBD.get_screenwriter_by_name(search)[0][0]
+            self.chosen_screenwriter = screenwriter
             list.append(screenwriter)
-            list.append('person')
+            list.append('screenwriter')
         except:
             pass
         try:
             composer = WorkingBD.get_composer_by_name(search)[0][0]
+            self.chosen_composer = composer
             list.append(composer)
-            list.append('person')
+            list.append('composer')
         except:
             pass
         if len(list)==0:
@@ -140,11 +181,16 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.pushButton.clicked.connect(self.ProfActor.show)
         if self.who == 'person':
             self.pushButton.clicked.connect(self.ProfPerson.show)
-        if self.who == 'filmInProgress':
+        if self.who == 'filminprogress':
+            self.ProfFilmInProgress.set_all()
+            self.ProfFilmInProgress.fill_actors_table()
             self.pushButton.clicked.connect(self.ProfFilmInProgress.show)
-        if self.who == 'filmInPlan':
+        if self.who == 'filminplan':
+            self.ProfFilmInPlan.set_all()
             self.pushButton.clicked.connect(self.ProfFilmInPlan.show)
         if self.who == 'film':
+            self.ProfFilm.set_all()
+            self.ProfFilm.fill_salary_table()
             self.pushButton.clicked.connect(self.ProfFilm.show)
     def fill_film_table(self):
         self.filmTab.setRowCount(0)

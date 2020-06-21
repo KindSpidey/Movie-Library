@@ -625,7 +625,6 @@ class WorkingBD():
         conn.commit()
         conn.close()
         return all_rows
-
     def get_director_by_name(name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -637,10 +636,27 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        all_rows = [list(i) for i in all_rows]
         if all_rows.__len__() == 0:
             return all_rows
-        a = WorkingBD.get_films_by_director(name1)
+        a = WorkingBD.get_salary_by_person('director', name1)
         all_rows.append(a)
+        a = WorkingBD.get_films_title_by_person('director', name1)
+        inside = 0
+        other_films = []
+        if len(all_rows[1])==0:
+            for elem in a:
+                other_films.append(elem)
+            all_rows.append(other_films)
+        for i in range(0, len(a)):
+            inside = 0
+            for elem in all_rows[1]:
+                if not elem.__contains__(a[i]):
+                    inside += 1
+                if inside == len(all_rows):
+                    other_films.append(a[i])
+        if len(other_films) != 0 and len(all_rows[1])!=0:
+            all_rows.append(other_films)
         conn.commit()
         conn.close()
         return all_rows
@@ -656,10 +672,27 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        all_rows = [list(i) for i in all_rows]
         if all_rows.__len__() == 0:
             return all_rows
-        a = WorkingBD.get_films_by_composer(name1)
+        a = WorkingBD.get_salary_by_person('composer', name1)
         all_rows.append(a)
+        a = WorkingBD.get_films_title_by_person('composer', name1)
+        inside = 0
+        other_films = []
+        if len(all_rows[1])==0:
+            for elem in a:
+                other_films.append(elem)
+            all_rows.append(other_films)
+        for i in range(0, len(a)):
+            inside = 0
+            for elem in all_rows[1]:
+                if not elem.__contains__(a[i]):
+                    inside += 1
+                if inside == len(all_rows):
+                    other_films.append(a[i])
+        if len(other_films) != 0 and len(all_rows[1])!=0:
+            all_rows.append(other_films)
         conn.commit()
         conn.close()
         return all_rows
@@ -675,10 +708,27 @@ class WorkingBD():
             '''
         cursor.execute(query)
         all_rows = cursor.fetchall()
+        all_rows = [list(i) for i in all_rows]
         if all_rows.__len__() == 0:
             return all_rows
-        a = WorkingBD.get_films_by_scrennwriter(name1)
+        a = WorkingBD.get_salary_by_person('screenwriter', name1)
         all_rows.append(a)
+        a = WorkingBD.get_films_title_by_person('screenwriter', name1)
+        inside = 0
+        other_films = []
+        if len(all_rows[1])==0:
+            for elem in a:
+                other_films.append(elem)
+            all_rows.append(other_films)
+        for i in range(0, len(a)):
+            inside = 0
+            for elem in all_rows[1]:
+                if not elem.__contains__(a[i]):
+                    inside += 1
+                if inside == len(all_rows):
+                    other_films.append(a[i])
+        if len(other_films) != 0 and len(all_rows[1])!=0:
+            all_rows.append(other_films)
         conn.commit()
         conn.close()
         return all_rows
@@ -1092,15 +1142,16 @@ class WorkingBD():
                 list.append(elem[0])
             result = []
             for elem in list:
-                a = WorkingBD.get_film_by_id(elem)
+                a = [WorkingBD.get_film_title_by_id(elem)[0][0]]
                 result.append(a)
             for i in range(len(sallist)):
                 result[i].append(sallist[i])
+
             return result
         if who == 'screenwriter':
             cursor.execute(f'''SELECT id FROM screenwriter WHERE name ={name!r}''')
             id = cursor.fetchall()[0][0]
-            cursor.execute(f'''SELECT salary FROM scrtsal WHERE scr_id={id!r}''')
+            cursor.execute(f'''SELECT salary FROM scrsal WHERE scr_id={id!r}''')
             sal = cursor.fetchall()
             cursor.execute(f'''SELECT film_id FROM scrsal WHERE scr_id = {id!r}''')
             a = cursor.fetchall()
@@ -1112,10 +1163,11 @@ class WorkingBD():
                 list.append(elem[0])
             result = []
             for elem in list:
-                a = WorkingBD.get_film_by_id(elem)
+                a = [WorkingBD.get_film_title_by_id(elem)[0][0]]
                 result.append(a)
             for i in range(len(sallist)):
                 result[i].append(sallist[i])
+
             return result
         if who == 'composer':
             cursor.execute(f'''SELECT id FROM composer WHERE name ={name!r}''')
@@ -1132,10 +1184,11 @@ class WorkingBD():
                 list.append(elem[0])
             result = []
             for elem in list:
-                a = WorkingBD.get_film_by_id(elem)
+                a = [WorkingBD.get_film_title_by_id(elem)[0][0]]
                 result.append(a)
             for i in range(len(sallist)):
                 result[i].append(sallist[i])
+
             return result
     def get_actors_by_id(id):
         conn = sqlite3.connect('Movies.db')
@@ -1609,4 +1662,6 @@ worker = WorkingBD()
 #WorkingBD.remove_director_by_name('')
 #WorkingBD.remove_screenwriter_by_name('')
 #WorkingBD.remove_composer_by_name('')
-print(WorkingBD.get_film_in_plan('Atlas Shrugged'))
+#print(WorkingBD.get_director_by_name('Marc Webb'))
+#WorkingBD.add_film('500 Days of Summer',12131313,80,2009,10000000,'Marc Webb','I dont know', 'Good guys', 'Joseph Gordon Levitt')
+print(WorkingBD.get_composer_by_name('Hans Zimmer'))

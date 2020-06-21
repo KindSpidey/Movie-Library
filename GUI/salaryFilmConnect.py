@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'salaryPersonConnect.ui'
+# Form implementation generated from reading ui file 'salaryFilmConnect.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -29,12 +29,14 @@ class Ui_Form(object):
         self.tableWidget.setFont(font)
         self.tableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
         self.gridLayout.addWidget(self.tableWidget, 3, 1, 1, 1)
         self.personName = QtWidgets.QLabel(Form)
         font = QtGui.QFont()
@@ -69,8 +71,10 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Фильм"))
+        item.setText(_translate("Form", "Человек"))
         item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("Form", "Должность"))
+        item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("Form", "Зарплата"))
-        self.personName.setText(_translate("Form", "Человек"))
+        self.personName.setText(_translate("Form", "Фильм"))
         self.pushButton.setText(_translate("Form", "Внести изменения"))

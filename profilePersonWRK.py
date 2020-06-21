@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
-import profilePerson, PyQt5
+import profilePerson, PyQt5, CreatePersonWRK
 from PyQt5.QtCore import Qt, pyqtSignal
 from SQL import WorkingBD
 
@@ -12,7 +12,10 @@ class profilePersonWorking(profilePerson.Ui_Form, QWidget):
         super(profilePersonWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-
+        self.CreatePerson =
+        self.editButton.clicked.connect(self.edit_mode)
+    def edit_mode(self):
+        
     def fill_salary_table(self):
         self.moviesTable.setRowCount(0)
         length = len(self.dataPerson[1])+len(self.dataPerson[2])

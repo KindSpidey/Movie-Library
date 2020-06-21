@@ -34,10 +34,11 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
             self.hide()
         if self.action == 'create':
             WorkingBD.add_actor(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text(), self.sexEdit.text(), self.birthYearEdit.text())
-    def save(self):
-        if self.action == 'edit':
-            WorkingBD.update_actor(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text(), self.sexEdit.text(), self.birthYearEdit.text())
-    def edit_actor(self):
+            films = self.get_str_films()
+            for elem in films:
+                WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+            self.hide()
+    def get_str_films(self):
         actors = WorkingBD.get_films_title_by_actor(self.parent_main.chosen_actor)
         actors_str =''
         for elem in actors:
@@ -45,13 +46,20 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
                 actors_str+=str(elem) + ', '
             else:
                 actors_str+=str(elem)
+        return actors_str
+    def save(self):
+        if self.action == 'edit':
+            WorkingBD.update_actor(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text(), self.sexEdit.text(), self.birthYearEdit.text())
+    def edit_actor(self):
+        actors = WorkingBD.get_films_title_by_actor(self.parent_main.chosen_actor)
+        films = self.get_str_films()
         try:
             self.head.setText('Редактирование актера')
             self.nameEdit.setText(self.parent_profile.actorInfo[0])
             self.phoneEdit.setText(self.parent_profile.actorInfo[2])
             self.emailEdit.setText(self.parent_profile.actorInfo[3])
             self.sexEdit.setText(self.parent_profile.actorInfo[4])
-            self.textEdit.setText(actors_str)
+            self.textEdit.setText(films)
             self.birthYearEdit.setText(str(2020 - self.parent_profile.actorInfo[5]))
         except:
             pass

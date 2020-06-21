@@ -632,7 +632,6 @@ class WorkingBD():
         if len(all_rows[1]) == 0:
             for elem in a:
                 other_films.append(elem)
-            all_rows.append(other_films)
         for i in range(0, len(a)):
             not_inside = 0
             for elem in all_rows[1]:
@@ -1702,4 +1701,4 @@ class WorkingBD():
 #WorkingBD.remove_film_by_title('500 Days of Summer')
 #print(WorkingBD.get_films_title_by_actor('Andrew Garfield'))
 #WorkingBD.connect_salary_and_person('Star Wars 1', 'actor', 'Andrew Garfield', 10000000)
-
+print(WorkingBD.get_actor_by_name_for_profile('Sally Field'))

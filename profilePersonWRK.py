@@ -23,7 +23,7 @@ class profilePersonWorking(profilePerson.Ui_Form, QWidget):
                     a = str(self.dataPerson[1][raw][columns])
                     self.moviesTable.setItem(raw, columns, QTableWidgetItem(a))
             for raw in range(len(self.dataPerson[1]), len(self.dataPerson[1])+len(self.dataPerson[2])):
-                self.moviesTable.setItem(raw, 0, QTableWidgetItem(self.dataPerson[2][raw - 2]))
+                self.moviesTable.setItem(raw, 0, QTableWidgetItem(self.dataPerson[2][raw - len(self.dataPerson[1])]))
         else:
             for raw in range(len(self.dataPerson[1]), len(self.dataPerson[1])+len(self.dataPerson[2])):
                 self.moviesTable.setItem(raw, 0, QTableWidgetItem(self.dataPerson[2][raw]))

@@ -1515,15 +1515,16 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
-    def update_actor(name1, phone, email):
+    def update_actor(name1, phone, email, sex, year):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
+        age = 2020 - int(year)
         query = f'''
         UPDATE actor
-        SET name = ?, phone = ?,email = ?
+        SET name = ?, phone = ?,email = ?, sex =?, birth_year = ?, age =?
         WHERE name = '{name1}'
         '''
-        cursor.execute(query, (name1, phone, email))
+        cursor.execute(query, (name1, phone, email, sex, year, age))
         conn.commit()
         conn.close()
 
@@ -1695,8 +1696,10 @@ class WorkingBD():
 #WorkingBD.remove_director_by_name('')
 #WorkingBD.remove_screenwriter_by_name('')
 #WorkingBD.remove_composer_by_name('')
-print(WorkingBD.get_director_by_name('Marc Webb'))
+#print(WorkingBD.get_director_by_name('Marc Webb'))
 #WorkingBD.add_film('500 Days of Summer',12131313,80,2009,10000000,'Marc Webb','I dont know', 'Good guys', 'Joseph Gordon Levitt')
 #print(WorkingBD.get_composer_by_name('Hans Zimmer'))
 #WorkingBD.remove_film_by_title('500 Days of Summer')
-print(WorkingBD.get_films_title_by_actor('Andrew Garfield'))
+#print(WorkingBD.get_films_title_by_actor('Andrew Garfield'))
+#WorkingBD.connect_salary_and_person('Star Wars 1', 'actor', 'Andrew Garfield', 10000000)
+

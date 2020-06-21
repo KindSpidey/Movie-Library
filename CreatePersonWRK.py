@@ -40,3 +40,4 @@ class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
                 WorkingBD.add_film(elem, None, None, None, None, self.nameEdit.text(), None, None, None)
         self.parent.setup_tables()
         self.hide()
+

@@ -37,7 +37,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.createFilmInProgress = CreateFilmInProgressWorking(self)
         self.progressCreate.clicked.connect(self.createFilmInProgress.show)
         self.createActor = CreateActorWRK.CreateActorWorking(self, profileActorWRK)
-        self.actorCreate.clicked.connect(self.createActor.show)
+        self.actorCreate.clicked.connect(self.create_action)
         self.createPerson = CreatePersonWRK.CreatePersonWorking(self)
         self.scrnCreate.clicked.connect(self.create_screenwriter)
         self.directorCreate.clicked.connect(self.create_director)
@@ -57,6 +57,11 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.compTable.itemDoubleClicked.connect(self.composer_cell_was_clicked)
         self.scrnTable.itemDoubleClicked.connect(self.screenwriter_cell_was_clicked)
         self.actorTable.itemDoubleClicked.connect(self.actor_cell_was_clicked)
+
+    #def film_cell_edit(self):
+    def create_action(self):
+        self.createActor.action = 'create'
+        self.createActor.show()
 
     def actor_cell_was_clicked(self):
         #self.who_is_person = 'actor'

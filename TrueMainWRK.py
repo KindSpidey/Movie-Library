@@ -33,8 +33,8 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.createFilm = CreateFilmWorking(self, None)
         self.filmCreate.clicked.connect(self.createFilm.show)
         self.createFilmInPlan = CreateFilmInPlanWorking(self, profileFilmInPlanWRK)
-        self.planCreate.clicked.connect(self.createFilmInPlan.show)
-        self.createFilmInProgress = CreateFilmInProgressWorking(self)
+        self.planCreate.clicked.connect(self.plan_create)
+        self.createFilmInProgress = CreateFilmInProgressWorking(self, profileFilmInProgressWRK,profileFilmInPlanWRK)
         self.progressCreate.clicked.connect(self.createFilmInProgress.show)
         self.createActor = CreateActorWRK.CreateActorWorking(self, profileActorWRK)
         self.actorCreate.clicked.connect(self.create_action_actor)
@@ -65,7 +65,10 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.progressDelete.clicked.connect(self.delete_film_in_progress)
         self.filmDelete.clicked.connect(self.delete_film)
 
-
+    def plan_create(self):
+        self.createFilmInPlan.action = 'create'
+        self.createFilmInPlan.set_all()
+        self.createFilmInPlan.show()
     def delete_film_in_progress(self):
         try:
             for_delete = self.film_in_progressTab.selectedItems().__getitem__(0).text()

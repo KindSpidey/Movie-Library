@@ -1606,8 +1606,7 @@ class WorkingBD():
         list_actors = []
         for elem in all_rows:
             list_actors.append(WorkingBD.get_films_title_by_actor(elem[1]))
-#            if len(WorkingBD.get_films_in_progress_by_actor(elem[1]))!=0:
-                #list_actors.append(WorkingBD.get_films_in_progress_by_actor(elem[1]))
+
         for i in range(0, len(all_rows)):
             all_rows[i].append(list_actors[i])
         conn.close()

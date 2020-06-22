@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWidget
 import CreateFilmInPlan, PyQt5
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
-import CreateFilmInProgressWRK
+import CreateFilmInProgressWRK, profileFilmInPlanWRK
 from SQL import WorkingBD
 
 class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):
@@ -13,18 +13,21 @@ class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):
         super(CreateFilmInPlanWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.MakeFilmProgress = CreateFilmInProgressWRK.CreateFilmInProgressWorking(parent_main)
+        self.MakeFilmProgress = CreateFilmInProgressWRK.CreateFilmInProgressWorking(parent_main, profileFilmInPlanWRK , self)
         self.makeInProgressFilmButton.clicked.connect(self.MakeFilmProgress.show)
         self.saveButton.clicked.connect(self.save)
         self.makeInProgressFilmButton.clicked.connect(self.MakeFilmProgress.set_in_plan)
 
     def set_all(self):
-        self.head.setText('Редактирование планируемого фильма')
-        self.titleEdit.setText(self.parent_profile.data[0])
-        self.planningBudgetEdit.setText(str(self.parent_profile.data[3]))
-        self.ideaEdit.setText(self.parent_profile.data[2])
-        self.themeEdit.setText(self.parent_profile.data[1])
-        self.descriptionEdit.setText(self.parent_profile.data[4])
+        if self.action == 'create':
+            self.makeInProgressFilmButton.setDisabled(True)
+        else:
+            self.head.setText('Редактирование планируемого фильма')
+            self.titleEdit.setText(self.parent_profile.data[0])
+            self.planningBudgetEdit.setText(str(self.parent_profile.data[3]))
+            self.ideaEdit.setText(self.parent_profile.data[2])
+            self.themeEdit.setText(self.parent_profile.data[1])
+            self.descriptionEdit.setText(self.parent_profile.data[4])
     def save(self):
         if self.action=='create':
             WorkingBD.add_filminplan(self.titleEdit.text(),self.descriptionEdit.toPlainText(),self.themeEdit.text(),
@@ -32,6 +35,7 @@ class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):
         else:
             WorkingBD.update_filminplan(self.titleEdit.text(),self.descriptionEdit.toPlainText(),self.themeEdit.text(),
                                     self.ideaEdit.text(),self.planningBudgetEdit.text())
-        self.parent_profile.set_all()
+        if self.action=='edit':
+            self.parent_profile.set_all()
         self.parent_main.setup_tables()
         self.hide()

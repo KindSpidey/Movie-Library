@@ -47,6 +47,10 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
             films = self.get_entered_films()
             for elem in films:
                 try:
+                    WorkingBD.add_film(elem, None, None,None, None,None, None,None,[self.nameEdit.text()])
+                except:
+                    pass
+                try:
                     WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
                 except:
                     pass
@@ -54,6 +58,7 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
                     WorkingBD.add_actor_in_consist_film(self.nameEdit.text(), elem)
                 except:
                     pass
+            self.parent_main.setup_tables()
             self.hide()
     def get_entered_films(self):
         films = self.textEdit.toPlainText().split(', ')

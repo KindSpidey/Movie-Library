@@ -37,8 +37,8 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.createFilmInProgress = CreateFilmInProgressWorking(self)
         self.progressCreate.clicked.connect(self.createFilmInProgress.show)
         self.createActor = CreateActorWRK.CreateActorWorking(self, profileActorWRK)
-        self.actorCreate.clicked.connect(self.create_action)
-        self.createPerson = CreatePersonWRK.CreatePersonWorking(self)
+        self.actorCreate.clicked.connect(self.create_action_actor)
+        self.createPerson = CreatePersonWRK.CreatePersonWorking(self, profilePersonWRK)
         self.scrnCreate.clicked.connect(self.create_screenwriter)
         self.directorCreate.clicked.connect(self.create_director)
         self.compCreate.clicked.connect(self.create_composer)
@@ -58,6 +58,12 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.scrnTable.itemDoubleClicked.connect(self.screenwriter_cell_was_clicked)
         self.actorTable.itemDoubleClicked.connect(self.actor_cell_was_clicked)
         self.actorDelete.clicked.connect(self.delete_actor)
+        self.compDelete.clicked.connect(self.delete_composer)
+        self.scrnDelete.clicked.connect(self.delete_screenwriter)
+        self.directorDelete.clicked.connect(self.delete_director)
+        self.planDelete.clicked.connect(self.delete_film_in_plan)
+        self.progressDelete.clicked.connect(self.delete_film_in_progress)
+        self.filmDelete.clicked.connect(self.delete_film)
 
 
     def delete_film_in_progress(self):
@@ -111,8 +117,19 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         except:
             pass
 
-    #def film_cell_edit(self):
-    def create_action(self):
+    def create_action_film(self):
+        self.createFilm.action = 'create'
+        self.createFilm.show()
+    def create_action_film_in_plan(self):
+        self.createFilmInPlan.action = 'create'
+        self.createFilmInPlan.show()
+    def create_action_film_in_progress(self):
+        self.createFilmInProgress.action = 'create'
+        self.createFilmInProgress.show()
+    def create_action_person(self):
+        self.createPerson.action = 'create'
+        self.createPerson.show()
+    def create_action_actor(self):
         self.createActor.action = 'create'
         self.createActor.show()
 
@@ -184,12 +201,12 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def search(self):
         search = self.ObjectName.text()
         list =[]
-        result =''
         try:
             film = WorkingBD.get_film_by_title(search)[0][0]
             self.chosen_film = film
             list.append(film)
             list.append('film')
+            self.who = 'film'
         except:
             pass
         try:
@@ -204,6 +221,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.chosen_film_in_plan = filminplan
             list.append(filminplan)
             list.append('filminplan')
+            self.who = 'filminplan'
         except:
             pass
         try:
@@ -211,6 +229,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.chosen_actor = actor
             list.append(actor)
             list.append('actor')
+            self.who = 'actor'
         except:
             pass
         try:
@@ -218,6 +237,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.chosen_director = director
             list.append(director)
             list.append('director')
+            self.who = 'director'
         except:
             pass
         try:
@@ -225,6 +245,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.chosen_screenwriter = screenwriter
             list.append(screenwriter)
             list.append('screenwriter')
+            self.who = 'screenwriter'
         except:
             pass
         try:
@@ -232,18 +253,22 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.chosen_composer = composer
             list.append(composer)
             list.append('composer')
+            self.who = 'composer'
         except:
             pass
         if len(list)==0:
             self.found.setText('Не найдено')
             return
         self.found.setText(list[0])
-        self.who = list[1]
         self.pushButton.setEnabled(True)
+        list.clear()
         self.transtition()
 
     def transtition(self):
         if self.who == 'actor':
+            self.pushButton.clicked.connect(self.ProfActor.show)
+            self.ProfActor.set_all()
+            self.ProfActor.fill_salary_actor_table()
             self.pushButton.clicked.connect(self.ProfActor.show)
         if self.who == 'person':
             self.pushButton.clicked.connect(self.ProfPerson.show)

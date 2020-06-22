@@ -50,17 +50,15 @@ class WorkingBD():
         queryFilm = '''
                 CREATE TABLE IF NOT EXISTS film(
                     id                INTEGER CONSTRAINT film_pk PRIMARY KEY AUTOINCREMENT,
-        title             TEXT    NOT NULL,
-        box_office        INT     NOT NULL,
-        budget            INT     NOT NULL,
-        rating            INT     NOT NULL,
-        year              INT     NOT NULL,
-        director_name     TEXT    REFERENCES director (name) 
-                                  NOT NULL,
-        screenwriter_name TEXT    REFERENCES screenwriter (name) 
-                                  NOT NULL,
-        composer_name     TEXT    NOT NULL
-                                  REFERENCES composer (name) 
+    id                INTEGER CONSTRAINT film_pk PRIMARY KEY AUTOINCREMENT,
+    title             TEXT,
+    box_office        INT,
+    budget            INT,
+    rating            INT,
+    year              INT,
+    director_name     TEXT    REFERENCES director (name),
+    screenwriter_name TEXT    REFERENCES screenwriter (name),
+    composer_name     TEXT    REFERENCES composer (name) 
     )
             '''
         queryAwards = '''
@@ -137,12 +135,11 @@ class WorkingBD():
 '''
         queryFilmInProgress = '''CREATE TABLE IF NOT EXISTS filminprogress (
     id           INTEGER NOT NULL
-                         PRIMARY KEY AUTOINCREMENT,
-    title        STRING  NOT NULL,
-    budget       INTEGER NOT NULL,
-    director_name     STRING  NOT NULL,
-    screenwriter_name STRING  NOT NULL,
-    composer_name     STRING  NOT NULL
+    title           STRING,
+    description     STRING,
+    theme           STRING,
+    idea            STRING,
+    planning_budget INTEGER
 );
 
 );
@@ -457,9 +454,13 @@ class WorkingBD():
     def add_actor(name, phone, email, sex, birth_year):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
+        age = 0
         if (WorkingBD.get_actor_by_name(name).__len__() != 0):
             return
-        age = 2020 - int(birth_year)
+        if birth_year!='':
+            age = 2020 - int(birth_year)
+        else:
+            age = None
         query = '''
                    INSERT INTO actor(name, phone, email, sex, birth_year,age)
                                 VALUES (?,?,?,?,?, ?)
@@ -1492,7 +1493,7 @@ class WorkingBD():
             actID = cursor.fetchall()[0][0]
             cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
             filmID = cursor.fetchall()[0][0]
-            cursor.execute(f'''UPDATE actsal SET salary = {salary!r} WHERE film_id={filmID!r} AND comp_id ={actID!r}''')
+            cursor.execute(f'''UPDATE actsal SET salary = {salary!r} WHERE film_id={filmID!r} AND act_id ={actID!r}''')
             conn.commit()
             conn.close()
             WorkingBD.update_salary('actor', actID)
@@ -1501,7 +1502,7 @@ class WorkingBD():
             actID = cursor.fetchall()[0][0]
             cursor.execute(f'''SELECT id FROM film WHERE title={film!r}''')
             filmID = cursor.fetchall()[0][0]
-            cursor.execute(f'''UPDATE scrsal SET salary = {salary!r} WHERE film_id={filmID!r} AND comp_id ={actID!r}''')
+            cursor.execute(f'''UPDATE scrsal SET salary = {salary!r} WHERE film_id={filmID!r} AND scr_id ={actID!r}''')
             conn.commit()
             conn.close()
             WorkingBD.update_salary('screenwriter', actID)
@@ -1711,4 +1712,4 @@ class WorkingBD():
 #WorkingBD.remove_film_by_title('500 Days of Summer')
 #print(WorkingBD.get_films_title_by_actor('Andrew Garfield'))
 #WorkingBD.connect_salary_and_person('Star Wars 1', 'actor', 'Andrew Garfield', 10000000)
-print(WorkingBD.get_actor_by_name_for_profile('Sally Field'))
+#print(WorkingBD.add_film('Example',None,None,None,None,None,None,None, 'Danila'))

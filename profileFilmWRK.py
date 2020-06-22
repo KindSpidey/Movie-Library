@@ -18,9 +18,9 @@ class profileFilmWorking(profileFilm.Ui_Form, QWidget):
         self.data = WorkingBD.get_film_by_title(self.parent.chosen_film)
         self.data = [list(elem) for elem in self.data]
         self.headTitle.setText(self.data[0][0])
-        self.director.setText('Режиссер: '+ self.data[0][5])
-        self.screenwriter.setText('Сценарист: ' +self.data[0][6])
-        self.composer.setText('Композитор: ' +self.data[0][7])
+        self.director.setText('Режиссер: '+ str(self.data[0][5]))
+        self.screenwriter.setText('Сценарист: ' +str(self.data[0][6]))
+        self.composer.setText('Композитор: ' +str(self.data[0][7]))
         self.year.setText('Год выхода: ' +str(self.data[0][3]))
         self.score.setText('Рейтинг: ' +str(self.data[0][2]))
         self.label_9.setText('Сборы: ' +str(self.data[0][1]))

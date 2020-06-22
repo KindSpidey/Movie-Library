@@ -12,10 +12,10 @@ class profilePersonWorking(profilePerson.Ui_Form, QWidget):
         super(profilePersonWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.CreatePerson =
+        self.CreatePerson = CreatePersonWRK.CreatePersonWorking(self)
         self.editButton.clicked.connect(self.edit_mode)
     def edit_mode(self):
-        
+        pass
     def fill_salary_table(self):
         self.moviesTable.setRowCount(0)
         length = len(self.dataPerson[1])+len(self.dataPerson[2])

@@ -414,6 +414,11 @@ class WorkingBD():
         for elem in films:
             WorkingBD.connect_film_and_actor(elem, actor)
 
+    def add_actor_in_consist_film_in_progress(actor, films):
+        WorkingBD.add_person_during_adding_film(actor, 'actor')
+        for elem in films:
+            WorkingBD.connect_film_and_actor_in_progress(elem, actor)
+
     def add_person_during_adding_film(name, who):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -543,6 +548,7 @@ class WorkingBD():
         cursor.execute(query, (title, budget, director_name, screenwriter_name, composer_name))
         conn.commit()
         for elem in actors_names:
+            WorkingBD.add_person_during_adding_film(elem, 'actor')
             WorkingBD.connect_film_and_actor_in_progress(title, elem)
         WorkingBD.add_person_during_adding_film(director_name, 'director')
         WorkingBD.add_person_during_adding_film(screenwriter_name, 'screenwriter')
@@ -1517,7 +1523,11 @@ class WorkingBD():
     def update_actor(name1, phone, email, sex, year):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
-        age = 2020 - int(year)
+        age = 0
+        if year!='':
+            age = 2020 - int(year)
+        else:
+            age = None
         query = f'''
         UPDATE actor
         SET name = ?, phone = ?,email = ?, sex =?, birth_year = ?, age =?

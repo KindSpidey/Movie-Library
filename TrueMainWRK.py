@@ -57,6 +57,59 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.compTable.itemDoubleClicked.connect(self.composer_cell_was_clicked)
         self.scrnTable.itemDoubleClicked.connect(self.screenwriter_cell_was_clicked)
         self.actorTable.itemDoubleClicked.connect(self.actor_cell_was_clicked)
+        self.actorDelete.clicked.connect(self.delete_actor)
+
+
+    def delete_film_in_progress(self):
+        try:
+            for_delete = self.film_in_progressTab.selectedItems().__getitem__(0).text()
+            WorkingBD.remove_filminprogress(for_delete)
+            self.setup_tables()
+        except:
+            pass
+    def delete_film_in_plan(self):
+        try:
+            for_delete = self.film_in_planTab.selectedItems().__getitem__(0).text()
+            WorkingBD.remove_filminplan(for_delete)
+            self.setup_tables()
+        except:
+            pass
+    def delete_film(self):
+        try:
+            for_delete = self.filmTab.selectedItems().__getitem__(0).text()
+            WorkingBD.remove_film_by_title(for_delete)
+            self.setup_tables()
+        except:
+            pass
+    def delete_screenwriter(self):
+        try:
+            for_delete = self.scrnTableTable.selectedItems().__getitem__(0).text()
+            WorkingBD.remove_screenwriter_by_name(for_delete)
+            self.setup_tables()
+        except:
+            pass
+    def delete_composer(self):
+        try:
+            for_delete = self.compTable.selectedItems().__getitem__(0).text()
+            WorkingBD.remove_composer_by_name(for_delete)
+            self.setup_tables()
+        except:
+            pass
+
+    def delete_director(self):
+        try:
+            for_delete = self.directorTable.selectedItems().__getitem__(0).text()
+            WorkingBD.remove_director_by_name(for_delete)
+            self.setup_tables()
+        except:
+            pass
+    def delete_actor(self):
+        try:
+            for_delete = self.actorTable.selectedItems().__getitem__(0).text()
+            WorkingBD.remove_actor_by_name(for_delete)
+            self.setup_tables()
+        except:
+            pass
 
     #def film_cell_edit(self):
     def create_action(self):

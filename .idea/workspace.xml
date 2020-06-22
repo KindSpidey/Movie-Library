@@ -24,6 +24,7 @@
       <change beforePath="$PROJECT_DIR$/CreateActorWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateActorWRK.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Movies.db" beforeDir="false" afterPath="$PROJECT_DIR$/Movies.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/SQL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrueMainWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/TrueMainWRK.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profilePersonWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/profilePersonWRK.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -282,6 +283,7 @@
       <workItem from="1592628765178" duration="29070000" />
       <workItem from="1592697178766" duration="30036000" />
       <workItem from="1592740033679" duration="5849000" />
+      <workItem from="1592801576351" duration="3025000" />
     </task>
     <servers />
   </component>
@@ -301,10 +303,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="22" key="#Inspections" timestamp="1584102768585">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="22" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1584102768585" />
     <state x="322" y="26" width="660" height="276" key="#Notifications" timestamp="1592227911496">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -314,14 +312,9 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="509" y="24" key="#OOP_project/0.0.1600.860@0.0.1600.860" timestamp="1592117521950" />
-    <state x="275" y="22" key="#SQL_Dialects" timestamp="1584102246634">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="22" key="#SQL_Dialects/0.0.1366.728@0.0.1366.728" timestamp="1584102246634" />
     <state x="160" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591078669113">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584102983943" />
     <state x="160" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1591078669113" />
     <state x="457" y="167" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587278861004">
       <screen x="0" y="0" width="1366" height="728" />
@@ -340,46 +333,46 @@
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587626085224" />
     <state x="542" y="141" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1592117501612" />
-    <state width="1556" height="164" key="GridCell.Tab.0.bottom" timestamp="1592746514231">
+    <state width="1556" height="164" key="GridCell.Tab.0.bottom" timestamp="1592804420164">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587643558873" />
-    <state width="1556" height="164" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1592746514231" />
-    <state width="1556" height="164" key="GridCell.Tab.0.center" timestamp="1592746514230">
+    <state width="1556" height="164" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1592804420164" />
+    <state width="1556" height="164" key="GridCell.Tab.0.center" timestamp="1592804420164">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587643558872" />
-    <state width="1556" height="164" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1592746514230" />
-    <state width="1556" height="164" key="GridCell.Tab.0.left" timestamp="1592746514230">
+    <state width="1556" height="164" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1592804420164" />
+    <state width="1556" height="164" key="GridCell.Tab.0.left" timestamp="1592804420164">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587643558871" />
-    <state width="1556" height="164" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1592746514230" />
-    <state width="1556" height="164" key="GridCell.Tab.0.right" timestamp="1592746514231">
+    <state width="1556" height="164" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1592804420164" />
+    <state width="1556" height="164" key="GridCell.Tab.0.right" timestamp="1592804420164">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587643558872" />
-    <state width="1556" height="164" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1592746514231" />
-    <state width="1556" height="252" key="GridCell.Tab.1.bottom" timestamp="1592746514220">
+    <state width="1556" height="164" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1592804420164" />
+    <state width="1556" height="252" key="GridCell.Tab.1.bottom" timestamp="1592804174111">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="252" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1592746514220" />
-    <state width="1556" height="252" key="GridCell.Tab.1.center" timestamp="1592746514219">
+    <state width="1556" height="252" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1592804174111" />
+    <state width="1556" height="252" key="GridCell.Tab.1.center" timestamp="1592804174111">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="252" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1592746514219" />
-    <state width="1556" height="252" key="GridCell.Tab.1.left" timestamp="1592746514219">
+    <state width="1556" height="252" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1592804174111" />
+    <state width="1556" height="252" key="GridCell.Tab.1.left" timestamp="1592804174110">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="252" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1592746514219" />
-    <state width="1556" height="252" key="GridCell.Tab.1.right" timestamp="1592746514220">
+    <state width="1556" height="252" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1592804174110" />
+    <state width="1556" height="252" key="GridCell.Tab.1.right" timestamp="1592804174111">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="252" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1592746514220" />
+    <state width="1556" height="252" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1592804174111" />
     <state x="239" y="7" width="978" height="708" key="SettingsEditor" timestamp="1591085845834">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -389,10 +382,6 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="579" y="254" width="326" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1366.728@0.0.1366.728" timestamp="1585137301135" />
-    <state x="263" y="19" key="com.intellij.database.dbimport.ImportDialog" timestamp="1584104511524">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="263" y="19" key="com.intellij.database.dbimport.ImportDialog/0.0.1366.728@0.0.1366.728" timestamp="1584104511524" />
     <state x="0" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1585136931024">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -445,7 +434,7 @@
     <SUITE FILE_PATH="coverage/Movie_Library$Server.coverage" NAME="Server Coverage Results" MODIFIED="1591182260522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GUI" />
     <SUITE FILE_PATH="coverage/Movie_Library$OOP_project.coverage" NAME="OOP_project Coverage Results" MODIFIED="1592744609291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$Server__1_.coverage" NAME="backend_server Coverage Results" MODIFIED="1592210712431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Movie_Library$client_main.coverage" NAME="client-main Coverage Results" MODIFIED="1592745613474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Movie_Library$client_main.coverage" NAME="client-main Coverage Results" MODIFIED="1592804420140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$TrueMain.coverage" NAME="TrueMain Coverage Results" MODIFIED="1592463994443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$ClientTest.coverage" NAME="ClientTest Coverage Results" MODIFIED="1591182263100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GUI" />
     <SUITE FILE_PATH="coverage/Movie_Library$ew.coverage" NAME="ew Coverage Results" MODIFIED="1592227792504" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

@@ -28,16 +28,37 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
         if self.action == 'edit':
             WorkingBD.update_actor(self.nameEdit.text(), self.phoneEdit.text(), self.emailEdit.text(), self.sexEdit.text(),
                                    self.birthYearEdit.text())
+            films = self.get_entered_films()
+            for elem in films:
+                try:
+                    WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+                except:
+                    pass
+                try:
+                    WorkingBD.add_actor_in_consist_film(self.nameEdit.text(), elem)
+                except:
+                    pass
             self.parent_profile.set_all()
             self.parent_profile.fill_salary_actor_table()
             self.parent_main.setup_tables()
             self.hide()
         if self.action == 'create':
             WorkingBD.add_actor(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text(), self.sexEdit.text(), self.birthYearEdit.text())
-            films = self.get_str_films()
+            films = self.get_entered_films()
             for elem in films:
-                WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+                try:
+                    WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+                except:
+                    pass
+                try:
+                    WorkingBD.add_actor_in_consist_film(self.nameEdit.text(), elem)
+                except:
+                    pass
             self.hide()
+    def get_entered_films(self):
+        films = self.textEdit.toPlainText().split(', ')
+        return films
+
     def get_str_films(self):
         actors = WorkingBD.get_films_title_by_actor(self.parent_main.chosen_actor)
         actors_str =''
@@ -50,6 +71,16 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
     def save(self):
         if self.action == 'edit':
             WorkingBD.update_actor(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text(), self.sexEdit.text(), self.birthYearEdit.text())
+            films = self.get_entered_films()
+            for elem in films:
+                try:
+                    WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+                except:
+                    pass
+                try:
+                    WorkingBD.add_actor_in_consist_film(self.nameEdit.text(), elem)
+                except:
+                    pass
     def edit_actor(self):
         actors = WorkingBD.get_films_title_by_actor(self.parent_main.chosen_actor)
         films = self.get_str_films()

@@ -2,16 +2,25 @@ from PyQt5.QtWidgets import QWidget
 import profileFilmInPlan, PyQt5
 from PyQt5.QtCore import Qt, pyqtSignal
 from SQL import WorkingBD
+from CreateFilmInPlanWRK import CreateFilmInPlanWorking
 
 class profileFilmInPlanWorking(profileFilmInPlan.Ui_Form, QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent_main):
         self.data =[]
-        self.parent = parent
+        self.parent_main = parent_main
         super(profileFilmInPlanWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
+        self.editFilmInPlan = CreateFilmInPlanWorking(parent_main,self)
+        self.edit.clicked.connect(self.edit_mode)
+
+    def edit_mode(self):
+        self.editFilmInPlan.action = 'edit'
+        self.editFilmInPlan.set_all()
+        self.editFilmInPlan.show()
+
     def set_all(self):
-        self.data = WorkingBD.get_film_in_plan(self.parent.chosen_film_in_plan)[0]
+        self.data = WorkingBD.get_film_in_plan(self.parent_main.chosen_film_in_plan)[0]
         self.headTitle.setText(self.data[0])
         self.theme.setText('Тема: ' + self.data[1])
         self.idea.setText('Замысел: ' + self.data[2])

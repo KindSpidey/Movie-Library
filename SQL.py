@@ -1649,7 +1649,7 @@ class WorkingBD():
     def update_filminplan(title, description, theme, idea, budget):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
-        query = f'''UPDATE director
+        query = f'''UPDATE filminplan
         SET title = ?,description = ?, theme = ?, idea = ?, planning_budget = ?
         WHERE title = '{title}'
         '''
@@ -1661,7 +1661,7 @@ class WorkingBD():
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
-        UPDATE film
+        UPDATE filminprogress
         SET title = ? ,budget = ?,director_name = ?, screenwriter_name = ?, composer_name = ?
         WHERE title = '{title}'
         '''

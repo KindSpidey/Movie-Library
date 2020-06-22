@@ -5,10 +5,11 @@ from SQL import WorkingBD
 
 
 class profileFilmInProgressWorking(profileFilmInProgress.Ui_Form, QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent_main, parent_in_plan):
         self.actors =[]
         self.data = []
-        self.parent = parent
+        self.parent = parent_main
+        self.parent_in_plan = parent_in_plan
         super(profileFilmInProgressWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)

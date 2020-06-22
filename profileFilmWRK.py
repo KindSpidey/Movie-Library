@@ -7,15 +7,16 @@ import sys
 
 
 class profileFilmWorking(profileFilm.Ui_Form, QWidget):
-    def __init__(self, parent):
-        self.parent = parent
+    def __init__(self, parent_main, parent_in_progress):
+        self.parent_main = parent_main
+        self.parent_in_progress = parent_in_progress
         super(profileFilmWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
         self.data = []
 
     def set_all(self):
-        self.data = WorkingBD.get_film_by_title(self.parent.chosen_film)
+        self.data = WorkingBD.get_film_by_title(self.parent_main.chosen_film)
         self.data = [list(elem) for elem in self.data]
         self.headTitle.setText(self.data[0][0])
         self.director.setText('Режиссер: '+ str(self.data[0][5]))

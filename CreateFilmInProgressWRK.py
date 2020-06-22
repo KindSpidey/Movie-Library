@@ -31,3 +31,4 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
                                self.dirEdit.text(), self.scrnEdit.text(), self.compEdit.text(), actors)
             self.parent.setup_tables()
             self.hide()
+    def set_in_plan(self):

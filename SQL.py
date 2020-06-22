@@ -1543,7 +1543,7 @@ class WorkingBD():
         cursor = conn.cursor()
         query = f'''
         UPDATE screenwriter
-        SET phone = ?,email = ?
+        SET name = ?, phone = ?,email = ?
         WHERE name = '{name1}'
         '''
         cursor.execute(query, (name1, phone, email))
@@ -1676,7 +1676,19 @@ class WorkingBD():
         cursor = conn.cursor()
         query = f'''
         UPDATE director
-        SET phone = ?,email = ?
+        SET name = ?, phone = ?,email = ?
+        WHERE name = '{name1}'
+        '''
+        cursor.execute(query, (name1, phone, email))
+        conn.commit()
+        conn.close()
+
+    def update_composer(name1, phone, email):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''
+        UPDATE composer
+        SET name = ?, phone = ?,email = ?
         WHERE name = '{name1}'
         '''
         cursor.execute(query, (name1, phone, email))

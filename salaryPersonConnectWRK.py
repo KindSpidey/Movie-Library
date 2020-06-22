@@ -68,5 +68,30 @@ class salaryPersonConnectWorking(salaryPersonConnect.Ui_Form, QWidget):
                              len(self.parent.parent_profile.dataActor[1]) + len(
                                      self.parent.parent_profile.dataActor[2])):
                 self.tableWidget.setItem(raw, 0, QTableWidgetItem(self.parent.parent_profile.dataActor[2][raw]))
-    # def set_all_persons(self):
-    # self.personName.setText(self.parent.parent_profile.)
+    def set_all_person(self):
+        self.tableWidget.setRowCount(0)
+        if self.parent.parent_main.who_is_person == 'director':
+            self.personName.setText(self.parent.parent_profile.directorInfo[0])
+        if self.parent.parent_main.who_is_person == 'composer':
+            self.personName.setText(self.parent.parent_profile.composerInfo[0])
+        if self.parent.parent_main.who_is_person == 'screenwriter':
+            self.personName.setText(self.parent.parent_profile.screenwriterInfo[0])
+        length = len(self.parent.parent_profile.dataPerson[1]) + len(self.parent.parent_profile.dataPerson[2])
+        self.tableWidget.setRowCount(length)
+        if len(self.parent.parent_profile.dataPerson[1]) != 0:
+            for raw in range(0, len(self.parent.parent_profile.dataPerson[1])):
+                for columns in range(0, self.tableWidget.columnCount()):
+                    a = str(self.parent.parent_profile.dataPerson[1][raw][columns])
+                    self.tableWidget.setItem(raw, columns, QTableWidgetItem(a))
+            for raw in range(len(self.parent.parent_profile.dataPerson[1]),
+                             len(self.parent.parent_profile.dataPerson[1]) + len(
+                                 self.parent.parent_profile.dataPerson[2])):
+                self.tableWidget.setItem(raw, 0, QTableWidgetItem(
+                    self.parent.parent_profile.dataPerson[2][raw - len(self.parent.parent_profile.dataPerson[1])]))
+        else:
+            for raw in range(len(self.parent.parent_profile.dataPerson[1]),
+                             len(self.parent.parent_profile.dataPerson[1]) + len(
+                                 self.parent.parent_profile.dataPerson[2])):
+                self.tableWidget.setItem(raw, 0, QTableWidgetItem(self.parent.parent_profile.dataPerson[2][raw]))
+
+

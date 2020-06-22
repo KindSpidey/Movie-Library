@@ -9,6 +9,9 @@ class profilePersonWorking(profilePerson.Ui_Form, QWidget):
     def __init__(self, parent):
         self.dataPerson = []
         self.parent = parent
+        self.directorInfo = ''
+        self.screenwriterInfo = ''
+        self.composerInfo = ''
         super(profilePersonWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
@@ -36,22 +39,22 @@ class profilePersonWorking(profilePerson.Ui_Form, QWidget):
     def set_all(self):
         if self.parent.who_is_person == 'director':
             self.dataPerson = WorkingBD.get_director_by_name(self.parent.chosen_director)
-            directorInfo = self.dataPerson[0]
-            self.nameHead.setText(directorInfo[0])
-            self.averageSalary.setText('Средняя зарплата: '+str(directorInfo[1]))
-            self.phone.setText('Телефон: '+str(directorInfo[2]))
-            self.email.setText('email: '+str(directorInfo[3]))
+            self.directorInfo = self.dataPerson[0]
+            self.nameHead.setText(self.directorInfo[0])
+            self.averageSalary.setText('Средняя зарплата: '+str(self.directorInfo[1]))
+            self.phone.setText('Телефон: '+str(self.directorInfo[2]))
+            self.email.setText('email: '+str(self.directorInfo[3]))
         if self.parent.who_is_person == 'screenwriter':
             self.dataPerson = WorkingBD.get_screenwriter_by_name(self.parent.chosen_screenwriter)
-            screenwriterInfo = self.dataPerson[0]
-            self.nameHead.setText(screenwriterInfo[0])
-            self.averageSalary.setText('Средняя зарплата: ' + str(screenwriterInfo[1]))
-            self.phone.setText('Телефон: ' + str(screenwriterInfo[2]))
-            self.email.setText('email: ' + str(screenwriterInfo[3]))
+            self.screenwriterInfo = self.dataPerson[0]
+            self.nameHead.setText(self.screenwriterInfo[0])
+            self.averageSalary.setText('Средняя зарплата: ' + str(self.screenwriterInfo[1]))
+            self.phone.setText('Телефон: ' + str(self.screenwriterInfo[2]))
+            self.email.setText('email: ' + str(self.screenwriterInfo[3]))
         if self.parent.who_is_person == 'composer':
             self.dataPerson = WorkingBD.get_composer_by_name(self.parent.chosen_composer)
-            composerInfo = self.dataPerson[0]
-            self.nameHead.setText(composerInfo[0])
-            self.averageSalary.setText('Средняя зарплата: ' + str(composerInfo[1]))
-            self.phone.setText('Телефон: ' + str(composerInfo[2]))
-            self.email.setText('email: ' + str(composerInfo[3]))
+            self.composerInfo = self.dataPerson[0]
+            self.nameHead.setText(self.composerInfo[0])
+            self.averageSalary.setText('Средняя зарплата: ' + str(self.composerInfo[1]))
+            self.phone.setText('Телефон: ' + str(self.composerInfo[2]))
+            self.email.setText('email: ' + str(self.composerInfo[3]))

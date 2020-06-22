@@ -635,7 +635,10 @@ class WorkingBD():
         a = WorkingBD.get_salary_by_person('actor', name1)
         all_rows.append(a)
         a = WorkingBD.get_films_title_by_actor(name1)
+        b = WorkingBD.get_films_in_progress_by_actor(name1)
         other_films = []
+        for elem in b:
+            other_films.append(elem)
         if len(all_rows[1]) == 0:
             for elem in a:
                 other_films.append(elem)
@@ -824,7 +827,50 @@ class WorkingBD():
         conn.commit()
         conn.close()
         return result
-
+    def get_films_in_progress_title_by_actor(name1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''SELECT id
+                FROM actor
+                WHERE name = {name1!r}
+            '''
+        idact = cursor.execute(query).fetchall()[0][0]
+        query = f'''SELECT film_in_progress_id
+                    FROM actfilminprogress
+                    WHERE act_id = {idact!r}'''
+        id_films = cursor.execute(query).fetchall()
+        list = []
+        for elem in id_films:
+            list.append(elem[0])
+        result = []
+        for elem in list:
+            s = WorkingBD.get_film_in_progress_title_by_id(elem)[0]
+            result += s
+        conn.commit()
+        conn.close()
+        return result
+    def get_films_in_progress_title_by_actor(name1):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        query = f'''SELECT id
+                FROM actor
+                WHERE name = {name1!r}
+            '''
+        idact = cursor.execute(query).fetchall()[0][0]
+        query = f'''SELECT film_in_progress_id
+                    FROM actfilminprogress
+                    WHERE act_id = {idact!r}'''
+        id_films = cursor.execute(query).fetchall()
+        list = []
+        for elem in id_films:
+            list.append(elem[0])
+        result = []
+        for elem in list:
+            s = WorkingBD.get_film_in_progress_title_by_id(elem)[0]
+            result += s
+        conn.commit()
+        conn.close()
+        return result
     def get_films_title_by_actor(name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -1607,6 +1653,8 @@ class WorkingBD():
     def get_all_actors(self):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
+        real =[]
+        in_progress =[]
         query = '''SELECT * FROM actor'''
         cursor.execute(query)
         all_rows = cursor.fetchall()
@@ -1615,8 +1663,20 @@ class WorkingBD():
             elem.remove(elem[5])
         list_actors = []
         for elem in all_rows:
-            list_actors.append(WorkingBD.get_films_title_by_actor(elem[1]))
-
+            try:
+                real = WorkingBD.get_films_title_by_actor(elem[1])
+            except:
+                pass
+            try:
+                in_progress = WorkingBD.get_films_in_progress_title_by_actor(elem[1])
+            except:
+                pass
+            if len(real)==0 and len(in_progress)==0:
+                list_actors.append([])
+            elif len(real)!=0 and len(in_progress)==0:
+                list_actors.append(real)
+            else:
+                list_actors.append(in_progress)
         for i in range(0, len(all_rows)):
             all_rows[i].append(list_actors[i])
         conn.close()
@@ -1734,3 +1794,4 @@ class WorkingBD():
 #print(WorkingBD.get_films_title_by_actor('Andrew Garfield'))
 #WorkingBD.connect_salary_and_person('Star Wars 1', 'actor', 'Andrew Garfield', 10000000)
 #print(WorkingBD.add_film('Example',None,None,None,None,None,None,None, 'Danila'))
+print(WorkingBD.get_films_in_progress_title_by_actor('Мамоа'))

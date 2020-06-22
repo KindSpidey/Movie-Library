@@ -23,7 +23,7 @@ class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):
             self.makeInProgressFilmButton.setDisabled(True)
         else:
             self.head.setText('Редактирование планируемого фильма')
-            self.titleEdit.setText(self.parent_profile.data[0])
+            self.titleEdit.setText(str(self.parent_profile.data[0]))
             self.planningBudgetEdit.setText(str(self.parent_profile.data[3]))
             self.ideaEdit.setText(self.parent_profile.data[2])
             self.themeEdit.setText(self.parent_profile.data[1])

@@ -8,15 +8,16 @@ from SQL import WorkingBD
 class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
     def __init__(self,parent_main, parent_profile, parent_in_plan):
         self.action = ''
+        self.actors = ''
         self.parent_main = parent_main
         self.parent_profile = parent_profile
         self.parent_in_plan = parent_in_plan
         super(CreateFilmInProgressWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.MakeFilmDone = CreateFilmWRK.CreateFilmWorking(self.parent_main, self)
+        self.MakeFilmDone = CreateFilmWRK.CreateFilmWorking(parent_main, self)
         self.saveButton.clicked.connect(self.save)
-        self.makeDoneMovieButton.clicked.connect(CreateFilmWRK.CreateFilmWorking(self.parent_main,self).show) #сделать установку текста текущего фильма в следующем окне
+        self.makeDoneMovieButton.clicked.connect(self.MakeFilmDone.set_in_progress)
 
     def save(self):
         msg = QMessageBox()
@@ -70,3 +71,27 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
         self.makeDoneMovieButton.setDisabled(True)
         self.titleEdit.setText(self.parent_in_plan.titleEdit.text())
         self.budgetEdit.setText(self.parent_in_plan.planningBudgetEdit.text())
+
+    def set_all(self):
+        if self.action == 'edit':
+            self.titleEdit.setText(self.parent_profile.data[0])
+            self.budgetEdit.setText(str(self.parent_profile.data[1]))
+            self.dirEdit.setText(self.parent_profile.data[2])
+            self.scrnEdit.setText(self.parent_profile.data[3])
+            self.compEdit.setText(self.parent_profile.data[4])
+            self.actors = self.get_str_actors()
+            self.actorsEdit.setText(self.actors)
+
+    def get_entered_actors(self):
+        actors = self.textEdit.toPlainText().split(', ')
+        return actors
+
+    def get_str_actors(self):
+        actors = WorkingBD.get_actors_by_filminprogress(self.parent_profile.data[0])
+        actors_str =''
+        for elem in actors:
+            if elem!=actors[len(actors)-1]:
+                actors_str+=str(elem) + ', '
+            else:
+                actors_str+=str(elem)
+        return actors_str

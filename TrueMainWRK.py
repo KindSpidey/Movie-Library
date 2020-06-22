@@ -35,7 +35,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.createFilmInPlan = CreateFilmInPlanWorking(self, profileFilmInPlanWRK)
         self.planCreate.clicked.connect(self.plan_create)
         self.createFilmInProgress = CreateFilmInProgressWorking(self, profileFilmInProgressWRK,profileFilmInPlanWRK)
-        self.progressCreate.clicked.connect(self.createFilmInProgress.show)
+        self.progressCreate.clicked.connect(self.progress_create)
         self.createActor = CreateActorWRK.CreateActorWorking(self, profileActorWRK)
         self.actorCreate.clicked.connect(self.create_action_actor)
         self.createPerson = CreatePersonWRK.CreatePersonWorking(self, profilePersonWRK)
@@ -64,7 +64,10 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.planDelete.clicked.connect(self.delete_film_in_plan)
         self.progressDelete.clicked.connect(self.delete_film_in_progress)
         self.filmDelete.clicked.connect(self.delete_film)
-
+    def progress_create(self):
+        self.createFilmInProgress.action ='create'
+        self.createFilmInProgress.set_all()
+        self.createFilmInProgress.show()
     def plan_create(self):
         self.createFilmInPlan.action = 'create'
         self.createFilmInPlan.set_all()

@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 import profileFilmInProgress, PyQt5
 from PyQt5.QtCore import Qt, pyqtSignal
 from SQL import WorkingBD
+from CreateFilmInProgressWRK import CreateFilmInProgressWorking
 
 
 class profileFilmInProgressWorking(profileFilmInProgress.Ui_Form, QWidget):
@@ -13,7 +14,12 @@ class profileFilmInProgressWorking(profileFilmInProgress.Ui_Form, QWidget):
         super(profileFilmInProgressWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-
+        self.editFilmInProgress = CreateFilmInProgressWorking(parent_main, self, parent_in_plan)
+        self.editButton.clicked.connect(self.edit_mode)
+    def edit_mode(self):
+        self.editFilmInProgress.action = 'edit'
+        self.editFilmInProgress.set_all()
+        self.editFilmInProgress.show()
     def set_all(self):
         self.data = WorkingBD.get_film_in_progress_by_title(self.parent.chosen_film_in_progress)
         self.data = [list(elem) for elem in self.data]

@@ -1349,6 +1349,15 @@ class WorkingBD():
         conn.commit()
         conn.close()
 
+    def remove_connection_by_film_in_progress(title):
+        conn = sqlite3.connect('Movies.db')
+        cursor = conn.cursor()
+        cursor.execute(f'''SELECT id FROM filminprogress WHERE title ="{title}"''')
+        act_id = cursor.fetchall()[0][0]
+        cursor.execute(f'''DELETE FROM actfilminprogress WHERE film_in_progress_id ="{act_id!r}"''')
+        conn.commit()
+        conn.close()
+
     def remove_connection_by_actor(name1):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
@@ -1419,6 +1428,7 @@ class WorkingBD():
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         for elem in title1:
+            WorkingBD.remove_connection_by_film_in_progress(elem)
             query = f'''
                         DELETE FROM filminprogress WHERE title = "{elem}"
                     '''

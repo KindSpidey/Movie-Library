@@ -3,6 +3,7 @@ import profileFilm
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QTableWidgetItem
 from SQL import WorkingBD
+from CreateFilmWRK import CreateFilmWorking
 import sys
 
 
@@ -14,7 +15,13 @@ class profileFilmWorking(profileFilm.Ui_Form, QWidget):
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
         self.data = []
+        self.editFilm = CreateFilmWorking(parent_main,parent_in_progress,self)
+        self.pushButton.clicked.connect(self.edit_mode)
 
+    def edit_mode(self):
+        self.editFilm.action= 'edit'
+        self.editFilm.set_all()
+        self.editFilm.show()
     def set_all(self):
         self.data = WorkingBD.get_film_by_title(self.parent_main.chosen_film)
         self.data = [list(elem) for elem in self.data]

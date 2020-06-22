@@ -30,7 +30,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         super(TrueMainWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.createFilm = CreateFilmWorking(self, None)
+        self.createFilm = CreateFilmWorking(self, CreateFilmInProgressWorking, profileFilmWRK)
         self.filmCreate.clicked.connect(self.createFilm.show)
         self.createFilmInPlan = CreateFilmInPlanWorking(self, profileFilmInPlanWRK)
         self.planCreate.clicked.connect(self.plan_create)

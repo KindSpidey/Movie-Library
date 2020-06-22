@@ -1563,15 +1563,15 @@ class WorkingBD():
             conn.close()
             WorkingBD.update_salary('screenwriter', actID)
 
-    def update_film(name, box_office, rating, budget, director_name, screenwriter_name, composer_name, actors):
+    def update_film(name, box_office, rating, budget, year, director_name, screenwriter_name, composer_name, actors):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
         query = f'''
         UPDATE film
-        SET title = ?, box_office = ?, rating = ? ,budget = ?,director_name = ?, screenwriter_name = ?, composer_name = ?
+        SET title = ?, box_office = ?, rating = ? ,budget = ?, year = ? ,director_name = ?, screenwriter_name = ?, composer_name = ?
         WHERE title = '{name}'
         '''
-        cursor.execute(query, (name, box_office, rating, budget, director_name, screenwriter_name, composer_name))
+        cursor.execute(query, (name, box_office, rating, budget, year, director_name, screenwriter_name, composer_name))
         for actor in actors:
             WorkingBD.connect_film_and_actor(name, actor)
         conn.commit()

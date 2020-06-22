@@ -195,6 +195,7 @@ class Ui_Form(object):
         self.header2.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         self.header2.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         self.header2.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+        self.header2.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         item = QtWidgets.QTableWidgetItem()
         self.film_in_progressTab.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()

@@ -15,7 +15,7 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
         super(CreateFilmInProgressWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.MakeFilmDone = CreateFilmWRK.CreateFilmWorking(parent_main, self)
+        self.MakeFilmDone = CreateFilmWRK.CreateFilmWorking(parent_main, self, None)
         self.saveButton.clicked.connect(self.save)
         self.makeDoneMovieButton.clicked.connect(self.MakeFilmDone.set_in_progress)
 

@@ -1,6 +1,6 @@
 import sqlite3
 import subprocess as sp
-
+import json
 
 class WorkingBD():
     def create_table(self):
@@ -1794,4 +1794,13 @@ class WorkingBD():
 #print(WorkingBD.get_films_title_by_actor('Andrew Garfield'))
 #WorkingBD.connect_salary_and_person('Star Wars 1', 'actor', 'Andrew Garfield', 10000000)
 #print(WorkingBD.add_film('Example',None,None,None,None,None,None,None, 'Danila'))
-print(WorkingBD.get_films_in_progress_title_by_actor('Мамоа'))
+#a = ['Andrew Garfield','89157213979','garfield','male','1986']
+#a = '"]Andrew Garfield','89157213979','garfield','male','1986']WorkingBD.add_actor]\r\n\r\n"'
+fontf = 'The fountainhead, goog, rork, what?, 313131]WorkingBD.add_filminplan\r\n\r\n'
+fontf = fontf[:-len('\r\n\r\n')]
+fontf = fontf.split(']')
+args = fontf[0].split(',')
+if fontf[1]=='WorkingBD.add_filminplan':
+    WorkingBD.add_filminplan(args[0], args[1], args[2], args[3], args[4] )
+print(fontf)
+#WorkingBD.add_filminplan()

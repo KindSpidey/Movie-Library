@@ -46,6 +46,7 @@ class Server(Thread):
         socket.listen()
 
         while True:
+            print('sd')
             try:
                 connection, clientAddress = socket.accept()
             except OSError:

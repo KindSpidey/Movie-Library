@@ -9,4 +9,4 @@ dataClosingSequence = b"\r\n\r\n"
 encoding = "utf-8"
 
 if __name__ == '__main__':
-    Server.startServer()
+    Server.startServer(Server)

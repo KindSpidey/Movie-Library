@@ -529,6 +529,8 @@ class WorkingBD():
     def add_filminplan(title, description, theme, idea, budget):
         conn = sqlite3.connect('Movies.db')
         cursor = conn.cursor()
+        if len(WorkingBD.get_film_in_plan(title))!=0:
+            return
         query = '''
                 INSERT INTO filminplan(title, description, theme, idea, planning_budget)
                             VALUES (?,?,?,?,?)
@@ -1796,11 +1798,3 @@ class WorkingBD():
 #print(WorkingBD.add_film('Example',None,None,None,None,None,None,None, 'Danila'))
 #a = ['Andrew Garfield','89157213979','garfield','male','1986']
 #a = '"]Andrew Garfield','89157213979','garfield','male','1986']WorkingBD.add_actor]\r\n\r\n"'
-fontf = 'The fountainhead, goog, rork, what?, 313131]WorkingBD.add_filminplan\r\n\r\n'
-fontf = fontf[:-len('\r\n\r\n')]
-fontf = fontf.split(']')
-args = fontf[0].split(',')
-if fontf[1]=='WorkingBD.add_filminplan':
-    WorkingBD.add_filminplan(args[0], args[1], args[2], args[3], args[4] )
-print(fontf)
-#WorkingBD.add_filminplan()

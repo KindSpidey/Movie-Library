@@ -35,3 +35,5 @@ class ServerBackHandler(Thread):
         if responseData[1] == 'WorkingBD.add_filminplan':
             WorkingBD.add_filminplan(args[0], args[1], args[2], args[3], args[4])
 
+    def send_data(self, data):
+        self.socket.sendall(data)

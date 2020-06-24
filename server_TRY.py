@@ -1,21 +1,41 @@
 import socket, threading
 from SQL import WorkingBD
+dataClosingSequence = b"\r\n\r\n"
+encoding = 'utf-8'
+dataPackageSize = 1024
+
+
 class ClientThread(threading.Thread):
-    def __init__(self,clientAddress,clientsocket):
+    def __init__(self, clientAddress, clientsocket):
         threading.Thread.__init__(self)
         self.csocket = clientsocket
-        print ("New connection added: ", clientAddress)
+        print("New connection added: ", clientAddress)
+
     def run(self):
-        print ("Connection from : ", clientAddress)
-        msg = ''
+        print("Connection from : ", clientAddress)
+        dataParts =[]
+        data = ''
         while True:
-            data = self.csocket.recv(1024)
-            msg = data.decode()
-            if not data:
-              break
-            print ("from client", msg)
-            self.csocket.sendall(bytes(msg,'UTF-8'))
-        print ("Client at ", clientAddress , " disconnected...")
+            try:
+                dataBytes = self.csocket.recv(dataPackageSize)
+            except:
+                break
+            if not dataBytes:
+                break
+            dataParts.append(dataBytes.decode(encoding))
+            if not dataBytes.endswith(dataClosingSequence):
+                continue
+            data = "".join(dataParts)[:-len(dataClosingSequence)]
+            self.handle_data(data)
+            dataParts.clear()
+        print("Client at ", clientAddress, " disconnected...")
+
+    def handle_data(self, data):
+        data = data.split(']')
+        args = data[0].split(', ')
+        if data[1] == 'WorkingBD.add_filminplan':
+            WorkingBD.add_filminplan(args[0], args[1], args[2], args[3], args[4])
+            self.csocket.sendall('Done'.encode(encoding)+dataClosingSequence)
 
 LOCALHOST = "localhost"
 PORT = 8080

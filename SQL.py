@@ -988,7 +988,7 @@ class WorkingBD():
         cursor.execute(query)
         a = cursor.fetchall()
         if len(a)==0:
-            return a
+            return 'incorrect password!'
         else:
             a = a[0][0]
         conn.commit()

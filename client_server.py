@@ -10,6 +10,7 @@ dataPackageSize = 1024
 class ClientServer(Thread):
     def __init__(self):
         super().__init__()
+        self.answer = 'incorrect password'
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((SERVER, PORT))
         self.client_listen_thread = Thread(target=self.getDataPackage)
@@ -32,15 +33,13 @@ class ClientServer(Thread):
             self.handle_data(data)
             dataParts.clear()
 
-
     def handle_data(self, data):
-        print(data)
-
+        self.answer = data
     def stop(self):
         self.client.close()
     def send(self, data):
-        self.client.sendall(data)
+        self.client.sendall(data.encode(encoding)+dataClosingSequence)
 
 
-a = ClientServer()
-a.send(b'Altas 2, Rork, good idea, good theme, wtf]WorkingBD.add_filminplan\r\n\r\n')
+#a = ClientServer()
+#a.send('Daniil Pugavko]WorkingBD.get_password')

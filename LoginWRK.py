@@ -1,12 +1,11 @@
-import sys, socket
+import sys, socket, time
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
-from backend_server import Server
-import TrueMainWRK#, client_server
-from SQL import WorkingBD
+import TrueMainWRK
 
 class LoginForm(QWidget):
-	def __init__(self):
+	def __init__(self, parent_server):
 		super().__init__()
+		self.server = parent_server
 		self.MainWindow = TrueMainWRK.TrueMainWorking()
 		self.setWindowTitle('Login Form')
 		self.resize(500, 120)
@@ -33,19 +32,11 @@ class LoginForm(QWidget):
 		self.setLayout(layout)
 
 	def check_password(self):
-		sock = socket.socket()
-		#sock.connect('localhost', 53210)
 		msg = QMessageBox()
-		#sock.send(self.lineEdit_username.text())
-		#sock.send(self.lineEdit_password.text())
-		#data = sock.recv(1024)
-		#print(data)
-		password = WorkingBD.get_password(self.lineEdit_username.text())
-		s = self.lineEdit_password.text()
-		#clServ = client_server.ClientServer()
-		#clServ.send_data(s)
-		#a = clServ.receive_data().decode('utf-8')
-		if self.lineEdit_password.text() == password:
+		self.server.send(self.lineEdit_username.text()+']WorkingBD.get_password')
+		time.sleep(0.05)
+		if self.lineEdit_password.text() == self.server.answer:
+			print(self.server.answer)
 			self.MainWindow.show()
 			self.hide()
 		else:

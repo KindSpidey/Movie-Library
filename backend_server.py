@@ -1,6 +1,7 @@
 import socket, threading
 from SQL import WorkingBD
 dataClosingSequence = b"\r\n\r\n"
+dataClosingSequenceStr = "\r\n\r\n"
 encoding = 'utf-8'
 dataPackageSize = 1024
 
@@ -35,7 +36,12 @@ class ClientThread(threading.Thread):
         args = data[0].split(', ')
         if data[1] == 'WorkingBD.add_filminplan':
             WorkingBD.add_filminplan(args[0], args[1], args[2], args[3], args[4])
-            self.csocket.sendall('Done'.encode(encoding)+dataClosingSequence)
+        if data[1]== 'WorkingBD.get_password':
+            answer = WorkingBD.get_password(args[0])
+            self.send_data(str(answer))
+
+    def send_data(self, data):
+        self.csocket.sendall(data.encode(encoding)+dataClosingSequence)
 
 LOCALHOST = "localhost"
 PORT = 8080

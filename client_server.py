@@ -38,6 +38,7 @@ class ClientServer(Thread):
     def stop(self):
         self.client.close()
     def send(self, data):
+        data = data
         self.client.sendall(data.encode(encoding)+dataClosingSequence)
 
 

@@ -1,3 +1,4 @@
+import time
 from SQL import WorkingBD
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
@@ -15,7 +16,8 @@ from CreateFilmWRK import CreateFilmWorking
 
 
 class TrueMainWorking(TrueMain.Ui_Form, QWidget):
-    def __init__(self):
+    def __init__(self, server):
+        self.client_server = server
         self.who_is_person =''
         self.chosen_actor = ''
         self.chosen_director =''
@@ -75,35 +77,40 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def delete_film_in_progress(self):
         try:
             for_delete = self.film_in_progressTab.selectedItems().__getitem__(0).text()
-            WorkingBD.remove_filminprogress(for_delete)
+            self.client_server.send(for_delete+']WorkingBD.remove_filminprogress')
+            time.sleep(0.02)
             self.setup_tables()
         except:
             pass
     def delete_film_in_plan(self):
         try:
             for_delete = self.film_in_planTab.selectedItems().__getitem__(0).text()
-            WorkingBD.remove_filminplan(for_delete)
+            self.client_server.send(for_delete+']WorkingBD.remove_filminplan')
+            time.sleep(0.02)
             self.setup_tables()
         except:
             pass
     def delete_film(self):
         try:
             for_delete = self.filmTab.selectedItems().__getitem__(0).text()
-            WorkingBD.remove_film_by_title(for_delete)
+            self.client_server.send(for_delete + ']WorkingBD.remove_film_by_title')
+            time.sleep(0.01)
             self.setup_tables()
         except:
             pass
     def delete_screenwriter(self):
         try:
             for_delete = self.scrnTableTable.selectedItems().__getitem__(0).text()
-            WorkingBD.remove_screenwriter_by_name(for_delete)
+            self.client_server.send(for_delete +']WorkingBD.remove_screenwriter_by_name')
+            time.sleep(0.01)
             self.setup_tables()
         except:
             pass
     def delete_composer(self):
         try:
             for_delete = self.compTable.selectedItems().__getitem__(0).text()
-            WorkingBD.remove_composer_by_name(for_delete)
+            self.client_server.send(for_delete +']WorkingBD.remove_composer_by_name')
+            time.sleep(0.01)
             self.setup_tables()
         except:
             pass
@@ -111,14 +118,16 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def delete_director(self):
         try:
             for_delete = self.directorTable.selectedItems().__getitem__(0).text()
-            WorkingBD.remove_director_by_name(for_delete)
+            self.client_server.send(for_delete + ']WorkingBD.remove_director_by_name')
+            time.sleep(0.01)
             self.setup_tables()
         except:
             pass
     def delete_actor(self):
         try:
             for_delete = self.actorTable.selectedItems().__getitem__(0).text()
-            WorkingBD.remove_actor_by_name(for_delete)
+            self.client_server.send(for_delete + ']WorkingBD.remove_actor_by_name')
+            time.sleep(0.01)
             self.setup_tables()
         except:
             pass
@@ -140,7 +149,6 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.createActor.show()
 
     def actor_cell_was_clicked(self):
-        #self.who_is_person = 'actor'
         self.chosen_actor = self.actorTable.selectedItems().__getitem__(0).text()
         self.ProfActor.set_all()
         self.ProfActor.fill_salary_actor_table()
@@ -208,7 +216,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         search = self.ObjectName.text()
         list =[]
         try:
-            film = WorkingBD.get_film_by_title(search)[0][0]
+            self.client_server.send(search+']WorkingBD.get_film_by_title')
+            time.sleep(0.05)
+            film = self.client_server.answer
             self.chosen_film = film
             list.append(film)
             list.append('film')
@@ -216,14 +226,19 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         except:
             pass
         try:
-            filminprogress = WorkingBD.get_film_in_progress_by_title(search)[0][0]
+            self.client_server.send(search + ']WorkingBD.get_film_in_progress_by_title')
+            time.sleep(0.01)
+            filminprogress = self.client_server.answer
             self.chosen_film_in_progress = filminprogress
             list.append(filminprogress)
             list.append('filminprogress')
         except:
             pass
         try:
-            filminplan = WorkingBD.get_film_in_plan(search)[0][0]
+            self.client_server.send(search + ']WorkingBD.get_film_in_plan')
+            time.sleep(0.01)
+            filminplan = self.client_server.answer
+            self.chosen_film = filminplan
             self.chosen_film_in_plan = filminplan
             list.append(filminplan)
             list.append('filminplan')

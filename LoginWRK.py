@@ -6,7 +6,7 @@ class LoginForm(QWidget):
 	def __init__(self, parent_server):
 		super().__init__()
 		self.server = parent_server
-		self.MainWindow = TrueMainWRK.TrueMainWorking()
+		self.MainWindow = TrueMainWRK.TrueMainWorking(self.server)
 		self.setWindowTitle('Login Form')
 		self.resize(500, 120)
 
@@ -34,7 +34,7 @@ class LoginForm(QWidget):
 	def check_password(self):
 		msg = QMessageBox()
 		self.server.send(self.lineEdit_username.text()+']WorkingBD.get_password')
-		time.sleep(0.05)
+		time.sleep(0.01)
 		if self.lineEdit_password.text() == self.server.answer:
 			print(self.server.answer)
 			self.MainWindow.show()

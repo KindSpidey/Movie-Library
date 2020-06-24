@@ -1,7 +1,6 @@
-from PyQt5.QtCore import Qt, pyqtSignal
+
 from PyQt5.QtWidgets import QWidget, QApplication
-import sys#, client_server
-from TrueMainWRK import TrueMainWorking
+import sys, client_server
 from LoginWRK import LoginForm
 from client_server import ClientServer
 

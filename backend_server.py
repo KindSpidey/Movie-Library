@@ -54,13 +54,19 @@ class ClientThread(threading.Thread):
         if data[1] == 'WorkingBD.remove_actor_by_name':
             WorkingBD.remove_actor_by_name(args[0])
         if data[1] == 'WorkingBD.get_film_by_title':
-            answer = WorkingBD.get_film_by_title(args[0])[0][0]
+            answer = WorkingBD.get_film_by_title(args[0])
+            if len(answer)!=0:
+                answer = answer[0][0]
             self.send_data(str(answer))
         if data[1] == 'WorkingBD.get_film_in_progress_by_title':
-            answer = WorkingBD.get_film_in_progress_by_title(args[0])[0][0]
+            answer = WorkingBD.get_film_in_progress_by_title(args[0])
+            if len(answer)!=0:
+                answer = answer[0][0]
             self.send_data(str(answer))
         if data[1] == 'WorkingBD.get_film_in_plan':
-            answer = WorkingBD.get_film_in_plan(args[0])[0][0]
+            answer = WorkingBD.get_film_in_plan(args[0])
+            if len(answer)!=0:
+                answer = answer[0][0]
             self.send_data(str(answer))
 
 

@@ -23,6 +23,7 @@ class profileFilmWorking(profileFilm.Ui_Form, QWidget):
         self.editFilm.set_all()
         self.editFilm.show()
     def set_all(self):
+        a = WorkingBD.get_film_by_title(self.parent_main.chosen_film)
         self.data = WorkingBD.get_film_by_title(self.parent_main.chosen_film)
         self.data = [list(elem) for elem in self.data]
         self.headTitle.setText(self.data[0][0])

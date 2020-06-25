@@ -227,18 +227,14 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             pass
         try:
             self.client_server.send(search + ']WorkingBD.get_film_in_progress_by_title')
-            time.sleep(0.01)
-            filminprogress = self.client_server.answer
+            filminprogress = WorkingBD.get_film_in_progress_by_title(search)[0][0]
             self.chosen_film_in_progress = filminprogress
             list.append(filminprogress)
             list.append('filminprogress')
         except:
             pass
         try:
-            self.client_server.send(search + ']WorkingBD.get_film_in_plan')
-            time.sleep(0.01)
-            filminplan = self.client_server.answer
-            self.chosen_film = filminplan
+            filminplan = WorkingBD.get_film_in_plan(search)[0][0]
             self.chosen_film_in_plan = filminplan
             list.append(filminplan)
             list.append('filminplan')

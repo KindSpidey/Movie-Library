@@ -34,7 +34,7 @@ class LoginForm(QWidget):
 	def check_password(self):
 		msg = QMessageBox()
 		self.server.send(self.lineEdit_username.text()+']WorkingBD.get_password')
-		time.sleep(0.01)
+		time.sleep(0.03)
 		if self.lineEdit_password.text() == self.server.answer:
 			print(self.server.answer)
 			self.MainWindow.show()

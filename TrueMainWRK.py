@@ -1,5 +1,4 @@
-import time
-from SQL import WorkingBD
+import time, json
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 import CreateActorWRK
@@ -334,7 +333,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def fill_film_table(self):
         self.filmTab.setRowCount(0)
         actors_str =''
-        films = WorkingBD.get_all_films(WorkingBD())
+        self.client_server.send(']WorkingBD.get_all_films')
+        time.sleep(0.1)
+        films = json.loads(self.client_server.answer)
         self.filmTab.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0,self.filmTab.columnCount()):
@@ -353,7 +354,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def fill_film_in_progress(self):
         self.film_in_progressTab.setRowCount(0)
         actors_str = ''
-        films = WorkingBD.get_all_films_in_progress(WorkingBD())
+        self.client_server.send(']WorkingBD.get_all_films_in_progress')
+        time.sleep(0.1)
+        films = json.loads(self.client_server.answer)
         self.film_in_progressTab.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0, self.film_in_progressTab.columnCount()):
@@ -371,7 +374,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
                     actors_str = ''
     def fill_film_in_plan_table(self):
         self.film_in_planTab.setRowCount(0)
-        films = WorkingBD.get_all_films_in_plan(WorkingBD())
+        self.client_server.send(']WorkingBD.get_all_films_in_plan')
+        time.sleep(0.1)
+        films = json.loads(self.client_server.answer)
         self.film_in_planTab.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0, self.film_in_planTab.columnCount()):
@@ -380,7 +385,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def fill_actors(self):
         self.actorTable.setRowCount(0)
         actors_str = ''
-        films = WorkingBD.get_all_actors(WorkingBD())
+        self.client_server.send(']WorkingBD.get_all_actors')
+        time.sleep(0.2)
+        films = json.loads(self.client_server.answer)
         self.actorTable.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0, self.actorTable.columnCount()):
@@ -399,7 +406,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def fill_directors(self):
         self.directorTable.setRowCount(0)
         actors_str = ''
-        films = WorkingBD.get_all_person(WorkingBD(),'director')
+        self.client_server.send(']WorkingBD.get_all_persondirector')
+        time.sleep(0.1)
+        films = json.loads(self.client_server.answer)
         self.directorTable.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0, self.directorTable.columnCount()):
@@ -418,7 +427,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def fill_composers(self):
         self.compTable.setRowCount(0)
         actors_str = ''
-        films = WorkingBD.get_all_person(WorkingBD(),'composer')
+        self.client_server.send(']WorkingBD.get_all_personcomposer')
+        time.sleep(0.1)
+        films = json.loads(self.client_server.answer)
         self.compTable.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0, self.compTable.columnCount()):
@@ -437,7 +448,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
     def fill_screenwriters(self):
         self.scrnTable.setRowCount(0)
         actors_str = ''
-        films = WorkingBD.get_all_person(WorkingBD(),'screenwriter')
+        self.client_server.send(']WorkingBD.get_all_personscreenwriter')
+        time.sleep(0.1)
+        films = json.loads(self.client_server.answer)
         self.scrnTable.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0, self.scrnTable.columnCount()):

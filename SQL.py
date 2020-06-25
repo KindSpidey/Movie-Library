@@ -1799,8 +1799,4 @@ class WorkingBD():
 #print(WorkingBD.add_film('Example',None,None,None,None,None,None,None, 'Danila'))
 #a = ['Andrew Garfield','89157213979','garfield','male','1986']
 #a = '"]Andrew Garfield','89157213979','garfield','male','1986']WorkingBD.add_actor]\r\n\r\n"'\
-print(WorkingBD.get_film_in_progress_by_title('Драйв'))
-WorkingBD.get_actor_by_name('Драйв')
-print(WorkingBD.get_film_in_plan('Altas 2'))
-print(WorkingBD.get_actor_by_name('Райан'))
-WorkingBD.remove_actor_by_name()
+WorkingBD.get_all_person(WorkingBD, 'director')

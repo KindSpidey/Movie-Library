@@ -1,4 +1,4 @@
-import socket
+import socket, json
 from threading import Thread
 SERVER = "localhost"
 PORT = 8080

@@ -1,4 +1,4 @@
-import socket, threading
+import socket, threading, json
 from SQL import WorkingBD
 dataClosingSequence = b"\r\n\r\n"
 dataClosingSequenceStr = "\r\n\r\n"
@@ -102,6 +102,20 @@ class ClientThread(threading.Thread):
                 self.send_data(str(answer))
             else:
                 self.send_data('')
+        if data[1] == 'WorkingBD.get_all_films':
+            self.send_data(json.dumps(WorkingBD.get_all_films(WorkingBD)))
+        if data[1] == 'WorkingBD.get_all_films_in_progress':
+            self.send_data(json.dumps(WorkingBD.get_all_films_in_progress(WorkingBD)))
+        if data[1] == 'WorkingBD.get_all_films_in_plan':
+            self.send_data(json.dumps(WorkingBD.get_all_films_in_plan(WorkingBD)))
+        if data[1] == 'WorkingBD.get_all_actors':
+            self.send_data(json.dumps(WorkingBD.get_all_actors(WorkingBD)))
+        if data[1] == 'WorkingBD.get_all_persondirector':
+            self.send_data(json.dumps(WorkingBD.get_all_person(WorkingBD, 'director')))
+        if data[1] == 'WorkingBD.get_all_personcomposer':
+            self.send_data(json.dumps(WorkingBD.get_all_person(WorkingBD, 'composer')))
+        if data[1] == 'WorkingBD.get_all_personscreenwriter':
+            self.send_data(json.dumps(WorkingBD.get_all_person(WorkingBD, 'screenwriter')))
 
 
     def send_data(self, data):

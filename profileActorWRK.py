@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5.QtCore import Qt, pyqtSignal
-import profileActor, PyQt5, CreateActorWRK
-from SQL import WorkingBD
+import profileActor, PyQt5, CreateActorWRK, json, time
+
 
 class profileActorWorking(profileActor.Ui_Form, QWidget):
     def __init__(self, parent):
@@ -18,7 +18,9 @@ class profileActorWorking(profileActor.Ui_Form, QWidget):
         self.editActor.action = 'edit'
         self.editActor.show()
     def set_all(self):
-        self.dataActor = WorkingBD.get_actor_by_name_for_profile(self.parent.chosen_actor)
+        self.parent.client_server.send(self.parent.chosen_actor+']WorkingBD.get_actor_by_name_for_profile')
+        time.sleep(0.1)
+        self.dataActor = json.loads(self.parent.client_server.answer)
         self.actorInfo = self.dataActor[0]
         self.headWithName.setText(self.actorInfo[0])
         self.email.setText('email: '+ str(self.actorInfo[3]))

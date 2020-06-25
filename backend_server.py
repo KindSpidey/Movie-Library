@@ -116,6 +116,10 @@ class ClientThread(threading.Thread):
             self.send_data(json.dumps(WorkingBD.get_all_person(WorkingBD, 'composer')))
         if data[1] == 'WorkingBD.get_all_personscreenwriter':
             self.send_data(json.dumps(WorkingBD.get_all_person(WorkingBD, 'screenwriter')))
+        if data[1] == 'WorkingBD.get_actor_by_name_for_profile':
+            self.send_data(json.dumps(WorkingBD.get_actor_by_name_for_profile(data[0])))
+        if data[1] == 'WorkingBD.update_actor':
+            WorkingBD.update_actor(args[0], args[1], args[2], args[3], args[4])
 
 
     def send_data(self, data):

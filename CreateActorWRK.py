@@ -26,8 +26,8 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
             pass
     def true_save(self):
         if self.action == 'edit':
-            WorkingBD.update_actor(self.nameEdit.text(), self.phoneEdit.text(), self.emailEdit.text(), self.sexEdit.text(),
-                                   self.birthYearEdit.text())
+            self.parent_main.client_server.send(self.nameEdit.text() + ', ' + self.phoneEdit.text()+ ', ' +
+                self.emailEdit.text()+ ', ' + self.sexEdit.text()+ ', ' + self.birthYearEdit.text()+ ']WorkingBD.update_actor')
             films = self.get_entered_films()
             for elem in films:
                 try:

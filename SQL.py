@@ -1412,6 +1412,7 @@ class WorkingBD():
         cursor.execute(f'''SELECT id FROM actor WHERE name ="{name1}"''')
         act_id = cursor.fetchall()[0][0]
         cursor.execute(f'''DELETE FROM actfilm WHERE act_id ="{act_id!r}"''')
+        cursor.execute(f'''DELETE FROM actfilminprogress WHERE act_id ="{act_id!r}"''')
         conn.commit()
         conn.close()
 
@@ -1800,3 +1801,6 @@ class WorkingBD():
 #a = '"]Andrew Garfield','89157213979','garfield','male','1986']WorkingBD.add_actor]\r\n\r\n"'\
 print(WorkingBD.get_film_in_progress_by_title('Драйв'))
 WorkingBD.get_actor_by_name('Драйв')
+print(WorkingBD.get_film_in_plan('Altas 2'))
+print(WorkingBD.get_actor_by_name('Райан'))
+WorkingBD.remove_actor_by_name()

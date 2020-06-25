@@ -218,6 +218,8 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             self.client_server.send(search+']WorkingBD.get_film_by_title')
             time.sleep(0.05)
+            if len(self.client_server.answer) == 0:
+                raise Exception
             film = self.client_server.answer
             self.chosen_film = film
             list.append(film)
@@ -227,14 +229,22 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             pass
         try:
             self.client_server.send(search + ']WorkingBD.get_film_in_progress_by_title')
-            filminprogress = WorkingBD.get_film_in_progress_by_title(search)[0][0]
+            time.sleep(0.05)
+            if len(self.client_server.answer) == 0:
+                raise Exception
+            filminprogress = self.client_server.answer
             self.chosen_film_in_progress = filminprogress
             list.append(filminprogress)
             list.append('filminprogress')
+            self.who = 'filminprogress'
         except:
             pass
         try:
-            filminplan = WorkingBD.get_film_in_plan(search)[0][0]
+            self.client_server.send(search + ']WorkingBD.get_film_in_plan')
+            time.sleep(0.05)
+            if len(self.client_server.answer) == 0:
+                raise Exception
+            filminplan = self.client_server.answer
             self.chosen_film_in_plan = filminplan
             list.append(filminplan)
             list.append('filminplan')
@@ -242,7 +252,11 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         except:
             pass
         try:
-            actor = WorkingBD.get_actor_by_name(search)[0][0]
+            self.client_server.send(search + ']WorkingBD.get_actor_by_name')
+            time.sleep(0.05)
+            if len(self.client_server.answer) == 0:
+                raise Exception
+            actor = self.client_server.answer
             self.chosen_actor = actor
             list.append(actor)
             list.append('actor')
@@ -250,27 +264,42 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         except:
             pass
         try:
-            director = WorkingBD.get_director_by_name(search)[0][0]
+            self.client_server.send(search + ']WorkingBD.get_director_by_name')
+            time.sleep(0.05)
+            if len(self.client_server.answer) == 0:
+                raise Exception
+            director = self.client_server.answer
             self.chosen_director = director
             list.append(director)
             list.append('director')
-            self.who = 'director'
+            self.who = 'person'
+            self.who_is_person = 'director'
         except:
             pass
         try:
-            screenwriter = WorkingBD.get_screenwriter_by_name(search)[0][0]
+            self.client_server.send(search + ']WorkingBD.get_screenwriter_by_name')
+            time.sleep(0.05)
+            if len(self.client_server.answer) == 0:
+                raise Exception
+            screenwriter = self.client_server.answer
             self.chosen_screenwriter = screenwriter
             list.append(screenwriter)
             list.append('screenwriter')
-            self.who = 'screenwriter'
+            self.who = 'person'
+            self.who_is_person = 'screenwriter'
         except:
             pass
         try:
-            composer = WorkingBD.get_composer_by_name(search)[0][0]
+            self.client_server.send(search + ']WorkingBD.get_composer_by_name')
+            time.sleep(0.05)
+            if len(self.client_server.answer) == 0:
+                raise Exception
+            composer = self.client_server.answer
             self.chosen_composer = composer
             list.append(composer)
             list.append('composer')
-            self.who = 'composer'
+            self.who = 'person'
+            self.who_is_person = 'composer'
         except:
             pass
         if len(list)==0:
@@ -288,6 +317,8 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             self.ProfActor.fill_salary_actor_table()
             self.pushButton.clicked.connect(self.ProfActor.show)
         if self.who == 'person':
+            self.ProfPerson.set_all()
+            self.ProfPerson.fill_salary_table()
             self.pushButton.clicked.connect(self.ProfPerson.show)
         if self.who == 'filminprogress':
             self.ProfFilmInProgress.set_all()

@@ -73,7 +73,6 @@ class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
         if self.action=='edit':
             self.save()
         self.parent_main.setup_tables()
-        self.parent_profile.set_all()
         self.parent_profile.fill_salary_table()
         self.hide()
     def save(self):

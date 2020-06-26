@@ -1,7 +1,8 @@
+import json, time
+
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 import profileFilmInProgress, PyQt5
 from PyQt5.QtCore import Qt, pyqtSignal
-from SQL import WorkingBD
 from CreateFilmInProgressWRK import CreateFilmInProgressWorking
 
 
@@ -21,7 +22,9 @@ class profileFilmInProgressWorking(profileFilmInProgress.Ui_Form, QWidget):
         self.editFilmInProgress.set_all()
         self.editFilmInProgress.show()
     def set_all(self):
-        self.data = WorkingBD.get_film_in_progress_by_title(self.parent.chosen_film_in_progress)
+        self.parent.client_server.send((self.parent.chosen_film_in_progress) + ']WorkingBD.get_film_in_progress_by_title')
+        time.sleep(0.2)
+        self.data = json.loads(self.parent.client_server.answer)
         self.data = [list(elem) for elem in self.data]
         self.actors = self.data[1]
         self.data = self.data[0]

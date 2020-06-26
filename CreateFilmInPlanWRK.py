@@ -1,9 +1,8 @@
 from PyQt5.QtWidgets import QWidget
-import CreateFilmInPlan, PyQt5
+import CreateFilmInPlan, PyQt5, time
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 import CreateFilmInProgressWRK, profileFilmInPlanWRK
-from SQL import WorkingBD
 
 class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):
     def __init__(self, parent_main, parent_profile):
@@ -30,11 +29,15 @@ class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):
             self.descriptionEdit.setText(self.parent_profile.data[4])
     def save(self):
         if self.action=='create':
-            WorkingBD.add_filminplan(self.titleEdit.text(),self.descriptionEdit.toPlainText(),self.themeEdit.text(),
-                                    self.ideaEdit.text(),self.planningBudgetEdit.text())
+            self.parent_main.client_server.send(self.titleEdit.text()+ ', ' + self.descriptionEdit.toPlainText()+ ', ' +
+                    self.themeEdit.text()+ ', ' +self.ideaEdit.text() + ', '+ self.planningBudgetEdit.text() + ']WorkingBD.add_filminplan')
+            time.sleep(0.1)
         else:
-            WorkingBD.update_filminplan(self.titleEdit.text(),self.descriptionEdit.toPlainText(),self.themeEdit.text(),
-                                    self.ideaEdit.text(),self.planningBudgetEdit.text())
+            self.parent_main.client_server.send(
+                self.titleEdit.text() + ', ' + self.descriptionEdit.toPlainText() + ', ' +
+                self.themeEdit.text() + ', ' + self.ideaEdit.text() + ', ' +
+                self.planningBudgetEdit.text() + ']WorkingBD.update_filminplan')
+            time.sleep(0.1)
         if self.action=='edit':
             self.parent_profile.set_all()
         self.parent_main.setup_tables()

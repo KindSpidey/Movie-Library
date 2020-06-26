@@ -22,7 +22,7 @@ class profileActorWorking(profileActor.Ui_Form, QWidget):
         time.sleep(0.1)
         self.dataActor = json.loads(self.parent.client_server.answer)
         self.actorInfo = self.dataActor[0]
-        self.headWithName.setText(self.actorInfo[0])
+        self.headWithName.setText(str(self.actorInfo[0]))
         self.email.setText('email: '+ str(self.actorInfo[3]))
         self.averageSalary.setText('Средняя зарплата: '+ str(self.actorInfo[1]))
         self.phone.setText(str(self.actorInfo[2]))

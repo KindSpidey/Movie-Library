@@ -1,7 +1,8 @@
+import json, time
+
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 import profilePerson, PyQt5, CreatePersonWRK
 from PyQt5.QtCore import Qt, pyqtSignal
-from SQL import WorkingBD
 
 
 
@@ -38,21 +39,27 @@ class profilePersonWorking(profilePerson.Ui_Form, QWidget):
 
     def set_all(self):
         if self.parent.who_is_person == 'director':
-            self.dataPerson = WorkingBD.get_director_by_name(self.parent.chosen_director)
+            self.parent.client_server.send(self.parent.chosen_director + ']WorkingBD.get_director_by_name')
+            time.sleep(0.1)
+            self.dataPerson = json.loads(self.parent.client_server.answer)
             self.directorInfo = self.dataPerson[0]
             self.nameHead.setText(self.directorInfo[0])
             self.averageSalary.setText('Средняя зарплата: '+str(self.directorInfo[1]))
             self.phone.setText('Телефон: '+str(self.directorInfo[2]))
             self.email.setText('email: '+str(self.directorInfo[3]))
         if self.parent.who_is_person == 'screenwriter':
-            self.dataPerson = WorkingBD.get_screenwriter_by_name(self.parent.chosen_screenwriter)
+            self.parent.client_server.send(self.parent.chosen_screenwriter + ']WorkingBD.get_screenwriter_by_name')
+            time.sleep(0.1)
+            self.dataPerson = json.loads(self.parent.client_server.answer)
             self.screenwriterInfo = self.dataPerson[0]
             self.nameHead.setText(self.screenwriterInfo[0])
             self.averageSalary.setText('Средняя зарплата: ' + str(self.screenwriterInfo[1]))
             self.phone.setText('Телефон: ' + str(self.screenwriterInfo[2]))
             self.email.setText('email: ' + str(self.screenwriterInfo[3]))
         if self.parent.who_is_person == 'composer':
-            self.dataPerson = WorkingBD.get_composer_by_name(self.parent.chosen_composer)
+            self.parent.client_server.send(self.parent.chosen_composer + ']WorkingBD.get_composer_by_name')
+            time.sleep(0.1)
+            self.dataPerson = json.loads(self.parent.client_server.answer)
             self.composerInfo = self.dataPerson[0]
             self.nameHead.setText(self.composerInfo[0])
             self.averageSalary.setText('Средняя зарплата: ' + str(self.composerInfo[1]))

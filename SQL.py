@@ -61,37 +61,12 @@ class WorkingBD():
     composer_name     TEXT    REFERENCES composer (name) 
     )
             '''
-        queryAwards = '''
-                CREATE TABLE IF NOT EXISTS awards(
-                id   INTEGER CONSTRAINT awards_pk PRIMARY KEY AUTOINCREMENT,
-                name TEXT)
-            '''
-        queryNews = '''
-                CREATE TABLE IF NOT EXISTS news(
-                id          INTEGER CONSTRAINT news_pk PRIMARY KEY AUTOINCREMENT,
-                title       TEXT,
-                description TEXT,
-                link        TEXT,
-                meaning     TEXT,
-                year        INT
-                )
-            '''
         queryScreenwriter = '''CREATE TABLE IF NOT EXISTS screenwriter(
     id             INTEGER CONSTRAINT screenwriter_pk PRIMARY KEY AUTOINCREMENT,
     name           TEXT,
     email          TEXT,
     phone          TEXT,
     average_salary INT  )'''
-        queryWinners = '''
-                CREATE TABLE IF NOT EXISTS winners(
-                    id INTEGER PRIMARY KEY, 
-                    year INTEGER,
-                    id_award INTEGER,
-                    id_actor INTEGER,
-                    id_director INTEGER,
-                    id_screenwriter INTEGER
-                )
-            '''
         queryActSal = '''CREATE TABLE IF NOT EXISTS actsal (
         act_id  INTEGER,
         film_id INT,
@@ -152,10 +127,7 @@ class WorkingBD():
         cursor.execute(queryActor)
         cursor.execute(queryDirector)
         cursor.execute(queryFilm)
-        cursor.execute(queryWinners)
-        cursor.execute(queryNews)
         cursor.execute(queryScreenwriter)
-        cursor.execute(queryAwards)
         cursor.execute(queryActorFilm)
         cursor.execute(queryComposer)
         cursor.execute(queryScrSal)
@@ -1799,4 +1771,8 @@ class WorkingBD():
 #print(WorkingBD.add_film('Example',None,None,None,None,None,None,None, 'Danila'))
 #a = ['Andrew Garfield','89157213979','garfield','male','1986']
 #a = '"]Andrew Garfield','89157213979','garfield','male','1986']WorkingBD.add_actor]\r\n\r\n"'\
-WorkingBD.get_all_person(WorkingBD, 'director')
+#WorkingBD.get_all_person(WorkingBD, 'director')
+#letter = json.dumps(['elem', None, None,None, None,None, None,None,['self.nameEdit.text()']]+ ']WorkingBD.add_film')
+#a = letter + ']WorkingBD.add_film'
+#print((letter))
+print(WorkingBD.get_salary_by_film('The Amazing Spider-Man 2'))

@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import QWidget
-import salaryPersonConnect, PyQt5
+import salaryPersonConnect, PyQt5, time
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QTableWidgetItem
-from SQL import WorkingBD
 
 
 class salaryPersonConnectWorking(salaryPersonConnect.Ui_Form, QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, parent_main):
+        self.parent_main = parent_main
         self.parent = parent
         super(salaryPersonConnectWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
@@ -38,11 +38,15 @@ class salaryPersonConnectWorking(salaryPersonConnect.Ui_Form, QWidget):
             self.whos = 'screenwriter'
         for lst in data:
             try:
-                WorkingBD.connect_salary_and_person(lst[0], self.whos, self.parent.nameEdit.text(), lst[1])
+                self.parent_main.client_server.send(lst[0] + ', ' + self.whos + ', '
+            + self.parent.nameEdit.text() + ', ' + lst[1] + ']WorkingBD.connect_salary_and_person')
+                time.sleep(0.1)
             except:
                 pass
             try:
-                WorkingBD.update_salary_when_created(lst[0], self.whos, self.parent.nameEdit.text(), lst[1])
+                self.parent_main.client_server.send(lst[0] + ', ' + self.whos + ', '
+                 + self.parent.nameEdit.text() + ', ' + lst[1] + ']WorkingBD.update_salary_when_created')
+                time.sleep(0.1)
             except:
                 pass
         self.hide()

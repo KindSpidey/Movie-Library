@@ -77,7 +77,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             for_delete = self.film_in_progressTab.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete+']WorkingBD.remove_filminprogress')
-            time.sleep(0.02)
+            time.sleep(0.3)
             self.setup_tables()
         except:
             pass
@@ -85,7 +85,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             for_delete = self.film_in_planTab.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete+']WorkingBD.remove_filminplan')
-            time.sleep(0.02)
+            time.sleep(0.3)
             self.setup_tables()
         except:
             pass
@@ -93,7 +93,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             for_delete = self.filmTab.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete + ']WorkingBD.remove_film_by_title')
-            time.sleep(0.01)
+            time.sleep(0.3)
             self.setup_tables()
         except:
             pass
@@ -101,7 +101,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             for_delete = self.scrnTableTable.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete +']WorkingBD.remove_screenwriter_by_name')
-            time.sleep(0.01)
+            time.sleep(0.3)
             self.setup_tables()
         except:
             pass
@@ -109,7 +109,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             for_delete = self.compTable.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete +']WorkingBD.remove_composer_by_name')
-            time.sleep(0.01)
+            time.sleep(0.03)
             self.setup_tables()
         except:
             pass
@@ -118,7 +118,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             for_delete = self.directorTable.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete + ']WorkingBD.remove_director_by_name')
-            time.sleep(0.01)
+            time.sleep(0.3)
             self.setup_tables()
         except:
             pass
@@ -126,7 +126,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         try:
             for_delete = self.actorTable.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete + ']WorkingBD.remove_actor_by_name')
-            time.sleep(0.01)
+            time.sleep(0.3)
             self.setup_tables()
         except:
             pass
@@ -219,7 +219,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             time.sleep(0.05)
             if len(self.client_server.answer) == 0:
                 raise Exception
-            film = self.client_server.answer
+            film = json.loads(self.client_server.answer)[0][0]
             self.chosen_film = film
             list.append(film)
             list.append('film')
@@ -231,7 +231,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             time.sleep(0.05)
             if len(self.client_server.answer) == 0:
                 raise Exception
-            filminprogress = self.client_server.answer
+            filminprogress = json.loads(self.client_server.answer)[0][0]
             self.chosen_film_in_progress = filminprogress
             list.append(filminprogress)
             list.append('filminprogress')
@@ -243,7 +243,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             time.sleep(0.05)
             if len(self.client_server.answer) == 0:
                 raise Exception
-            filminplan = self.client_server.answer
+            filminplan = json.loads(self.client_server.answer)[0][0]
             self.chosen_film_in_plan = filminplan
             list.append(filminplan)
             list.append('filminplan')
@@ -255,7 +255,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             time.sleep(0.05)
             if len(self.client_server.answer) == 0:
                 raise Exception
-            actor = self.client_server.answer
+            actor = json.loads(self.client_server.answer)[0][0]
             self.chosen_actor = actor
             list.append(actor)
             list.append('actor')
@@ -267,7 +267,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             time.sleep(0.05)
             if len(self.client_server.answer) == 0:
                 raise Exception
-            director = self.client_server.answer
+            director = json.loads(self.client_server.answer)[0][0]
             self.chosen_director = director
             list.append(director)
             list.append('director')
@@ -280,7 +280,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             time.sleep(0.05)
             if len(self.client_server.answer) == 0:
                 raise Exception
-            screenwriter = self.client_server.answer
+            screenwriter = json.loads(self.client_server.answer)[0][0]
             self.chosen_screenwriter = screenwriter
             list.append(screenwriter)
             list.append('screenwriter')
@@ -293,7 +293,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             time.sleep(0.05)
             if len(self.client_server.answer) == 0:
                 raise Exception
-            composer = self.client_server.answer
+            composer = json.loads(self.client_server.answer)[0][0]
             self.chosen_composer = composer
             list.append(composer)
             list.append('composer')

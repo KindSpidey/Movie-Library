@@ -1,7 +1,8 @@
+import json, time
+
 from PyQt5.QtWidgets import QWidget
 import profileFilmInPlan, PyQt5
 from PyQt5.QtCore import Qt, pyqtSignal
-from SQL import WorkingBD
 from CreateFilmInPlanWRK import CreateFilmInPlanWorking
 
 class profileFilmInPlanWorking(profileFilmInPlan.Ui_Form, QWidget):
@@ -20,7 +21,9 @@ class profileFilmInPlanWorking(profileFilmInPlan.Ui_Form, QWidget):
         self.editFilmInPlan.show()
 
     def set_all(self):
-        self.data = WorkingBD.get_film_in_plan(self.parent_main.chosen_film_in_plan)[0]
+        self.parent_main.client_server.send((self.parent_main.chosen_film_in_plan) + ']WorkingBD.get_film_in_plan')
+        time.sleep(0.2)
+        self.data = json.loads(self.parent_main.client_server.answer)[0]
         self.headTitle.setText(str(self.data[0]))
         self.theme.setText('Тема: ' + self.data[1])
         self.idea.setText('Замысел: ' + self.data[2])

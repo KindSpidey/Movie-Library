@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import QWidget
-import CreateActor, PyQt5
+import CreateActor, PyQt5, time, json
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
-from SQL import WorkingBD
 from salaryPersonConnectWRK import salaryPersonConnectWorking
 
 class CreateActorWorking(CreateActor.Ui_Form, QWidget):
@@ -13,7 +12,7 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
         super(CreateActorWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.salary = salaryPersonConnectWorking(self)
+        self.salary = salaryPersonConnectWorking(self, parent_main)
         self.addSalaryButton.clicked.connect(self.go_to_salary)
         self.saveButton.clicked.connect(self.true_save)
 
@@ -28,14 +27,17 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
         if self.action == 'edit':
             self.parent_main.client_server.send(self.nameEdit.text() + ', ' + self.phoneEdit.text()+ ', ' +
                 self.emailEdit.text()+ ', ' + self.sexEdit.text()+ ', ' + self.birthYearEdit.text()+ ']WorkingBD.update_actor')
+            time.sleep(0.3)
             films = self.get_entered_films()
             for elem in films:
                 try:
-                    WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+                    self.parent_main.client_server.send(elem +', '+self.nameEdit.text()+']WorkingBD.connect_film_and_actor')
+                    time.sleep(0.3)
                 except:
                     pass
                 try:
-                    WorkingBD.add_actor_in_consist_film(self.nameEdit.text(), elem)
+                    self.parent_main.client_server.send(self.nameEdit.text()+', ' + elem + ']WorkingBD.add_actor_in_consist_film')
+                    time.sleep(0.3)
                 except:
                     pass
             self.parent_profile.set_all()
@@ -43,19 +45,25 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
             self.parent_main.setup_tables()
             self.hide()
         if self.action == 'create':
-            WorkingBD.add_actor(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text(), self.sexEdit.text(), self.birthYearEdit.text())
+            self.parent_main.client_server.send(self.nameEdit.text() + ', ' + self.phoneEdit.text() + ', '
+                + self.emailEdit.text() + ', ' + self.sexEdit.text() + ', ' + self.birthYearEdit.text() + ']WorkingBD.add_actor')
+            time.sleep(0.2)
             films = self.get_entered_films()
             for elem in films:
                 try:
-                    WorkingBD.add_film(elem, None, None,None, None,None, None,None,[self.nameEdit.text()])
+                    letter = json.dumps([elem, None, None,None, None,None, None,None,[self.nameEdit.text()]])
+                    self.parent_main.client_server.send(letter + ']WorkingBD.add_film')
+                    time.sleep(0.1)
                 except:
                     pass
                 try:
-                    WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+                    self.parent_main.client_server.send(elem + ', '+self.nameEdit.text() + ']WorkingBD.connect_film_and_actor')
+                    time.sleep(0.1)
                 except:
                     pass
                 try:
-                    WorkingBD.add_actor_in_consist_film(self.nameEdit.text(), elem)
+                    self.parent_main.client_server.send(self.nameEdit.text() + ', ' + elem + ']WorkingBD.add_actor_in_consist_film')
+                    time.sleep(0.1)
                 except:
                     pass
             self.parent_main.setup_tables()
@@ -65,7 +73,9 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
         return films
 
     def get_str_films(self):
-        actors = WorkingBD.get_films_title_by_actor(self.parent_main.chosen_actor)
+        self.parent_main.client_server.send(self.parent_main.chosen_actor + ']WorkingBD.get_films_title_by_actor')
+        time.sleep(0.1)
+        actors = json.loads(self.parent_main.client_server.answer)
         actors_str =''
         for elem in actors:
             if elem!=actors[len(actors)-1]:
@@ -75,19 +85,26 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
         return actors_str
     def save(self):
         if self.action == 'edit':
-            WorkingBD.update_actor(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text(), self.sexEdit.text(), self.birthYearEdit.text())
+            self.parent_main.client_server.send(self.nameEdit.text() + ', ' + self.phoneEdit.text() + ', ' +
+             self.emailEdit.text() + ', ' + self.sexEdit.text() + ', ' + self.birthYearEdit.text() + ']WorkingBD.update_actor')
+            time.sleep(0.1)
             films = self.get_entered_films()
             for elem in films:
                 try:
-                    WorkingBD.connect_film_and_actor(elem,self.nameEdit.text())
+                    self.parent_main.client_server.send(elem + ', '+self.nameEdit.text() + ']WorkingBD.connect_film_and_actor')
+                    time.sleep(0.1)
                 except:
                     pass
                 try:
-                    WorkingBD.add_actor_in_consist_film(self.nameEdit.text(), elem)
+                    self.parent_main.client_server.send(
+                        self.nameEdit.text() + ', ' + elem + ']WorkingBD.add_actor_in_consist_film')
+                    time.sleep(0.1)
                 except:
                     pass
     def edit_actor(self):
-        actors = WorkingBD.get_films_title_by_actor(self.parent_main.chosen_actor)
+        self.parent_main.client_server.send(self.parent_main.chosen_actor + ']WorkingBD.get_films_title_by_actor')
+        time.sleep(0.1)
+        actors = self.parent_main.client_server.answer
         films = self.get_str_films()
         try:
             self.head.setText('Редактирование актера')

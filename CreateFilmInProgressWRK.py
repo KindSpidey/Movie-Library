@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget
-import CreateFilmInProgress, PyQt5, CreateFilmWRK
+import CreateFilmInProgress, PyQt5, CreateFilmWRK, json, time
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMessageBox
 from PyQt5.QtCore import Qt, pyqtSignal
 from SQL import WorkingBD
@@ -47,7 +47,7 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
                         actors.append(s)
                 WorkingBD.add_filmInProgress(self.titleEdit.text(), self.budgetEdit.text(),
                                    self.dirEdit.text(), self.scrnEdit.text(), self.compEdit.text(), actors)
-                WorkingBD.remove_filminplan(self.titleEdit.text())
+                self.parent_main.client_server.send(self.titleEdit.text() + ']WorkingBD.remove_filminplan')
                 self.parent_in_plan.close()
                 self.parent_in_plan.parent_profile.close()
         if self.action=='edit':
@@ -87,7 +87,9 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
         return actors
 
     def get_str_actors(self):
-        actors = WorkingBD.get_actors_by_filminprogress(self.parent_profile.data[0])
+        self.parent_main.client_server.send((self.parent_profile.data[0])+']WorkingBD.get_actors_by_filminprogress')
+        time.sleep(0.2)
+        actors = json.loads(self.parent_main.client_server.answer)
         actors_str =''
         for elem in actors:
             if elem!=actors[len(actors)-1]:

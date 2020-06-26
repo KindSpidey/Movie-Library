@@ -13,7 +13,7 @@ class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
         super(CreatePersonWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.salary = salaryPersonConnectWorking(self)
+        self.salary = salaryPersonConnectWorking(self, parent_main)
         self.addSalaryButton.clicked.connect(self.go_to_salary)
         self.saveButton.clicked.connect(self.true_save)
     def go_to_salary(self):

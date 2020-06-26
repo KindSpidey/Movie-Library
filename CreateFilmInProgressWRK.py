@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QWidget
 import CreateFilmInProgress, PyQt5, CreateFilmWRK, json, time
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMessageBox
 from PyQt5.QtCore import Qt, pyqtSignal
-from SQL import WorkingBD
 
 
 class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
@@ -32,8 +31,8 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
                 for elem in list:
                     for s in elem:
                         actors.append(s)
-                WorkingBD.add_filmInProgress(self.titleEdit.text(), self.budgetEdit.text(),
-                                   self.dirEdit.text(), self.scrnEdit.text(), self.compEdit.text(), actors)
+                params_of_film = self.titleEdit.text() + ', ' + self.titleEdit.text()+ ', ' + self.budgetEdit.text()+ ', ' +self.dirEdit.text()+ ', ' + self.scrnEdit.text()+ ', ' + self.compEdit.text()
+                self.parent_main.client_server.send(json.dumps(dict(params=params_of_film, actors=actors, command='WorkingBD.add_filmInProgress')))
         if self.action=='make_in_progress':
             if self.actorsEdit.toPlainText() == '' or self.titleEdit.text() == '' or self.budgetEdit.text() == '' or self.dirEdit.text() == '' or self.compEdit.text() == '' or self.scrnEdit.text() == '':
                 msg.setText('Заполните все поля')
@@ -45,8 +44,9 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
                 for elem in list:
                     for s in elem:
                         actors.append(s)
-                WorkingBD.add_filmInProgress(self.titleEdit.text(), self.budgetEdit.text(),
-                                   self.dirEdit.text(), self.scrnEdit.text(), self.compEdit.text(), actors)
+                params_of_film = self.titleEdit.text() + ', ' + self.titleEdit.text() + ', ' + self.budgetEdit.text() + ', ' + self.dirEdit.text() + ', ' + self.scrnEdit.text() + ', ' + self.compEdit.text()
+                self.parent_main.client_server.send(
+                    json.dumps(dict(params=params_of_film, actors=actors, command='WorkingBD.add_filmInProgress')))
                 self.parent_main.client_server.send(self.titleEdit.text() + ']WorkingBD.remove_filminplan')
                 self.parent_in_plan.close()
                 self.parent_in_plan.parent_profile.close()
@@ -61,8 +61,8 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
                 for elem in list:
                     for s in elem:
                         actors.append(s)
-                WorkingBD.update_filminprogress(self.titleEdit.text(), self.budgetEdit.text(),
-                                   self.dirEdit.text(), self.scrnEdit.text(), self.compEdit.text(), actors)
+                params_of_film = self.titleEdit.text() + ', ' + self.titleEdit.text() + ', ' + self.budgetEdit.text() + ', ' + self.dirEdit.text() + ', ' + self.scrnEdit.text() + ', ' + self.compEdit.text()
+                self.parent_main.client_server.send(json.dumps(dict(params=params_of_film, actors=actors, command='WorkingBD.update_filminprogress')))
         self.parent_main.setup_tables()
         self.hide()
     def set_in_plan(self):

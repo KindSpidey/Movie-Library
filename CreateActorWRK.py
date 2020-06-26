@@ -51,8 +51,8 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
             films = self.get_entered_films()
             for elem in films:
                 try:
-                    letter = json.dumps([elem, None, None,None, None,None, None,None,[self.nameEdit.text()]])
-                    self.parent_main.client_server.send(letter + ']WorkingBD.add_film')
+                    params_of_film = elem + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None)
+                    self.parent_main.client_server.send(json.dumps(dict(params=params_of_film, actors=[self.nameEdit.text()], command='WorkingBD.add_film')))
                     time.sleep(0.1)
                 except:
                     pass

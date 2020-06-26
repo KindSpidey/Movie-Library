@@ -145,10 +145,16 @@ class ClientThread(threading.Thread):
             WorkingBD.update_actor(args[0], args[1], args[2], args[3], args[4])
             return
         if data[1] == 'WorkingBD.connect_film_and_actor':
-            WorkingBD.connect_film_and_actor(args[0], args[1])
+            try:
+                WorkingBD.connect_film_and_actor(args[0], args[1])
+            except:
+                pass
             return
         if data[1] == 'WorkingBD.add_actor_in_consist_film':
-            WorkingBD.add_actor_in_consist_film(args[0], args[1])
+            try:
+                WorkingBD.add_actor_in_consist_film(args[0], args[1])
+            except:
+                pass
             return
         if data[1] == 'WorkingBD.add_actor':
             WorkingBD.add_actor(args[0], args[1], args[2], args[3], args[4])

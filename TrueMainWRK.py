@@ -210,7 +210,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.fill_actors()
         self.fill_directors()
         self.fill_composers()
-        self.fill_screenwriters()
+        #self.fill_screenwriters()
     def search(self):
         search = self.ObjectName.text()
         list =[]

@@ -21,21 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fbcc3d64-6a0c-4130-959c-4f7ab738bee2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreateActorWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateActorWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreateFilmInPlanWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateFilmInPlanWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreateFilmInProgressWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateFilmInProgressWRK.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CreateFilmWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateFilmWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreatePersonWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreatePersonWRK.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Movies.db" beforeDir="false" afterPath="$PROJECT_DIR$/Movies.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/SQL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrueMainWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/TrueMainWRK.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profileActorWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/profileActorWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profileFilmInPlanWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/profileFilmInPlanWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profileFilmInProgressWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/profileFilmInProgressWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profileFilmWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/profileFilmWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profilePersonWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/profilePersonWRK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salaryPersonConnectWRK.py" beforeDir="false" afterPath="$PROJECT_DIR$/salaryPersonConnectWRK.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +303,7 @@
       <workItem from="1592991092908" duration="588000" />
       <workItem from="1592992907028" duration="4406000" />
       <workItem from="1593059384096" duration="22000000" />
-      <workItem from="1593145490253" duration="9087000" />
+      <workItem from="1593145490253" duration="14851000" />
     </task>
     <servers />
   </component>
@@ -372,46 +361,46 @@
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587626085224" />
     <state x="542" y="141" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1592117501612" />
-    <state width="1556" height="164" key="GridCell.Tab.0.bottom" timestamp="1593155485673">
+    <state width="1556" height="164" key="GridCell.Tab.0.bottom" timestamp="1593166087401">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587643558873" />
-    <state width="1556" height="164" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1593155485673" />
-    <state width="1556" height="164" key="GridCell.Tab.0.center" timestamp="1593155485673">
+    <state width="1556" height="164" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1593166087401" />
+    <state width="1556" height="164" key="GridCell.Tab.0.center" timestamp="1593166087401">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587643558872" />
-    <state width="1556" height="164" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1593155485673" />
-    <state width="1556" height="164" key="GridCell.Tab.0.left" timestamp="1593155485673">
+    <state width="1556" height="164" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1593166087401" />
+    <state width="1556" height="164" key="GridCell.Tab.0.left" timestamp="1593166087401">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587643558871" />
-    <state width="1556" height="164" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1593155485673" />
-    <state width="1556" height="164" key="GridCell.Tab.0.right" timestamp="1593155485673">
+    <state width="1556" height="164" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1593166087401" />
+    <state width="1556" height="164" key="GridCell.Tab.0.right" timestamp="1593166087401">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587643558872" />
-    <state width="1556" height="164" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1593155485673" />
-    <state width="1556" height="217" key="GridCell.Tab.1.bottom" timestamp="1593154542020">
+    <state width="1556" height="164" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1593166087401" />
+    <state width="1556" height="217" key="GridCell.Tab.1.bottom" timestamp="1593166075729">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="217" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1593154542020" />
-    <state width="1556" height="217" key="GridCell.Tab.1.center" timestamp="1593154542019">
+    <state width="1556" height="217" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1593166075729" />
+    <state width="1556" height="217" key="GridCell.Tab.1.center" timestamp="1593166075729">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="217" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1593154542019" />
-    <state width="1556" height="217" key="GridCell.Tab.1.left" timestamp="1593154542019">
+    <state width="1556" height="217" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1593166075729" />
+    <state width="1556" height="217" key="GridCell.Tab.1.left" timestamp="1593166075728">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="217" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1593154542019" />
-    <state width="1556" height="217" key="GridCell.Tab.1.right" timestamp="1593154542019">
+    <state width="1556" height="217" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1593166075728" />
+    <state width="1556" height="217" key="GridCell.Tab.1.right" timestamp="1593166075729">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587458567060" />
-    <state width="1556" height="217" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1593154542019" />
+    <state width="1556" height="217" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1593166075729" />
     <state x="239" y="7" width="978" height="708" key="SettingsEditor" timestamp="1591085845834">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -459,15 +448,15 @@
     <SUITE FILE_PATH="coverage/Movie_Library$client_TY2.coverage" NAME="client_TY2 Coverage Results" MODIFIED="1592916042988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$21.coverage" NAME="21 Coverage Results" MODIFIED="1592227948261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$Server.coverage" NAME="Server Coverage Results" MODIFIED="1591182260522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GUI" />
-    <SUITE FILE_PATH="coverage/Movie_Library$OOP_project.coverage" NAME="OOP_project Coverage Results" MODIFIED="1593154541963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Movie_Library$OOP_project.coverage" NAME="OOP_project Coverage Results" MODIFIED="1593164242774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$server_client_test.coverage" NAME="server_client_test Coverage Results" MODIFIED="1592906328127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Movie_Library$client_main.coverage" NAME="client-main Coverage Results" MODIFIED="1593155485646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Movie_Library$client_main.coverage" NAME="client-main Coverage Results" MODIFIED="1593166087384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$ClientTest.coverage" NAME="ClientTest Coverage Results" MODIFIED="1591182263100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GUI" />
     <SUITE FILE_PATH="coverage/Movie_Library$server_TRY.coverage" NAME="server_TRY Coverage Results" MODIFIED="1592984461082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$client_handler.coverage" NAME="client-handler Coverage Results" MODIFIED="1592570807011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$API.coverage" NAME="API Coverage Results" MODIFIED="1585812846353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$MainClient.coverage" NAME="client-main Coverage Results" MODIFIED="1592047445092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Movie_Library$backend_server__1_.coverage" NAME="backend_server (1) Coverage Results" MODIFIED="1593155056680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Movie_Library$backend_server__1_.coverage" NAME="backend_server (1) Coverage Results" MODIFIED="1593166075696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$server_back_test.coverage" NAME="server_back_test Coverage Results" MODIFIED="1592984475129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$client_main__1_.coverage" NAME="client-main (1) Coverage Results" MODIFIED="1592217915535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Movie_Library$SendDataToServer.coverage" NAME="client_Server Coverage Results" MODIFIED="1592209006365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

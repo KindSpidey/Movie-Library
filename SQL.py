@@ -1775,4 +1775,4 @@ class WorkingBD():
 #letter = json.dumps(['elem', None, None,None, None,None, None,None,['self.nameEdit.text()']]+ ']WorkingBD.add_film')
 #a = letter + ']WorkingBD.add_film'
 #print((letter))
-print(WorkingBD.get_salary_by_film('The Amazing Spider-Man 2'))
+#print(WorkingBD.get_salary_by_film('The Amazing Spider-Man 2'))

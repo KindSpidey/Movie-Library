@@ -32,6 +32,12 @@ class ClientThread(threading.Thread):
         print("Client at ", clientAddress, " disconnected...")
 
     def handle_data(self, data):
+        try:
+            data = json.loads(data)
+            self.special_handle(data)
+            return
+        except:
+            pass
         data = data.split(']')
         args = data[0].split(', ')
         if data[1]== 'WorkingBD.get_password':
@@ -121,7 +127,7 @@ class ClientThread(threading.Thread):
             WorkingBD.add_actor(args[0], args[1], args[2], args[3], args[4])
         #if data[1] == 'WorkingBD.add_film':
         if data[1] == 'WorkingBD.get_films_title_by_actor':
-            self.send_data(json.dumps(WorkingBD.get_films_by_actor(args[0])))
+            self.send_data(json.dumps(WorkingBD.get_films_title_by_actor(args[0])))
         if data[1] == 'WorkingBD.update_filminplan':
             WorkingBD.update_filminplan(args[0], args[1], args[2], args[3], args[4])
         if data[1] == 'WorkingBD.add_filminplan':
@@ -137,7 +143,15 @@ class ClientThread(threading.Thread):
         if data[1] == 'WorkingBD.update_salary_when_created':
             WorkingBD.update_salary_when_created(args[0], args[1], args[2], args[3])
 
-
+    def special_handle(self, data):
+        params_of_film = data['params']
+        args = params_of_film.split(', ')
+        actors = data['actors']
+        command = data['command']
+        if command == 'WorkingBD.add_film':
+            WorkingBD.add_film(args[0], args[1], args[2], args[3], args[4], args[5], args[6],args[7], actors)
+        if command == 'WorkingBD.update_film':
+            WorkingBD.update_film(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7],actors)
 
 
     def send_data(self, data):

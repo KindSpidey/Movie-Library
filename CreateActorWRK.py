@@ -27,17 +27,17 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
         if self.action == 'edit':
             self.parent_main.client_server.send(self.nameEdit.text() + ', ' + self.phoneEdit.text()+ ', ' +
                 self.emailEdit.text()+ ', ' + self.sexEdit.text()+ ', ' + self.birthYearEdit.text()+ ']WorkingBD.update_actor')
-            time.sleep(0.3)
+            time.sleep(0.2)
             films = self.get_entered_films()
             for elem in films:
                 try:
                     self.parent_main.client_server.send(elem +', '+self.nameEdit.text()+']WorkingBD.connect_film_and_actor')
-                    time.sleep(0.3)
+                    time.sleep(0.2)
                 except:
                     pass
                 try:
                     self.parent_main.client_server.send(self.nameEdit.text()+', ' + elem + ']WorkingBD.add_actor_in_consist_film')
-                    time.sleep(0.3)
+                    time.sleep(0.2)
                 except:
                     pass
             self.parent_profile.set_all()
@@ -53,17 +53,17 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
                 try:
                     params_of_film = elem + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None)
                     self.parent_main.client_server.send(json.dumps(dict(params=params_of_film, actors=[self.nameEdit.text()], command='WorkingBD.add_film')))
-                    time.sleep(0.1)
+                    time.sleep(0.2)
                 except:
                     pass
                 try:
                     self.parent_main.client_server.send(elem + ', '+self.nameEdit.text() + ']WorkingBD.connect_film_and_actor')
-                    time.sleep(0.1)
+                    time.sleep(0.2)
                 except:
                     pass
                 try:
                     self.parent_main.client_server.send(self.nameEdit.text() + ', ' + elem + ']WorkingBD.add_actor_in_consist_film')
-                    time.sleep(0.1)
+                    time.sleep(0.2)
                 except:
                     pass
             self.parent_main.setup_tables()
@@ -87,18 +87,18 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
         if self.action == 'edit':
             self.parent_main.client_server.send(self.nameEdit.text() + ', ' + self.phoneEdit.text() + ', ' +
              self.emailEdit.text() + ', ' + self.sexEdit.text() + ', ' + self.birthYearEdit.text() + ']WorkingBD.update_actor')
-            time.sleep(0.1)
+            time.sleep(0.2)
             films = self.get_entered_films()
             for elem in films:
                 try:
                     self.parent_main.client_server.send(elem + ', '+self.nameEdit.text() + ']WorkingBD.connect_film_and_actor')
-                    time.sleep(0.1)
+                    time.sleep(0.2)
                 except:
                     pass
                 try:
                     self.parent_main.client_server.send(
                         self.nameEdit.text() + ', ' + elem + ']WorkingBD.add_actor_in_consist_film')
-                    time.sleep(0.1)
+                    time.sleep(0.2)
                 except:
                     pass
     def edit_actor(self):

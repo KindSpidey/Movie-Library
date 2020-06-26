@@ -99,9 +99,9 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             pass
     def delete_screenwriter(self):
         try:
-            for_delete = self.scrnTableTable.selectedItems().__getitem__(0).text()
+            for_delete = self.scrnTable.selectedItems().__getitem__(0).text()
             self.client_server.send(for_delete +']WorkingBD.remove_screenwriter_by_name')
-            time.sleep(0.1)
+            time.sleep(0.2)
             self.setup_tables()
         except:
             pass
@@ -334,7 +334,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.filmTab.setRowCount(0)
         actors_str =''
         self.client_server.send(']WorkingBD.get_all_films')
-        time.sleep(0.2)
+        time.sleep(0.4)
         films = json.loads(self.client_server.answer)
         self.filmTab.setRowCount(len(films))
         for raw in range(0, len(films)):
@@ -391,11 +391,11 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.actorTable.setRowCount(len(films))
         for raw in range(0, len(films)):
             for columns in range(0, self.actorTable.columnCount()):
-                if columns != 7:
+                if columns != 6 :
                     a = str(films[raw][columns + 1])
                     self.actorTable.setItem(raw, columns, QTableWidgetItem(a))
                 else:
-                    actors = films[raw][6]
+                    actors = films[raw][7]
                     for u in actors:
                         if u != actors[len(actors) - 1]:
                             actors_str += u + ', '
@@ -449,7 +449,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.scrnTable.setRowCount(0)
         actors_str = ''
         self.client_server.send(']WorkingBD.get_all_personscreenwriter')
-        time.sleep(0.2)
+        time.sleep(0.3)
         films = json.loads(self.client_server.answer)
         self.scrnTable.setRowCount(len(films))
         for raw in range(0, len(films)):

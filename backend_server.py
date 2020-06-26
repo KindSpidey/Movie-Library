@@ -177,6 +177,26 @@ class ClientThread(threading.Thread):
         if data[1] == 'WorkingBD.update_salary_when_created':
             WorkingBD.update_salary_when_created(args[0], args[1], args[2], args[3])
             return
+        if data[1] == 'WorkingBD.add_director':
+            WorkingBD.add_director(args[0], args[1], args[2])
+            return
+        if data[1] == 'WorkingBD.add_composer':
+            WorkingBD.add_composer(args[0], args[1], args[2])
+            return
+        if data[1] == 'WorkingBD.add_screenwriter':
+            WorkingBD.add_screenwriter(args[0], args[1], args[2])
+            return
+        if data[1] == 'WorkingBD.update_director':
+            WorkingBD.update_director(args[0], args[1], args[2])
+            return
+        if data[1] == 'WorkingBD.update_composer':
+            WorkingBD.update_composer(args[0], args[1], args[2])
+            return
+        if data[1] == 'WorkingBD.update_screenwriter':
+            WorkingBD.update_screenwriter(args[0], args[1], args[2])
+            return
+        if data[1] == 'WorkingBD.get_films_title_by_person':
+            WorkingBD.get_films_title_by_person(args[0], args[1])
 
     def special_handle(self, data):
         params_of_film = data['params']
@@ -187,7 +207,7 @@ class ClientThread(threading.Thread):
             WorkingBD.add_film(args[0], args[1], args[2], args[3], args[4], args[5], args[6],args[7], actors)
             return
         if command == 'WorkingBD.update_film':
-            WorkingBD.update_film(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7],actors)
+            WorkingBD.update_film(args[0], args[1], args[2], args[4], args[3], args[5], args[6], args[7],actors)
             return
         if command == 'WorkingBD.add_filmInProgress':
             WorkingBD.add_filmInProgress(args[0], args[1], args[2], args[3], args[4], actors)

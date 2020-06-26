@@ -1,8 +1,7 @@
-from PyQt5.QtWidgets import QWidget
-import CreatePerson, PyQt5
+
+import CreatePerson, time, json
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
-from SQL import WorkingBD
 from salaryPersonConnectWRK import salaryPersonConnectWorking
 
 class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
@@ -34,27 +33,41 @@ class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
     def true_save(self):
         if self.action == 'create':
             if self.parent_profile.parent.who_is_person == 'director':
-                WorkingBD.add_director(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text())
+                self.parent_main.client_server.send(self.nameEdit.text()+ ', '+  self.phoneEdit.text()+ ', '+self.emailEdit.text()+ ']WorkingBD.add_director')
+                time.sleep(0.2)
                 films = self.get_entered_films()
                 for elem in films:
                     try:
-                        WorkingBD.add_film(elem, None, None, None, None, self.nameEdit.text(), None, None,None)
+                        params_of_film = elem + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + self.nameEdit.text() + ', ' + str(None) + ', ' + str(None)
+                        self.parent_main.client_server.send(
+                            json.dumps(dict(params=params_of_film, actors=[str(None)], command='WorkingBD.add_film')))
+                        time.sleep(0.2)
                     except:
                         pass
             if self.parent_profile.parent.who_is_person == 'composer':
-                WorkingBD.add_composer(self.nameEdit.text(), self.phoneEdit.text(), self.emailEdit.text())
+                self.parent_main.client_server.send(self.nameEdit.text()+ ', '+  self.phoneEdit.text()+ ', '+self.emailEdit.text()+ ']WorkingBD.add_composer')
+                time.sleep(0.2)
                 films = self.get_entered_films()
                 for elem in films:
                     try:
-                        WorkingBD.add_film(elem, None, None, None, None, None, None, self.nameEdit.text(), None)
+                        params_of_film = elem + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(
+                            None) + ', ' + str(None) + ', ' + str(None) + ', ' + self.nameEdit.text()
+                        self.parent_main.client_server.send(
+                            json.dumps(dict(params=params_of_film, actors=[str(None)], command='WorkingBD.add_film')))
+                        time.sleep(0.2)
                     except:
                         pass
             if self.parent_profile.parent.who_is_person == 'screenwriter':
-                WorkingBD.add_screenwriter(self.nameEdit.text(), self.phoneEdit.text(), self.emailEdit.text())
+                self.parent_main.client_server.send(self.nameEdit.text()+ ', '+  self.phoneEdit.text()+ ', '+self.emailEdit.text()+ ']WorkingBD.add_screenwriter')
+                time.sleep(0.2)
                 films = self.get_entered_films()
                 for elem in films:
                     try:
-                        WorkingBD.add_film(elem, None, None, None, None, None, self.nameEdit.text(), None, None)
+                        params_of_film = elem + ', ' + str(None) + ', ' + str(None) + ', ' + str(None) + ', ' + str(
+                            None) + ', ' + str(None) + ', ' + self.nameEdit.text()+ str(None)
+                        self.parent_main.client_server.send(
+                            json.dumps(dict(params=params_of_film, actors=[str(None)], command='WorkingBD.add_film')))
+                        time.sleep(0.2)
                     except:
                         pass
         if self.action=='edit':
@@ -66,11 +79,14 @@ class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
     def save(self):
         if self.action == 'edit':
             if self.parent_profile.parent.who_is_person == 'director':
-                WorkingBD.update_director(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text())
+                self.parent_main.client_server.send(self.nameEdit.text()+ ', '+  self.phoneEdit.text()+ ', '+self.emailEdit.text()+ ']WorkingBD.update_director')
+                time.sleep(0.2)
             if self.parent_profile.parent.who_is_person == 'composer':
-                WorkingBD.update_composer(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text())
+                self.parent_main.client_server.send(self.nameEdit.text()+ ', '+  self.phoneEdit.text()+ ', '+self.emailEdit.text()+ ']WorkingBD.update_composer')
+                time.sleep(0.2)
             if self.parent_profile.parent.who_is_person == 'screenwriter':
-                WorkingBD.update_screenwriter(self.nameEdit.text(), self.phoneEdit.text(),self.emailEdit.text())
+                self.parent_main.client_server.send(self.nameEdit.text()+ ', '+  self.phoneEdit.text()+ ', '+self.emailEdit.text()+ ']WorkingBD.update_screenwriter')
+                time.sleep(0.2)
     def edit_person(self):
         films = self.get_str_films()
         try:
@@ -98,13 +114,17 @@ class CreatePersonWorking(CreatePerson.Ui_Form, QWidget):
     def get_str_films(self):
         actors = ''
         if self.parent_main.who_is_person == 'director':
-            actors = WorkingBD.get_films_title_by_person(self.parent_main.who_is_person,self.parent_profile.directorInfo[0])
+            self.parent_main.client_server.send(self.parent_main.who_is_person + ', ' +self.parent_profile.directorInfo[0] + ']WorkingBD.get_films_title_by_person')
+            time.sleep(0.2)
+            actors = self.parent_main.client_server.answer
         if self.parent_main.who_is_person == 'screenwriter':
-            actors = WorkingBD.get_films_title_by_person(self.parent_main.who_is_person,
-                                                         self.parent_profile.screenwriterInfo[0])
+            self.parent_main.client_server.send(self.parent_main.who_is_person + ', ' +self.parent_profile.screenwriterInfo[0]+ ']WorkingBD.get_films_title_by_person')
+            time.sleep(0.2)
+            actors = self.parent_main.client_server.answer
         if self.parent_main.who_is_person == 'composer':
-            actors = WorkingBD.get_films_title_by_person(self.parent_main.who_is_person,
-                                                         self.parent_profile.composerInfo[0])
+            self.parent_main.client_server.send(self.parent_main.who_is_person + ', ' +self.parent_profile.composerInfo[0]+ ']WorkingBD.get_films_title_by_person')
+            time.sleep(0.2)
+            actors = self.parent_main.client_server.answer
         actors_str =''
         for elem in actors:
             if elem!=actors[len(actors)-1]:

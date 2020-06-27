@@ -1,7 +1,6 @@
+import CreateFilmInPlan, time
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget
-import CreateFilmInPlan, PyQt5, time
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 import CreateFilmInProgressWRK, profileFilmInPlanWRK
 
 class CreateFilmInPlanWorking(CreateFilmInPlan.Ui_Form, QWidget):

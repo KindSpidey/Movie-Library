@@ -1,5 +1,5 @@
-import sys, socket, time
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
+import time
+from PyQt5.QtWidgets import (QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
 import TrueMainWRK
 
 class LoginForm(QWidget):

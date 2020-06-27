@@ -625,6 +625,8 @@ class WorkingBD():
                     other_films.append(a[i])
         if len(other_films) != 0 or len(all_rows[1]) != 0:
             all_rows.append(other_films)
+        if len(all_rows)==2:
+            all_rows.append([])
         conn.commit()
         conn.close()
         return all_rows
@@ -1776,7 +1778,3 @@ class WorkingBD():
 #a = letter + ']WorkingBD.add_film'
 #print((letter))
 #print(WorkingBD.get_salary_by_film('The Amazing Spider-Man 2'))
-a = WorkingBD.get_all_person(WorkingBD, 'screenwriter')
-b = json.dumps(a)
-c = json.loads(b)
-print(c)

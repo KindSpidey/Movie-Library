@@ -625,6 +625,8 @@ class WorkingBD():
                     other_films.append(a[i])
         if len(other_films) != 0 or len(all_rows[1]) != 0:
             all_rows.append(other_films)
+        if len(all_rows)==2:
+            all_rows.append([])
         conn.commit()
         conn.close()
         return all_rows

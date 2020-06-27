@@ -19,7 +19,7 @@ class profileActorWorking(profileActor.Ui_Form, QWidget):
         self.editActor.show()
     def set_all(self):
         self.parent.client_server.send(self.parent.chosen_actor+']WorkingBD.get_actor_by_name_for_profile')
-        time.sleep(0.2)
+        time.sleep(0.3)
         self.dataActor = json.loads(self.parent.client_server.answer)
         self.actorInfo = self.dataActor[0]
         self.headWithName.setText(str(self.actorInfo[0]))

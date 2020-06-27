@@ -1,7 +1,6 @@
-from PyQt5.QtWidgets import QWidget
-import salaryPersonConnect, PyQt5, time
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QTableWidgetItem
+import salaryPersonConnect, time
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 
 
 class salaryPersonConnectWorking(salaryPersonConnect.Ui_Form, QWidget):
@@ -17,7 +16,6 @@ class salaryPersonConnectWorking(salaryPersonConnect.Ui_Form, QWidget):
         rows = self.tableWidget.rowCount()
         cols = self.tableWidget.columnCount()
         data = []
-        tmp = []
         for row in range(rows):
             tmp = []
             for col in range(cols):
@@ -40,13 +38,13 @@ class salaryPersonConnectWorking(salaryPersonConnect.Ui_Form, QWidget):
             try:
                 self.parent_main.client_server.send(lst[0] + ', ' + self.whos + ', '
             + self.parent.nameEdit.text() + ', ' + lst[1] + ']WorkingBD.connect_salary_and_person')
-                time.sleep(0.1)
+                time.sleep(0.3)
             except:
                 pass
             try:
                 self.parent_main.client_server.send(lst[0] + ', ' + self.whos + ', '
                  + self.parent.nameEdit.text() + ', ' + lst[1] + ']WorkingBD.update_salary_when_created')
-                time.sleep(0.1)
+                time.sleep(0.3)
             except:
                 pass
         self.hide()

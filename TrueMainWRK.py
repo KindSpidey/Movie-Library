@@ -210,7 +210,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.fill_actors()
         self.fill_directors()
         self.fill_composers()
-        #self.fill_screenwriters()
+        self.fill_screenwriters()
     def search(self):
         search = self.ObjectName.text()
         list =[]
@@ -252,7 +252,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             pass
         try:
             self.client_server.send(search + ']WorkingBD.get_actor_by_name')
-            time.sleep(0.05)
+            time.sleep(0.1)
             if len(self.client_server.answer) == 0:
                 raise Exception
             actor = json.loads(self.client_server.answer)[0][0]
@@ -264,7 +264,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             pass
         try:
             self.client_server.send(search + ']WorkingBD.get_director_by_name')
-            time.sleep(0.05)
+            time.sleep(0.1)
             if len(self.client_server.answer) == 0:
                 raise Exception
             director = json.loads(self.client_server.answer)[0][0]
@@ -277,7 +277,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             pass
         try:
             self.client_server.send(search + ']WorkingBD.get_screenwriter_by_name')
-            time.sleep(0.05)
+            time.sleep(0.1)
             if len(self.client_server.answer) == 0:
                 raise Exception
             screenwriter = json.loads(self.client_server.answer)[0][0]
@@ -290,7 +290,7 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
             pass
         try:
             self.client_server.send(search + ']WorkingBD.get_composer_by_name')
-            time.sleep(0.05)
+            time.sleep(0.1)
             if len(self.client_server.answer) == 0:
                 raise Exception
             composer = json.loads(self.client_server.answer)[0][0]
@@ -449,7 +449,8 @@ class TrueMainWorking(TrueMain.Ui_Form, QWidget):
         self.scrnTable.setRowCount(0)
         actors_str = ''
         self.client_server.send(']WorkingBD.get_all_personscreenwriter')
-        time.sleep(0.3)
+        time.sleep(0.2)
+        c = self.client_server.answer
         films = json.loads(self.client_server.answer)
         self.scrnTable.setRowCount(len(films))
         for raw in range(0, len(films)):

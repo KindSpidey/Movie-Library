@@ -18,7 +18,6 @@ class ClientServer(Thread):
 
     def getDataPackage(self):
         dataParts = []
-        data =''
         while True:
             try:
                 dataBytes = self.client.recv(dataPackageSize)
@@ -43,5 +42,4 @@ class ClientServer(Thread):
         self.client.sendall(data)
 
 
-#a = ClientServer()
-#a.send('Daniil Pugavko]WorkingBD.get_password')
+

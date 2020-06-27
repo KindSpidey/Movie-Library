@@ -1776,3 +1776,7 @@ class WorkingBD():
 #a = letter + ']WorkingBD.add_film'
 #print((letter))
 #print(WorkingBD.get_salary_by_film('The Amazing Spider-Man 2'))
+a = WorkingBD.get_all_person(WorkingBD, 'screenwriter')
+b = json.dumps(a)
+c = json.loads(b)
+print(c)

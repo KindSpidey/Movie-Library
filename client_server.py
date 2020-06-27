@@ -25,7 +25,6 @@ class ClientServer(Thread):
                 break
             if not dataBytes:
                 break
-            dataParts.clear()
             dataParts.append(dataBytes.decode(encoding))
             if not dataBytes.endswith(dataClosingSequence):
                 continue

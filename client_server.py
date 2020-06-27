@@ -18,15 +18,17 @@ class ClientServer(Thread):
 
     def getDataPackage(self):
         dataParts = []
+        dataB = b''
         while True:
             try:
                 dataBytes = self.client.recv(dataPackageSize)
+                dataB += dataBytes
             except:
                 break
             if not dataBytes:
                 break
             dataParts.append(dataBytes.decode(encoding))
-            if not dataBytes.endswith(dataClosingSequence):
+            if not dataB.endswith(dataClosingSequence):
                 continue
             data = "".join(dataParts)[:-len(dataClosingSequence)]
             self.handle_data(data)

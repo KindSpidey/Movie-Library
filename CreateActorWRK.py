@@ -1,7 +1,7 @@
-from PyQt5.QtWidgets import QWidget
+
 import CreateActor, PyQt5, time, json
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget
 from salaryPersonConnectWRK import salaryPersonConnectWorking
 
 class CreateActorWorking(CreateActor.Ui_Form, QWidget):
@@ -40,6 +40,7 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
                     time.sleep(0.2)
                 except:
                     pass
+            self.parent_profile.fill_salary_actor_table()
             self.parent_profile.set_all()
             self.parent_profile.fill_salary_actor_table()
             self.parent_main.setup_tables()
@@ -104,7 +105,6 @@ class CreateActorWorking(CreateActor.Ui_Form, QWidget):
     def edit_actor(self):
         self.parent_main.client_server.send(self.parent_main.chosen_actor + ']WorkingBD.get_films_title_by_actor')
         time.sleep(0.1)
-        actors = self.parent_main.client_server.answer
         films = self.get_str_films()
         try:
             self.head.setText('Редактирование актера')

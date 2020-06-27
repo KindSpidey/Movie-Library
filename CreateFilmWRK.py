@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import QWidget, QMessageBox
 
 
 class CreateFilmWorking(CreateFilm.Ui_Form, QWidget):
-    def __init__(self, parent_main, parent_in_progress, parent_profile):
-        self.action = ''
+    def __init__(self, parent_main, parent_in_progress, parent_profile, action):
+        self.action = action
         self.actors =''
         self.parent = parent_main
         self.parent_profile = parent_profile
@@ -29,8 +29,9 @@ class CreateFilmWorking(CreateFilm.Ui_Form, QWidget):
                     actors.append(s)
             if self.action=='make_done':
                 params_of_film = self.titleEdit.text()+ ', ' + self.boxOfficeEdit.text()+ ', '+self.scoreEdit.text()+ ', ' + self.yearEdit.text()+ ', ' +self.budgetEdit.text()+ ', '+self.dirEdit.text()+ ', ' +self.scoreEdit.text()+ ', ' +self.compEdit.text()
+                self.parent.client_server.send(self.parent_in_progress.titleEdit.text() + ']WorkingBD.remove_filminprogress')
+                time.sleep(0.2)
                 self.parent.client_server.send(json.dumps(dict(params = params_of_film, actors = actors, command = 'WorkingBD.add_film')))
-                self.parent.client_server.send(self.parent_in_progress.titleEdit.text()+']WorkingBD.remove_filminprogress')
                 time.sleep(0.2)
                 self.parent_in_progress.close()
                 self.parent_in_progress.parent_profile.close()
@@ -38,11 +39,12 @@ class CreateFilmWorking(CreateFilm.Ui_Form, QWidget):
                 params_of_film = self.titleEdit.text() + ', ' + self.boxOfficeEdit.text() + ', ' + self.scoreEdit.text() + ', ' + self.yearEdit.text() + ', ' + self.budgetEdit.text() + ', '  + self.dirEdit.text() + ', ' + self.scoreEdit.text() + ', ' + self.compEdit.text()
                 self.parent.client_server.send(json.dumps(dict(params=params_of_film, actors=actors, command='WorkingBD.update_film')))
                 time.sleep(0.2)
+                self.parent_profile.set_all()
             if self.action=='create':
                 params_of_film = self.titleEdit.text()+ ', ' + self.boxOfficeEdit.text()+ ', '+self.scoreEdit.text()+ ', ' + self.yearEdit.text()+ ', ' +self.budgetEdit.text()+ ', '+self.dirEdit.text()+ ', ' +self.scoreEdit.text()+ ', ' +self.compEdit.text()
                 self.parent.client_server.send(json.dumps(dict(params = params_of_film, actors = actors, command = 'WorkingBD.add_film')))
                 time.sleep(0.2)
-            self.parent_profile.set_all()
+            time.sleep(0.2)
             self.parent.setup_tables()
             self.hide()
 

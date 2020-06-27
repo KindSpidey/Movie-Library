@@ -14,7 +14,7 @@ class profileFilmWorking(profileFilm.Ui_Form, QWidget):
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
         self.data = []
-        self.editFilm = CreateFilmWorking(parent_main,parent_in_progress,self)
+        self.editFilm = CreateFilmWorking(parent_main,parent_in_progress,self, 'edit')
         self.pushButton.clicked.connect(self.edit_mode)
 
     def edit_mode(self):

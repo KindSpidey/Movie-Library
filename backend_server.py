@@ -15,7 +15,6 @@ class ClientThread(threading.Thread):
     def run(self):
         print("Connection from : ", clientAddress)
         dataParts =[]
-        data = ''
         while True:
             try:
                 dataBytes = self.csocket.recv(dataPackageSize)
@@ -202,7 +201,7 @@ class ClientThread(threading.Thread):
             WorkingBD.update_screenwriter(args[0], args[1], args[2])
             return
         if data[1] == 'WorkingBD.get_films_title_by_person':
-            WorkingBD.get_films_title_by_person(args[0], args[1])
+            self.send_data(json.dumps(WorkingBD.get_films_title_by_person(args[0], args[1])))
 
     def special_handle(self, data):
         params_of_film = data['params']

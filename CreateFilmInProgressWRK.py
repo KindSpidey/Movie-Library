@@ -14,7 +14,7 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
         super(CreateFilmInProgressWorking, self).__init__()
         self.setWindowModality(Qt.WindowModal)
         self.setupUi(self)
-        self.MakeFilmDone = CreateFilmWRK.CreateFilmWorking(parent_main, self, None)
+        self.MakeFilmDone = CreateFilmWRK.CreateFilmWorking(parent_main, self, None, 'make_done')
         self.saveButton.clicked.connect(self.save)
         self.makeDoneMovieButton.clicked.connect(self.MakeFilmDone.set_in_progress)
 
@@ -45,11 +45,10 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
                 for elem in list:
                     for s in elem:
                         actors.append(s)
-                params_of_film = self.titleEdit.text() + ', ' + self.budgetEdit.text() + ', ' + self.dirEdit.text() + ', ' + self.scrnEdit.text() + ', ' + self.compEdit.text()
-                self.parent_main.client_server.send(
-                    json.dumps(dict(params=params_of_film, actors=actors, command='WorkingBD.add_filmInProgress')))
-                time.sleep(0.2)
                 self.parent_main.client_server.send(self.titleEdit.text() + ']WorkingBD.remove_filminplan')
+                time.sleep(0.2)
+                params_of_film = self.titleEdit.text() + ', ' + self.budgetEdit.text() + ', ' + self.dirEdit.text() + ', ' + self.scrnEdit.text() + ', ' + self.compEdit.text()
+                self.parent_main.client_server.send(json.dumps(dict(params=params_of_film, actors=actors, command='WorkingBD.add_filmInProgress')))
                 time.sleep(0.2)
                 self.parent_in_plan.close()
                 self.parent_in_plan.parent_profile.close()
@@ -67,6 +66,8 @@ class CreateFilmInProgressWorking(CreateFilmInProgress.Ui_Form, QWidget):
                 params_of_film = self.titleEdit.text() + ', ' + self.budgetEdit.text() + ', ' + self.dirEdit.text() + ', ' + self.scrnEdit.text() + ', ' + self.compEdit.text()
                 self.parent_main.client_server.send(json.dumps(dict(params=params_of_film, actors=actors, command='WorkingBD.update_filminprogress')))
                 time.sleep(0.2)
+                self.parent_profile.set_all()
+        time.sleep(0.2)
         self.parent_main.setup_tables()
         self.hide()
     def set_in_plan(self):

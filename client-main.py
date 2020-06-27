@@ -1,6 +1,6 @@
 
-from PyQt5.QtWidgets import QWidget, QApplication
-import sys, client_server
+from PyQt5.QtWidgets import QApplication
+import sys
 from LoginWRK import LoginForm
 from client_server import ClientServer
 
